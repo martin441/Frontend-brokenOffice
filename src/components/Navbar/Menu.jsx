@@ -6,7 +6,6 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -20,7 +19,8 @@ export default function AccountMenu() {
     id: 1,
     name: "John Doe",
     email: "johndoe@example.com",
-    age: 25
+    companyRole: "developer",
+    address: 'address 123'
   }));
   
   const user = JSON.parse(localStorage.getItem("user"));

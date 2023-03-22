@@ -3,7 +3,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Heebo';
+  font-family: "Heebo";
 }
 
 .btn-login {
@@ -20,9 +20,17 @@
   transition: all 0.3s;
 }
 
+.center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* USER PROFILE */
+
 .header-profile {
   overflow: hidden;
-  max-height: 20rem;
+  max-height: 15rem;
 }
 
 .header-image {
@@ -38,16 +46,28 @@
 }
 
 .header-avatar {
-  position: absolute;
-  bottom: 5rem;
-  margin: 0 auto;
-  
+  position: relative;
+  margin-top: -4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.profile-data{
- 
+.profile-data {
+  margin-top: 1rem;
 }
 
-.profile-data h4 {
-  margin: 0;
+/* HOME */
+
+.header-container {
+  background-image: url('https://brand.globant.com/wp-content/uploads/2021/10/bg.png');
+  height: 100vh;
+  object-fit: contain;
+}
+
+.home-text{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
 }
