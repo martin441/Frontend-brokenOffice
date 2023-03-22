@@ -6,17 +6,18 @@ export const Home = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
-  // localStorage.setItem(
-  //   "user",
-  //   JSON.stringify({
-  //     id: 1,
-  //     name: "John ",
-  //     lastname: "Doe",
-  //     email: "johndoe@example.com",
-  //     companyRole: "developer",
-  //     address: "address 123",
-  //   })
-  // );
+  localStorage.setItem(
+    "user",
+    JSON.stringify({
+      id: 1,
+      name: "John ",
+      lastname: "Doe",
+      email: "johndoe@example.com",
+      companyRole: "developer",
+      address: "address 123",
+      type: "service",
+    })
+  );
 
   return (
     <Box className="header-container-home home-text">
@@ -44,7 +45,7 @@ export const Home = () => {
             sx={{ borderRadius: 20, mt: 3 }}
             onClick={() => navigate("/login")}
           >
-           Login
+            Login
           </Button>
         </Box>
       )}
