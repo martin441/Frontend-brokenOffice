@@ -8,24 +8,15 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Logout from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router";
 
 export default function AccountMenu() {
   // SUPOSICION DEL MANEJO DEL BACK =>
-  
-  localStorage.setItem("user", JSON.stringify({
-    id: 1,
-    name: "John Doe",
-    email: "johndoe@example.com",
-    companyRole: "developer",
-    address: 'address 123'
-  }));
-  
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -35,10 +26,9 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
 
-
   return (
     <>
-      {user.id ? (
+      {user?.id ? (
         <React.Fragment>
           <Box
             sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
@@ -92,10 +82,12 @@ export default function AccountMenu() {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuItem onClick={() => {
-              handleClose()
-              navigate('/user/profile')
-            }}>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                navigate("/user/profile");
+              }}
+            >
               <Avatar /> Profile
             </MenuItem>
             <Divider />
@@ -121,10 +113,11 @@ export default function AccountMenu() {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <button onClick={() => navigate("/login")} className="btn-login">LOGIN</button>
+          <button onClick={() => navigate("/login")} className="btn-login">
+            LOGIN
+          </button>
         </React.Fragment>
       )}
     </>
   );
 }
-

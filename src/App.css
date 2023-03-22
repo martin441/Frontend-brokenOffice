@@ -6,6 +6,10 @@
   font-family: "Heebo";
 }
 
+.btn{
+  
+}
+
 .btn-login {
   background-color: #bfd732;
   font-family: "Heebo", sans-serif;
@@ -59,7 +63,7 @@
 
 /* HOME */
 
-.header-container {
+.header-container-home {
   background-image: url('https://brand.globant.com/wp-content/uploads/2021/10/bg.png');
   height: 100vh;
   object-fit: contain;
