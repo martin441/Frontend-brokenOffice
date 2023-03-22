@@ -6,7 +6,7 @@ import AccountMenu from './Menu'
 
 export const Navbar = () => {
   return (
-    <AppBar position="sticky" sx={{ mb: 2 }} color='secondary'>
+    <AppBar position="sticky" sx={{ mb: 0 }} color='secondary'>
     <Container maxWidth="xl">
       <Toolbar
         disableGutters

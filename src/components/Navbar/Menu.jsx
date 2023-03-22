@@ -9,15 +9,23 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
-import Settings from "@mui/icons-material/Settings";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Logout from "@mui/icons-material/Logout";
-import MenuIcon from '@mui/icons-material/Menu';
-import LoginIcon from '@mui/icons-material/Login';
+import { useNavigate } from "react-router";
 
 export default function AccountMenu() {
   // SUPOSICION DEL MANEJO DEL BACK =>
-  const user = localStorage.getItem("user");
+  
+  localStorage.setItem("user", JSON.stringify({
+    id: 1,
+    name: "John Doe",
+    email: "johndoe@example.com",
+    age: 25
+  }));
+  
+  const user = JSON.parse(localStorage.getItem("user"));
 
+  const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -26,14 +34,16 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
   return (
     <>
-      {user ? (
+      {user.id ? (
         <React.Fragment>
           <Box
             sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
           >
-            <Typography sx={{ minWidth: 100 }}>Contact</Typography>
+            {/* <Typography sx={{ minWidth: 100 }}>Contact</Typography> */}
             <Tooltip title="Account settings">
               <IconButton
                 onClick={handleClick}
@@ -43,7 +53,7 @@ export default function AccountMenu() {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
               >
-                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                <Avatar sx={{ width: 32, height: 32 }}></Avatar>
               </IconButton>
             </Tooltip>
           </Box>
@@ -82,21 +92,24 @@ export default function AccountMenu() {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={() => {
+              handleClose()
+              navigate('/user/profile')
+            }}>
               <Avatar /> Profile
             </MenuItem>
             <Divider />
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
-                <ConfirmationNumberIcon fontSize="small" />
+                <AddCircleOutlineIcon fontSize="small" />
               </ListItemIcon>
-              Tickets
+              New Ticket
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
-                <Settings fontSize="small" />
+                <ConfirmationNumberIcon fontSize="small" />
               </ListItemIcon>
-              Settings
+              Tickets
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
@@ -108,10 +121,10 @@ export default function AccountMenu() {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          
           <button className="btn-login">LOGIN</button>
         </React.Fragment>
       )}
     </>
   );
 }
+
