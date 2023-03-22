@@ -15,6 +15,10 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
 }
+.btn-login:hover{
+  background-color: #92C64E;
+  transition: all 0.3s;
+}
 
 .center{
   display: flex;
