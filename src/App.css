@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.btn-login{
+  background-color: #BFD732;
+  font-family: 'Heebo', sans-serif ;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  padding: .5rem 1rem;
+  cursor: pointer;
+}
