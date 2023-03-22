@@ -121,7 +121,7 @@ export default function AccountMenu() {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <button className="btn-login">LOGIN</button>
+          <button onClick={() => navigate("/login")} className="btn-login">LOGIN</button>
         </React.Fragment>
       )}
     </>
