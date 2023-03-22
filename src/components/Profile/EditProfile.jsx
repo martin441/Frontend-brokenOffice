@@ -64,6 +64,7 @@ export default function EditProfile() {
             onChange=""
             sx={{ mb: ".5rem" }}
           />
+          <Button variant="contained" sx={{ mt:2, mx:'auto'}}>Submit</Button>
         </Box>
       </Modal>
     </div>

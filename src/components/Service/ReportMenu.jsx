@@ -1,11 +1,11 @@
 import React from "react";
-import { ReportButtonGroup } from "./ReportButtonGroup";
+import DropdownReports from "./DropdownReports";
 import ReportList from "./ReportList";
 
 export const ReportMenu = () => {
   return (
     <>
-      <ReportButtonGroup />
+      <DropdownReports />
       <ReportList />
     </>
   );

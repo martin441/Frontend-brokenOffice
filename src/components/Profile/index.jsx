@@ -1,6 +1,7 @@
 import { Avatar, Typography } from "@mui/material";
 import React from "react";
 import EditProfile from "./EditProfile";
+import EditSensitive from "./EditSensitive";
 
 export const Profile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -34,6 +35,7 @@ export const Profile = () => {
       </div>
 
       <EditProfile />
+      <EditSensitive />
     </>
   );
 };
