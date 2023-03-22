@@ -5,7 +5,7 @@ import { Profile } from "./components/Profile";
 import { Home } from "./components/Home";
 import SignInSide from "./components/Login";
 import { ReportMenu } from "./components/Service/ReportMenu";
-
+import { AdminView } from "./components/Admin";
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
         <Route path="/user/profile" element={<Profile/>}/>
         <Route path="/login" element={<SignInSide/>}/>
         <Route path="/service/report/all" element={<ReportMenu />} />
+        <Route path="/admin" element={<AdminView />} />
       </Routes>
     </div>
   );
