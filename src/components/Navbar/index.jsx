@@ -2,6 +2,7 @@ import { AppBar, Toolbar } from '@mui/material'
 import { Container } from '@mui/system'
 import React from 'react'
 import { Logo } from './Logo'
+import AccountMenu from './Menu'
 
 export const Navbar = () => {
   return (
@@ -16,6 +17,7 @@ export const Navbar = () => {
         }}
       >
         <Logo/>
+        <AccountMenu />
       </Toolbar>
     </Container>
   </AppBar>

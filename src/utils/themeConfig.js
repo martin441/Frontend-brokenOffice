@@ -13,4 +13,12 @@ export const theme = createTheme({
       main: "#444444",
     },
   },
+  text: {
+    primary: {
+        main: "#444444",
+    }
+  },
+  typography: {
+    fontFamily: "Heebo"
+  }
 });
