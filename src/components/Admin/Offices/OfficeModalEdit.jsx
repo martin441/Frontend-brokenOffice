@@ -1,76 +1,73 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { styleEditProfile } from "../../utils/styleMUI";
-import { Button, TextField } from "@mui/material";
+import {  Link, TextField } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
+import { styleEditProfile } from "../../../utils/styleMUI";
 
-export default function EditProfile() {
+
+export default function OfficeModalEdit({office}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const user = JSON.parse(localStorage.getItem('user'))
 
   return (
     <div>
-      <Button variant="contained" sx={{mt:'1rem', borderRadius:20}} onClick={handleOpen}>EDIT</Button>
+      <Link
+        component="button"
+        variant="body2"
+        onClick={handleOpen}
+        sx={{ mt:2, color: "#444444"}}
+      >
+         <EditIcon />
+      </Link>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={styleEditProfile} component="form">
+        <Box sx={styleEditProfile}  >
           <TextField
             id="standard-multiline-static"
-            label="Name"
+            label="Region"
             multiline
-            placeholder="New name..."
+            placeholder="New region..."
             variant="standard"
-            value={user?.name}
+            value={office.name}
+            onChange={(e) => e.target.value}
+            sx={{ mb: ".5rem" }}
+          />
+        <TextField
+            id="standard-multiline-static"
+            label="Street"
+            multiline
+            placeholder="New street..."
+            variant="standard"
+            value={office.address?.street}
             onChange={(e) => e.target.value}
             sx={{ mb: ".5rem" }}
           />
           <TextField
             id="standard-multiline-static"
-            label="Last Name"
+            label="Zip"
             multiline
-            placeholder="New lastName..."
+            placeholder="New zip..."
             variant="standard"
-            value={user?.lastName}
+            value={office.address?.zip}
             onChange={(e) => e.target.value}
             sx={{ mb: ".5rem" }}
           />
           <TextField
             id="standard-multiline-static"
-            label="Email"
+            label="Floor"
             multiline
-            placeholder="New email..."
+            placeholder="New floor..."
             variant="standard"
-            value={user?.email}
+            value={office.address?.floor}
             onChange={(e) => e.target.value}
             sx={{ mb: ".5rem" }}
           />
-          <TextField
-            id="standard-multiline-static"
-            label="Role"
-            multiline
-            placeholder="New role..."
-            variant="standard"
-            value={user?.role}
-            onChange={(e) => e.target.value}
-            sx={{ mb: ".5rem" }}
-          />
-          <TextField
-            id="standard-multiline-static"
-            label="Address"
-            multiline
-            placeholder="New address..."
-            variant="standard"
-            value={user?.address}
-            onChange={(e) => e.target.value}
-            sx={{ mb: ".5rem" }}
-          />
-          <Button variant="contained" sx={{ mt:2, mx:'auto'}}>Submit</Button>
         </Box>
       </Modal>
     </div>
