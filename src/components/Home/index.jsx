@@ -1,29 +1,27 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 
 export const Home = () => {
+  const ROUTE = process.env.REACT_APP_ROUTE;
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
-  localStorage.setItem(
-    "user",
-    JSON.stringify({
-      id: 1,
-      name: "John ",
-      lastname: "Doe",
-      email: "johndoe@example.com",
-      companyRole: "developer",
-      address: "address 123",
-      type: "service",
-    })
-  );
+
+  useEffect(() => {
+    axios
+      .get(`${ROUTE}/user/profile/`, {
+        withCredentials: true,
+      })
+      .then((data) => localStorage.setItem("user", JSON.stringify(data.data)));
+  }, [ROUTE]);
 
   return (
     <Box className="header-container-home home-text">
-      {user?.id ? (
+      {user?._id ? (
         <Box sx={{ mt: 4 }}>
-          <Typography variant="h3">{`Hey ${user.name} ${user.lastname}!`}</Typography>
+          <Typography variant="h3">{`Hey ${user.name} ${user.lastName}!`}</Typography>
           <Button
             variant="contained"
             color="secondary"

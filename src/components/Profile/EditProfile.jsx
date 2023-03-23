@@ -32,7 +32,7 @@ export default function EditProfile() {
             id="standard-multiline-static"
             label="Last Name"
             multiline
-            placeholder="New lastname..."
+            placeholder="New lastName..."
             variant="standard"
             onChange=""
             sx={{ mb: ".5rem" }}

@@ -26,7 +26,7 @@ export const Profile = () => {
 
       <div className="profile-data">
         <Typography variant="h6"> {user?.name} </Typography>
-        <Typography variant="h6"> {user?.lastname} </Typography>
+        <Typography variant="h6"> {user?.lastName} </Typography>
         <Typography variant="subtitle2" sx={{ color: "#666666" }}>
           {user?.companyRole}
         </Typography>

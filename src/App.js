@@ -16,7 +16,7 @@ function App() {
         <Route path="/user/profile" element={<Profile/>}/>
         <Route path="/login" element={<SignInSide/>}/>
         <Route path="/service/report/all" element={<ReportMenu />} />
-        <Route path="/admin" element={<AdminView />} />
+        <Route path="/admin/users" element={<AdminView />} />
       </Routes>
     </div>
   );
