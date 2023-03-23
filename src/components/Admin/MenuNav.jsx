@@ -102,7 +102,7 @@ export default function MenuNavAdmin() {
             </MenuItem>
             <MenuItem  onClick={() => {
                 handleClose();
-                navigate("/admin");
+                navigate("/admin/offices");
               }}>
               <ListItemIcon>
                 <AddLocationIcon fontSize="small" />
