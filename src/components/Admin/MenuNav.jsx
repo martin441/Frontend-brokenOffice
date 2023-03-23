@@ -7,12 +7,12 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Logout from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router";
+import PeopleIcon from '@mui/icons-material/People';
+import AddLocationIcon from '@mui/icons-material/AddLocation';
 
-export default function AccountMenu() {
+export default function MenuNavAdmin() {
   // SUPOSICION DEL MANEJO DEL BACK =>
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -28,7 +28,7 @@ export default function AccountMenu() {
 
   return (
     <>
-      {user?.id ? (
+      {user?.type === 'admin' && user?._id && (
         <React.Fragment>
           <Box
             sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
@@ -91,17 +91,23 @@ export default function AccountMenu() {
               <Avatar /> Profile
             </MenuItem>
             <Divider />
-            <MenuItem onClick={handleClose}>
+            <MenuItem  onClick={() => {
+                handleClose();
+                navigate("/admin/users");
+              }}>
               <ListItemIcon>
-                <AddCircleOutlineIcon fontSize="small" />
+                <PeopleIcon fontSize="small" />
               </ListItemIcon>
-              New Ticket
+              Users
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem  onClick={() => {
+                handleClose();
+                navigate("/admin");
+              }}>
               <ListItemIcon>
-                <ConfirmationNumberIcon fontSize="small" />
+                <AddLocationIcon fontSize="small" />
               </ListItemIcon>
-              Tickets
+              Offices
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
@@ -111,13 +117,7 @@ export default function AccountMenu() {
             </MenuItem>
           </Menu>
         </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <button onClick={() => navigate("/login")} className="btn-login">
-            LOGIN
-          </button>
-        </React.Fragment>
-      )}
+      ) }
     </>
   );
 }

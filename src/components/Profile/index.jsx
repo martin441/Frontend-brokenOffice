@@ -1,6 +1,7 @@
 import { Avatar, Typography } from "@mui/material";
 import React from "react";
 import EditProfile from "./EditProfile";
+import EditSensitive from "./EditSensitive";
 
 export const Profile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -25,7 +26,7 @@ export const Profile = () => {
 
       <div className="profile-data">
         <Typography variant="h6"> {user?.name} </Typography>
-        <Typography variant="h6"> {user?.lastname} </Typography>
+        <Typography variant="h6"> {user?.lastName} </Typography>
         <Typography variant="subtitle2" sx={{ color: "#666666" }}>
           {user?.companyRole}
         </Typography>
@@ -34,6 +35,7 @@ export const Profile = () => {
       </div>
 
       <EditProfile />
+      <EditSensitive />
     </>
   );
 };

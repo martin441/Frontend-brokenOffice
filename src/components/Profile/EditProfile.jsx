@@ -32,7 +32,7 @@ export default function EditProfile() {
             id="standard-multiline-static"
             label="Last Name"
             multiline
-            placeholder="New lastname..."
+            placeholder="New lastName..."
             variant="standard"
             onChange=""
             sx={{ mb: ".5rem" }}
@@ -64,6 +64,7 @@ export default function EditProfile() {
             onChange=""
             sx={{ mb: ".5rem" }}
           />
+          <Button variant="contained" sx={{ mt:2, mx:'auto'}}>Submit</Button>
         </Box>
       </Modal>
     </div>

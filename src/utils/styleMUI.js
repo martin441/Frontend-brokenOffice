@@ -11,3 +11,10 @@ export const styleEditProfile = {
   boxShadow: 24,
   p: 4,
 };
+
+export const muiStyleLoginBtn = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center'
+}
