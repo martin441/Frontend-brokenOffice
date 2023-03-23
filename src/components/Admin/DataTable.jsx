@@ -8,7 +8,6 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { Button } from "@mui/material";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CheckboxAdmin from "./CheckboxAdmin";
 
 function createData(title, sender) {
@@ -35,7 +34,7 @@ export default function DataTable() {
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <Paper sx={{ width: "100%", overflow: "hidden", my: 5 }}>
       <TableContainer sx={{ maxHeight: "100vh" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
