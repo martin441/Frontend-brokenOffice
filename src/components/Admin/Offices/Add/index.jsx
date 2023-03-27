@@ -1,10 +1,11 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import { Container } from "@mui/material";
-import PeopleIcon from "@mui/icons-material/People";
-import { Form } from "./Form";
+import { Typography } from "@mui/material";
+import { Box, Container } from "@mui/system";
+import React from "react";
+import { OfficeAddForm } from "./OfficeAddForm";
+import BusinessIcon from "@mui/icons-material/Business";
+import { BackLink } from "../../../../commons/BackLink";
 
-export const RegisterUsers = () => {
+export const OfficeAdd = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -16,6 +17,7 @@ export const RegisterUsers = () => {
 
   return (
     <Container component="main" maxWidth="lg">
+      <BackLink text='Back to Offices' />
       <Box
         sx={{
           my: 8,
@@ -27,9 +29,9 @@ export const RegisterUsers = () => {
         TextField
       >
         <Typography component="h1" variant="h5">
-          Register <PeopleIcon fontSize="small" />
+          New Office <BusinessIcon fontSize="small" />
         </Typography>
-        <Form handleSubmit={handleSubmit} />
+        <OfficeAddForm handleSubmit={handleSubmit} />
       </Box>
     </Container>
   );

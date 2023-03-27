@@ -13,6 +13,10 @@ import { useAxios } from "../../../hooks/useAxios";
 import OfficeModalEdit from "./OfficeModalEdit";
 import OfficeModalDelete from "./OfficeBtnDelete";
 import { setOffices } from "../../../state/office";
+import { OfficeAdd } from "./Add/OfficeAddForm";
+import { Box } from "@mui/system";
+import { muiOfficeBar } from "../../../utils/styleMUI";
+import { OfficeAddBtn } from "./Add/OfficeAddBtn";
 
 export default function OfficeList() {
   const [page, setPage] = useState(0);
@@ -33,6 +37,10 @@ export default function OfficeList() {
   dispatch(setOffices(offices))
 
   return (
+    <>
+    <Box sx={muiOfficeBar}>
+    <OfficeAddBtn />
+    </Box>
     <Paper sx={{ width: "100%", overflow: "hidden", m: "0 auto" }}>
       <TableContainer sx={{ maxHeight: "100vh" }}>
         <Table stickyHeader aria-label="sticky table">
@@ -63,7 +71,7 @@ export default function OfficeList() {
                       role="checkbox"
                       tabIndex={-1}
                       key={`${office.name}addad`}
-                    >
+                      >
                       <TableCell  align={"center"}>
                         {office.name}
                       </TableCell>
@@ -99,5 +107,6 @@ export default function OfficeList() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+        </>
   );
 }

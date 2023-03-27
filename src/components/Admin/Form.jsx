@@ -15,6 +15,7 @@ export const Form = ({ handleSubmit }) => {
         id="Name"
         label="Name"
         name="name"
+        type="text"
         autoComplete="name"
         autoFocus
       />
@@ -24,7 +25,7 @@ export const Form = ({ handleSubmit }) => {
         fullWidth
         name="Last Name"
         label="Last Name"
-        type="Last Name"
+        type="text"
         id="Last Name"
         autoComplete="Last Name"
       />
@@ -34,7 +35,7 @@ export const Form = ({ handleSubmit }) => {
         fullWidth
         name="Email"
         label="Email"
-        type="Email"
+        type="email"
         id="Email"
         autoComplete="Email"
       />
@@ -44,7 +45,7 @@ export const Form = ({ handleSubmit }) => {
         fullWidth
         name="Password"
         label="Password"
-        type="Password"
+        type="password"
         id="Password"
         autoComplete="Password"
       />
@@ -54,7 +55,7 @@ export const Form = ({ handleSubmit }) => {
         fullWidth
         name="Role"
         label="Role"
-        type="Role"
+        type="text"
         id="Role"
         autoComplete="Role"
       />
@@ -64,7 +65,7 @@ export const Form = ({ handleSubmit }) => {
         fullWidth
         name="Type"
         label="Type"
-        type="Type"
+        type="text"
         id="Type"
         autoComplete="Type"
       />

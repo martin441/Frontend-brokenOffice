@@ -13,8 +13,33 @@ export const styleEditProfile = {
 };
 
 export const muiStyleLoginBtn = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center'
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+export const muiBtnOfficeDelete = {
+  border: "none",
+  bordeRadius: 20,
+  padding: "0.5rem 1rem",
+  bgcolor: 'primary',
+  color: 'secondary'
+};
+
+export const muiOfficeBar = {
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "space-evenly",
+  width: '100%',
+  my: 4
+}
+
+export const muiBackLink = {
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "start",
+  width: '100%',
+  mt: 2,
+  color: 'secondary.dark'
 }
