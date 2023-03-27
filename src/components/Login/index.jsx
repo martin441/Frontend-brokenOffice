@@ -31,7 +31,7 @@ export default function SignInSide() {
       });
       dispatch(setUser(loggedUser.data));
     } catch (err) {
-      toast.error("Wrong email or password");
+      toast.error("Wrong email or passwdispatch(setUser(loggedUser.data));d");
       console.error(err);
     }
   };
