@@ -5,15 +5,11 @@ export const theme = createTheme({
     contrastThreshold: 4.5,
     primary: {
       main: "#BFD732", // globant green
+      dark: "#39B54A", // dark green
     },
     secondary: {
       main: "#FFFFFF", // white
-    },
-    third: {
-      main: "#444444", //black
-    },
-    fourth: {
-      main: "#39B54A", //dark green
+      dark: "#444444", // black
     },
   },
   text: {

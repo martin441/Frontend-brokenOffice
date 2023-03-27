@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import officeReducer from './office'
+import userReducer from './user'
 
 const store = configureStore({
     reducer: {
-        office: officeReducer
+        office: officeReducer,
+        user: userReducer,
     }
 })
 

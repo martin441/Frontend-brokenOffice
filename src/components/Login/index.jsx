@@ -9,15 +9,31 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
 import { muiStyleLoginBtn } from "../../utils/styleMUI";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../state/user";
 
 export default function SignInSide() {
-  const handleSubmit = (event) => {
+  const ROUTE = process.env.REACT_APP_ROUTE;
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    try {
+      const data = new FormData(event.currentTarget);
+      const userData = {
+        email: data.get("email"),
+        password: data.get("password"),
+      };
+      const loggedUser = await axios.post(`${ROUTE}/user/login`, userData, {
+        withCredentials: true,
+      });
+      dispatch(setUser(loggedUser.data));
+    } catch (err) {
+      toast.error("Wrong email or password");
+      console.error(err);
+    }
   };
 
   return (
@@ -35,7 +51,8 @@ export default function SignInSide() {
             sm={4}
             md={7}
             sx={{
-              backgroundImage: "url(https://statics.globant.com/production/public/2023-02/Ref-Globant-Canada-2.jpg)",
+              backgroundImage:
+                "url(https://statics.globant.com/production/public/2023-02/Ref-Globant-Canada-2.jpg)",
               backgroundRepeat: "no-repeat",
               backgroundColor: (t) =>
                 t.palette.mode === "light"
@@ -45,14 +62,7 @@ export default function SignInSide() {
               backgroundPosition: "center",
             }}
           />
-          <Grid
-            item
-            xs={12}
-            sm={8}
-            md={5}
-            elevation={6}
-            square
-          >
+          <Grid item xs={12} sm={8} md={5} elevation={6} square="true">
             <Box
               sx={{
                 my: 8,
