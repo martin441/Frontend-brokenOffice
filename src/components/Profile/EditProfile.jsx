@@ -24,14 +24,14 @@ export default function EditProfile() {
   const [inputRole, setInputRole] = React.useState(user?.role);
   const [inputAddress, setInputAddress] = React.useState(user?.address);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (
       inputName === "" ||
       inputLastName === "" ||
       inputEmail === "" ||
       inputRole === ""
     ) return toast.error("Please enter required data");
-
+  
     const obj = {
       name: inputName,
       lastName: inputLastName,
@@ -39,15 +39,17 @@ export default function EditProfile() {
       role: inputRole,
       address: inputAddress,
     };
-    axios
-      .put(`${ROUTE}/user/edit/profile`, obj, { withCredentials: true })
-      .then((data) => {
-        dispatch(setUser(data.data));
-      })
-      .catch((err) => console.error(err));
-
-      handleClose()
+    
+    try {
+      const { data } = await axios.put(`${ROUTE}/user/edit/profile`, obj, { withCredentials: true });
+      dispatch(setUser(data));
+      toast.success("Profile changed successfully ")
+      handleClose();
+    } catch (err) {
+      console.error(err);
+    }
   };
+  
 
   return (
     <div>
