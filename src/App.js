@@ -13,6 +13,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "./state/user";
+import { OfficeAddForm } from "./components/Admin/Offices/Add/OfficeAddForm";
+import { OfficeAdd } from "./components/Admin/Offices/Add";
 
 
 function App() {
@@ -36,7 +38,9 @@ function App() {
         <Route path="/service/report/all" element={<ReportMenu />} />
         <Route path="/admin/users" element={<AdminView />} />
         <Route path="/admin/offices" element={<OfficeList />} />
+        <Route path="/admin/offices/register" element={<OfficeAdd />} />
         <Route path="/admin/users/register" element={<RegisterUsers />} />
+
 
       </Routes>
     </div>
