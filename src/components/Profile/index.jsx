@@ -29,7 +29,7 @@ export const Profile = () => {
         <Typography variant="h6"> {user?.name} </Typography>
         <Typography variant="h6"> {user?.lastName} </Typography>
         <Typography variant="subtitle2" sx={{ color: "#666666" }}>
-          {user?.companyRole}
+          {user?.role}
         </Typography>
         <Typography>{user?.email}</Typography>
         <Typography variant="p">{user?.address}</Typography>
