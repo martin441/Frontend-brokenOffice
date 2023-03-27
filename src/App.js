@@ -9,9 +9,22 @@ import { AdminView } from "./components/Admin";
 import OfficeList from "./components/Admin/Offices/OfficeList";
 import { Toaster } from "react-hot-toast";
 import { RegisterUsers } from "./components/Admin/RegisterUsers";
+import { useEffect } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser } from "./state/user";
 
 
 function App() {
+  const ROUTE = process.env.REACT_APP_ROUTE;
+  const dispatch = useDispatch()
+  useEffect(() => {
+    axios
+      .get(`${ROUTE}/user/me`, { withCredentials: true })
+      .then((res) => res.data)
+      .then((data) => dispatch(setUser(data)));
+  }, [ROUTE, dispatch])
+
   return (
     <div className="App">
       <div><Toaster/></div>

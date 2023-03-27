@@ -3,12 +3,13 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { styleEditProfile } from "../../utils/styleMUI";
 import { Button, TextField } from "@mui/material";
+import { useSelector } from "react-redux";
 
 export default function EditProfile() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const user = JSON.parse(localStorage.getItem('user'))
+  const user = useSelector(state => state.user)
 
   return (
     <div>
