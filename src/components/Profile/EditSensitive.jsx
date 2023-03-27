@@ -16,20 +16,21 @@ export default function EditSensitive() {
   const [newPassword, setNewPassword] = React.useState("");
   const [repeatPassword, setRepeatPassword] = React.useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (newPassword !== repeatPassword)
       return toast.error("The new password does not match");
-    axios
-      .put(
+    
+    try {
+      await axios.put(
         `${ROUTE}/user/edit/password`,
         { oldPassword, newPassword },
         { withCredentials: true }
-      )
-      .then(() => {
-        toast.success("Password changed successfully")
-        handleClose();
-      })
-      .catch((err) => toast.error("Password is incorrect"));
+      );
+      toast.success("Password changed successfully");
+      handleClose();
+    } catch (err) {
+      toast.error("Password is incorrect");
+    }
   };
 
   return (
