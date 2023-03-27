@@ -14,14 +14,15 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUser } from "../../state/user";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import PeopleIcon from '@mui/icons-material/People';
-import AddLocationIcon from '@mui/icons-material/AddLocation';
+import PeopleIcon from "@mui/icons-material/People";
+import AddLocationIcon from "@mui/icons-material/AddLocation";
+import checkType from "../../utils/checkType";
 
 export default function MenuNav() {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
   const ROUTE = process.env.REACT_APP_ROUTE;
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -31,15 +32,21 @@ export default function MenuNav() {
     setAnchorEl(null);
   };
 
-  async function handleLogout(){
-    handleClose()
-    try{
-      const user = await axios.post(`${ROUTE}/user/logout`,{}, { withCredentials: true })
-      if(user) dispatch(setUser({}))
+  async function handleLogout() {
+    handleClose();
+    try {
+      const user = await axios.post(
+        `${ROUTE}/user/logout`,
+        {},
+        { withCredentials: true }
+      );
+      if (user) dispatch(setUser({}));
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
+
+
 
   return (
     <>
@@ -106,52 +113,64 @@ export default function MenuNav() {
               <Avatar /> Profile
             </MenuItem>
             <Divider />
-            {user?.type === 'service' && (
-              <MenuItem  onClick={() => {
-                handleClose();
-                navigate("/service/report/all");
-              }}>
-              <ListItemIcon>
-                <ConfirmationNumberIcon fontSize="small" />
-              </ListItemIcon>
-              Tickets
-            </MenuItem>
+            {checkType(user.type)=== 14 && (
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate("/service/report/all");
+                }}
+              >
+                <ListItemIcon>
+                  <ConfirmationNumberIcon fontSize="small" />
+                </ListItemIcon>
+                Tickets
+              </MenuItem>
             )}
 
-            {user?.type === 'admin' && (
-               <><MenuItem onClick={() => {
-                handleClose();
-                navigate("/admin/users");
-              } }>
-                <ListItemIcon>
-                  <PeopleIcon fontSize="small" />
-                </ListItemIcon>
-                Users
-              </MenuItem><MenuItem onClick={() => {
-                handleClose();
-                navigate("/admin/offices");
-              } }>
+            {checkType(user.type)=== 66 && (
+              <>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    navigate("/admin/users");
+                  }}
+                >
+                  <ListItemIcon>
+                    <PeopleIcon fontSize="small" />
+                  </ListItemIcon>
+                  Users
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    navigate("/admin/offices");
+                  }}
+                >
                   <ListItemIcon>
                     <AddLocationIcon fontSize="small" />
                   </ListItemIcon>
                   Offices
-                </MenuItem></>
+                </MenuItem>
+              </>
             )}
 
-            {user?.type === 'standard' &&  (
-              <><MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <AddCircleOutlineIcon fontSize="small" />
-                </ListItemIcon>
-                New Ticket
-              </MenuItem><MenuItem onClick={handleClose}>
+            {checkType(user.type)=== 21 && (
+              <>
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <AddCircleOutlineIcon fontSize="small" />
+                  </ListItemIcon>
+                  New Ticket
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
                   <ListItemIcon>
                     <ConfirmationNumberIcon fontSize="small" />
                   </ListItemIcon>
                   Tickets
-                </MenuItem></>
+                </MenuItem>
+              </>
             )}
-            
+
             <MenuItem onClick={() => handleLogout()}>
               <ListItemIcon>
                 <Logout fontSize="small" />
