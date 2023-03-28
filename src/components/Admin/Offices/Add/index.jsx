@@ -6,18 +6,9 @@ import BusinessIcon from "@mui/icons-material/Business";
 import { BackLink } from "../../../../commons/BackLink";
 
 export const OfficeAdd = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
-
   return (
     <Container component="main" maxWidth="lg">
-      <BackLink text='Back to Offices' />
+      <BackLink text="Back to Offices" />
       <Box
         sx={{
           my: 8,
@@ -26,12 +17,11 @@ export const OfficeAdd = () => {
           flexDirection: "column",
           alignItems: "center",
         }}
-        TextField
       >
         <Typography component="h1" variant="h5">
           New Office <BusinessIcon fontSize="small" />
         </Typography>
-        <OfficeAddForm handleSubmit={handleSubmit} />
+        <OfficeAddForm />
       </Box>
     </Container>
   );

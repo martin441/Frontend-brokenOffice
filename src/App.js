@@ -13,8 +13,9 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "./state/user";
-import { OfficeAddForm } from "./components/Admin/Offices/Add/OfficeAddForm";
 import { OfficeAdd } from "./components/Admin/Offices/Add";
+import AutocompleteAddress from "./commons/Autocomplete";
+
 
 
 function App() {
@@ -40,8 +41,7 @@ function App() {
         <Route path="/admin/offices" element={<OfficeList />} />
         <Route path="/admin/offices/register" element={<OfficeAdd />} />
         <Route path="/admin/users/register" element={<RegisterUsers />} />
-
-
+        <Route path="/map" element={<AutocompleteAddress />} />
       </Routes>
     </div>
   );
