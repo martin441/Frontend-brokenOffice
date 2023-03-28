@@ -13,7 +13,6 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./state/user";
-import { OfficeAddForm } from "./components/Admin/Offices/Add/OfficeAddForm";
 import { OfficeAdd } from "./components/Admin/Offices/Add";
 import NotFoundPage from "./components/NotFoundPage/NotFound";
 import checkType from "./utils/checkType";
@@ -48,6 +47,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/login" element={<SignInSide />} />
+
         {/* <PublicRoute path="/login" element={<SignInSide />} /> */}
         {(checkType(user.type) === 14 ||
           checkType(user.type) === 66 ||
@@ -67,6 +67,7 @@ function App() {
           <Route path="/admin/users/register" element={<RegisterUsers />} />
         )}
         <Route path="*" element={<NotFoundPage />} />
+
       </Routes>
     </div>
   );

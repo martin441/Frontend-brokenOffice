@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import { Form } from "./Form";
+import { BackLink } from "../../commons/BackLink";
 
 export const RegisterUsers = () => {
   const handleSubmit = (event) => {
@@ -16,6 +17,7 @@ export const RegisterUsers = () => {
 
   return (
     <Container component="main" maxWidth="lg">
+       <BackLink text="Back to Users" />
       <Box
         sx={{
           my: 8,
@@ -24,7 +26,6 @@ export const RegisterUsers = () => {
           flexDirection: "column",
           alignItems: "center",
         }}
-        TextField
       >
         <Typography component="h1" variant="h5">
           Register <PeopleIcon fontSize="small" />

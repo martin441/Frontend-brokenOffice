@@ -1,17 +1,18 @@
 import * as React from "react";
-import {  Button } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Button } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
-import { deleteOffice } from "../../../state/office";
-import toast from "react-hot-toast";
+import { deleteOffice, setOffices } from "../../../state/office";
+import { axiosDeleteOffice, axiosGetAllOffices } from "../../../utils/axios";
 
+export default function OfficeBtnDelete({ office }) {
+  const dispatch = useDispatch();
 
-export default function OfficeBtnDelete({office}) {
-  const dispatch = useDispatch()
-
-  function handleClick(){
-    dispatch(deleteOffice(office))
-    toast.success('Office deleted successfully')
+  function handleClick() {
+    axiosDeleteOffice(office._id);
+    dispatch(deleteOffice(office._id))
+    const offices = axiosGetAllOffices();
+    offices.then((offices) => dispatch(setOffices(offices)));
   }
 
   return (
@@ -19,11 +20,11 @@ export default function OfficeBtnDelete({office}) {
       <Button
         component="button"
         variant="body2"
-        sx={{ mt:2}}
-        color='error'
+        sx={{ mt: 2 }}
+        color="error"
         onClick={handleClick}
       >
-         <DeleteIcon />
+        <DeleteIcon />
       </Button>
     </div>
   );
