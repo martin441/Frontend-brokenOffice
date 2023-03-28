@@ -15,21 +15,23 @@ import { useDispatch } from "react-redux";
 import { setUser } from "./state/user";
 import { OfficeAddForm } from "./components/Admin/Offices/Add/OfficeAddForm";
 import { OfficeAdd } from "./components/Admin/Offices/Add";
-
+import NotFoundPage from "./components/NotFoundPage/NotFound";
 
 function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     axios
       .get(`${ROUTE}/user/me`, { withCredentials: true })
       .then((res) => res.data)
       .then((data) => dispatch(setUser(data)));
-  }, [ROUTE, dispatch])
+  }, [ROUTE, dispatch]);
 
   return (
     <div className="App">
-      <div><Toaster/></div>
+      <div>
+        <Toaster />
+      </div>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -40,8 +42,7 @@ function App() {
         <Route path="/admin/offices" element={<OfficeList />} />
         <Route path="/admin/offices/register" element={<OfficeAdd />} />
         <Route path="/admin/users/register" element={<RegisterUsers />} />
-
-
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
