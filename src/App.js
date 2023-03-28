@@ -11,11 +11,12 @@ import { Toaster } from "react-hot-toast";
 import { RegisterUsers } from "./components/Admin/RegisterUsers";
 import { useEffect } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./state/user";
 import { OfficeAddForm } from "./components/Admin/Offices/Add/OfficeAddForm";
 import { OfficeAdd } from "./components/Admin/Offices/Add";
 import NotFoundPage from "./components/NotFoundPage/NotFound";
+import checkType from "./utils/checkType";
 
 function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
@@ -26,6 +27,7 @@ function App() {
       .then((res) => res.data)
       .then((data) => dispatch(setUser(data)));
   }, [ROUTE, dispatch]);
+  const user = useSelector((state) => state.user);
 
   return (
     <div className="App">
@@ -37,11 +39,24 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/login" element={<SignInSide />} />
-        <Route path="/service/report/all" element={<ReportMenu />} />
-        <Route path="/admin/users" element={<AdminView />} />
-        <Route path="/admin/offices" element={<OfficeList />} />
-        <Route path="/admin/offices/register" element={<OfficeAdd />} />
-        <Route path="/admin/users/register" element={<RegisterUsers />} />
+        {checkType(user.type) === 14 && (
+          <Route path="/service/report/all" element={<ReportMenu />} />
+        )}
+        {checkType(user.type) === 66 && (
+          <Route path="/admin/users" element={<AdminView />} />
+        )}
+        {checkType(user.type) === 32 && (
+          <Route path="/admin/users" element={<AdminView />} />
+        )}
+        {checkType(user.type) === 66 && (
+          <Route path="/admin/offices" element={<OfficeList />} />
+        )}
+        {checkType(user.type) === 66 && (
+          <Route path="/admin/offices/register" element={<OfficeAdd />} />
+        )}
+        {checkType(user.type) === 66 && (
+          <Route path="/admin/users/register" element={<RegisterUsers />} />
+        )}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
