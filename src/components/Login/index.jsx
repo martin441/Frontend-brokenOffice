@@ -12,11 +12,13 @@ import { muiStyleLoginBtn } from "../../utils/styleMUI";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import { setUser } from "../../state/user";
 
 export default function SignInSide() {
   const ROUTE = process.env.REACT_APP_ROUTE;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,6 +32,7 @@ export default function SignInSide() {
         withCredentials: true,
       });
       dispatch(setUser(loggedUser.data));
+      navigate("/");
     } catch (err) {
       toast.error("Wrong email or passwdispatch(setUser(loggedUser.data));d");
       console.error(err);
@@ -73,7 +76,7 @@ export default function SignInSide() {
               }}
             >
               <Typography component="h1" variant="h5">
-                Sign in
+                Log in
               </Typography>
               <Box
                 component="form"
@@ -111,7 +114,7 @@ export default function SignInSide() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Sign In
+                  Log in
                 </Button>
                 <Grid sx={muiStyleLoginBtn}>
                   <Grid item xs>
