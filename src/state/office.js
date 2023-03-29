@@ -21,7 +21,6 @@ const reducer = createReducer([], {
     const indexToUpdate = state.findIndex(
       (office) => office._id === action.payload._id
     );
-    console.log(indexToUpdate);
     if (indexToUpdate !== -1) state.splice(indexToUpdate, 1, action.payload);
     return state;
   },

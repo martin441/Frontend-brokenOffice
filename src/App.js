@@ -16,6 +16,7 @@ import { setUser } from "./state/user";
 import { OfficeAdd } from "./components/Admin/Offices/Add";
 import NotFoundPage from "./components/NotFoundPage/NotFound";
 import checkType from "./utils/checkType";
+import { setOffices } from "./state/office";
 
 // function PublicRoute({ path, ...props }) {
 //   const user = useSelector((state) => state.user);
@@ -34,6 +35,10 @@ function App() {
       .get(`${ROUTE}/user/me`, { withCredentials: true })
       .then((res) => res.data)
       .then((data) => dispatch(setUser(data)));
+    axios
+      .get(`${ROUTE}/offices`, { withCredentials: true })
+      .then((res) => res.data)
+      .then((data) => dispatch(setOffices(data)));
   }, [ROUTE, dispatch]);
   const user = useSelector((state) => state.user);
 
@@ -67,7 +72,6 @@ function App() {
           <Route path="/admin/users/register" element={<RegisterUsers />} />
         )}
         <Route path="*" element={<NotFoundPage />} />
-
       </Routes>
     </div>
   );

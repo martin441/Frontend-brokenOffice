@@ -13,7 +13,6 @@ import EditProfile from "./EditProfile";
 import EditSensitive from "./EditSensitive";
 import { Box } from "@mui/system";
 import { styleEditProfile } from "../../utils/styleMUI";
-import { setUser } from "../../state/user";
 import axios from "axios";
 
 export const Profile = () => {
@@ -27,7 +26,6 @@ export const Profile = () => {
   const handleClose = () => setOpen(false);
 
   const handleChangeInput = async (e) => {
-    console.log(e.target.value)
     const reader = new FileReader();
     reader.onload = function (onLoadEvent) {
       setImgAvatar(onLoadEvent.target.result);
@@ -35,7 +33,6 @@ export const Profile = () => {
     reader.readAsDataURL(e.target.files[0]);
     try {
       const { data } = await axios.put(`${ROUTE}/user/edit/profile`,  imgAvatar , { withCredentials: true });
-      console.log('okay')
     } catch (err) {
       console.error("desde PROFILE,index", err);
     }
