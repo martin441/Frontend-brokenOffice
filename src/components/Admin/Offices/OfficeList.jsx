@@ -82,13 +82,13 @@ export default function OfficeList() {
                             {`${office.address?.street}, ${office.address?.zip}, ${office.address?.floor}`}
                           </TableCell>
 
-                          <TableCell key={office._id} align={"center"}>
-                            <Link>
+                          <TableCell  align={"center"}>
+                            <Link key={office._id}>
                               <OfficeModalEdit office={office} />
                             </Link>
                           </TableCell>
                           <TableCell key={office.name} align={"center"}>
-                            <Link>
+                            <Link >
                               <OfficeBtnDelete office={office} />
                             </Link>
                           </TableCell>

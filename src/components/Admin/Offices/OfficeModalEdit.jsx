@@ -7,7 +7,8 @@ import { styleEditProfile } from "../../../utils/styleMUI";
 import { muiBtnOfficeDelete } from "../../../utils/styleMUI.js";
 import { axiosPutOffice } from "../../../utils/axios";
 import { useDispatch } from "react-redux";
-import {  updateOffices } from "../../../state/office";
+import { updateOffices } from "../../../state/office";
+import AddressAutocomplete from "mui-address-autocomplete";
 
 export default function OfficeModalEdit({ office }) {
   const [open, setOpen] = React.useState(false);
@@ -19,6 +20,20 @@ export default function OfficeModalEdit({ office }) {
   const [street, setStreet] = React.useState(office.address?.street);
   const [zip, setZip] = React.useState(office.address?.zip);
   const [floor, setFloor] = React.useState(office.address?.floor);
+  const [coords, setCoords] = React.useState([]);
+
+  function handleStreetChange(value) {
+    if (value) {
+      setStreet(value?.description);
+      setRegion(value?.description.split(",")[1]);
+    } else {
+      setStreet("");
+      setRegion("");
+    }
+    const lat = value?.geometry.location.lat();
+    const lng = value?.geometry.location.lng();
+    setCoords([lng, lat]);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -27,9 +42,10 @@ export default function OfficeModalEdit({ office }) {
       name: region,
       address: {
         street: street,
-        zip: zip,
+        zip: Number(zip),
         floor: floor,
       },
+      location: { type: "Point", coordinates: coords },
     };
     axiosPutOffice(office._id, updatedOffice);
     dispatch(updateOffices(updatedOffice));
@@ -52,25 +68,13 @@ export default function OfficeModalEdit({ office }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={styleEditProfile} component="form" onSubmit={handleSubmit}>
-          <TextField
-            id="standard-multiline-static"
-            label="Region"
-            multiline
-            placeholder="New region..."
-            variant="standard"
-            value={region}
-            onChange={(e) => setRegion(e.target.value)}
-            sx={{ mb: ".5rem" }}
-          />
-          <TextField
-            id="standard-multiline-static"
+          <AddressAutocomplete
+            apiKey={process.env.REACT_APP_API_KEY}
             label="Street"
-            multiline
-            placeholder="New street..."
-            variant="standard"
-            value={street}
-            onChange={(e) => setStreet(e.target.value)}
-            sx={{ mb: ".5rem" }}
+            fields={["geometry"]}
+            onChange={(_, value) => {
+              handleStreetChange(value);
+            }}
           />
           <TextField
             id="standard-multiline-static"

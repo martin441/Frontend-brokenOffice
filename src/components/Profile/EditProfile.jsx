@@ -6,6 +6,7 @@ import { styleEditProfile } from "../../utils/styleMUI";
 import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import AddressAutocomplete from "mui-address-autocomplete";
 import { setUser } from "../../state/user";
 
 export default function EditProfile() {
@@ -21,9 +22,21 @@ export default function EditProfile() {
   const [inputLastName, setInputLastName] = React.useState(user?.lastName);
   const [inputEmail, setinputEmail] = React.useState(user?.email);
   const [inputRole, setInputRole] = React.useState(user?.role);
-  const [inputAddress, setInputAddress] = React.useState(user?.address);
+  const [inputAddress, setInputAddress] = React.useState(user?.addressName);
   const [inputOffice, setInputOffice] = React.useState(user?.office);
+  const [addressCoor, setAddressCoor] = React.useState([]);
 
+  function handleAddressChange(value) {
+    if (value) {
+      setInputAddress(value?.description);
+    } else {
+      setInputAddress("");
+    }
+    const lat = value?.geometry.location.lat();
+    const lng = value?.geometry.location.lng();
+    setAddressCoor([lng, lat]);
+    if (!value) toast.error("Address not valid");
+  }
 
   const handleSubmit = async () => {
     if (
@@ -39,8 +52,9 @@ export default function EditProfile() {
       lastName: inputLastName,
       email: inputEmail,
       role: inputRole,
-      address: inputAddress,
-      office: inputOffice
+      addressName: inputAddress,
+      addressCoor: { type: "Point", coordinates: addressCoor },
+      office: inputOffice,
     };
 
     try {
@@ -112,30 +126,31 @@ export default function EditProfile() {
             sx={{ mb: ".5rem" }}
           />
           <TextField
-            id="standard-multiline-static"
-            label="Address"
-            multiline
-            placeholder="New address..."
-            variant="standard"
-            value={inputAddress}
-            onChange={(e) => setInputAddress(e.target.value)}
-            sx={{ mb: ".5rem" }}
-          />
-          <InputLabel id="demo-simple-select-label">Office</InputLabel>
-          <Select
+            sx={{ mt: 1 }}
+            select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={inputOffice}
             label="Office"
+            name="Office"
             onChange={(e) => setInputOffice(e.target.value)}
           >
             {offices?.map((office) => (
               <MenuItem
-                value={office._id}
-                key={office._id}
-              >{`${office.name}, ${office.address.street}`}</MenuItem>
+                value={office?._id}
+                key={office?._id}
+              >{`${office?.name}, ${office?.address.street}`}</MenuItem>
             ))}
-          </Select>
+          </TextField>
+          <AddressAutocomplete
+            sx={{ mt: 2 }}
+            apiKey={process.env.REACT_APP_API_KEY}
+            label="Address"
+            fields={["geometry"]} // fields will always contain address_components and formatted_address, no need to repeat them
+            onChange={(_, value) => {
+              handleAddressChange(value);
+            }}
+          />
           <Button
             onClick={handleSubmit}
             variant="contained"

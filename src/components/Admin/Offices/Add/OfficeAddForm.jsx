@@ -4,37 +4,45 @@ import { axiosPostOffice } from "../../../../utils/axios";
 import { muiBtnOfficeDelete } from "../../../../utils/styleMUI.js";
 import { useDispatch } from "react-redux";
 import { addOffice } from "../../../../state/office";
-import axios from "axios";
+import AddressAutocomplete from "mui-address-autocomplete";
 
 export const OfficeAddForm = () => {
   const [region, setRegion] = React.useState("");
   const [street, setStreet] = React.useState("");
   const [zip, setZip] = React.useState("");
   const [floor, setFloor] = React.useState("");
+  const [coords, setCoords] = React.useState([]);
+  
 
   const dispatch = useDispatch();
 
+  function handleStreetChange(value) {
+    if (value) {
+      setStreet(value?.description);
+      setRegion(value?.description.split(",")[1]);
+    } else {
+      setStreet("");
+      setRegion("");
+    }
+    const lat = value?.geometry.location.lat();
+    const lng = value?.geometry.location.lng();
+    setCoords([lng, lat]);
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
-    try {
-      const coords = await axios.post(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${street}&key=${process.env.REACT_APP_API_KEY}`
-      );
-      const { lat, lng } = coords.data.results[0].geometry.location;
-      const newOffice = {
-        name: region,
-        address: {
-          street: street,
-          zip: Number(zip),
-          floor: floor,
-        },
-        location: { type: "Point", coordinates: [lat, lng] },
-      };
-      axiosPostOffice(newOffice);
-      dispatch(addOffice(newOffice));
-    } catch (error) {
-      console.error(error);
-    }
+
+    const newOffice = {
+      name: region,
+      address: {
+        street: street,
+        zip: Number(zip),
+        floor: floor,
+      },
+      location: { type: "Point", coordinates: coords },
+    };
+    axiosPostOffice(newOffice);
+    dispatch(addOffice(newOffice));
   }
 
   return (
@@ -45,7 +53,14 @@ export const OfficeAddForm = () => {
         onSubmit={handleSubmit}
         sx={{ mt: 1, width: "70%" }}
       >
-        {/* <PlacesAutocomplete /> */}
+        <AddressAutocomplete
+          apiKey={process.env.REACT_APP_API_KEY}
+          label="Street"
+          fields={["geometry"]}
+          onChange={(_, value) => {
+            handleStreetChange(value);
+          }}
+        />
         <TextField
           id="standard-multiline-static"
           label="Region"
@@ -55,17 +70,6 @@ export const OfficeAddForm = () => {
           variant="standard"
           value={region}
           onChange={(e) => setRegion(e.target.value)}
-          sx={{ mb: ".5rem" }}
-        />
-        <TextField
-          id="standard-multiline-static"
-          label="Street"
-          multiline
-          fullWidth
-          placeholder="New street..."
-          variant="standard"
-          value={street}
-          onChange={(e) => setStreet(e.target.value)}
           sx={{ mb: ".5rem" }}
         />
         <TextField
