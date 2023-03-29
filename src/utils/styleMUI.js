@@ -1,3 +1,5 @@
+import reportIcon from '../assets/report_logo.svg'
+
 export const styleEditProfile = {
   display: "flex",
   flexDirection: "column",
@@ -42,4 +44,12 @@ export const muiBackLink = {
   width: '100%',
   mt: 2,
   color: 'secondary.dark'
+}
+
+export const muiDashboardHome = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  mt: '1rem'
 }

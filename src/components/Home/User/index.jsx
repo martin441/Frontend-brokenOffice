@@ -1,8 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+import {  DashboardUser } from "./Dashboard";
 
-export const Home = () => {
+export const UserHome = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
@@ -10,14 +11,8 @@ export const Home = () => {
     <Box className="header-container-home home-text">
       {user?.email ? (
         <Box sx={{ mt: 4 }}>
-          <Typography variant="h3">{`Hey ${user.name} ${user.lastName}!`}</Typography>
-          <Button
-            variant="contained"
-            sx={{ borderRadius: 20, mt: 3, backgroundColor: 'primary.dark'}}
-            onClick={() => navigate("/user/profile")}
-          >
-            Profile
-          </Button>
+          <Typography variant="h5">{`Hey ${user.name} ${user.lastName}!`}</Typography>
+          <DashboardUser />
         </Box>
       ) : (
         <Box sx={{ mt: 4 }}>

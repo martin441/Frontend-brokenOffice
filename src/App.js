@@ -2,7 +2,7 @@ import "./App.css";
 import { Navbar } from "./components/Navbar";
 import { Route, Routes, Navigate } from "react-router";
 import { Profile } from "./components/Profile";
-import { Home } from "./components/Home";
+import { UserHome } from "./components/Home/User";
 import SignInSide from "./components/Login";
 import { ReportMenu } from "./components/Service/ReportMenu";
 import { AdminView } from "./components/Admin/Users";
@@ -17,6 +17,9 @@ import { OfficeAdd } from "./components/Admin/Offices/Add";
 import NotFoundPage from "./components/NotFoundPage/NotFound";
 import checkType from "./utils/checkType";
 import { setOffices } from "./state/office";
+import { Home } from "./components/Home/Home";
+import { ServiceHome } from "./components/Home/Service";
+import { AdminHome } from "./components/Home/Admin";
 
 // function PublicRoute({ path, ...props }) {
 //   const user = useSelector((state) => state.user);
@@ -49,10 +52,22 @@ function App() {
       </div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/login" element={<SignInSide />} />
 
+        {checkType(user.type) === 404 && <Route path="/" element={<Home />} />}
+
+        {checkType(user.type) === 21 && (
+          <Route path="/" element={<UserHome />} />
+        )}
+
+        {checkType(user.type) === 14 && (
+          <Route path="/" element={<ServiceHome />} />
+        )}
+
+        {checkType(user.type) === 66 && (
+          <Route path="/" element={<AdminHome />} />
+        )}
         {/* <PublicRoute path="/login" element={<SignInSide />} /> */}
         {(checkType(user.type) === 14 ||
           checkType(user.type) === 66 ||
