@@ -27,20 +27,22 @@ export const Profile = () => {
   const handleClose = () => setOpen(false);
 
   const handleChangeInput = async (e) => {
-    console.log(e.target.value)
-    const reader = new FileReader();
-    reader.onload = function (onLoadEvent) {
-      setImgAvatar(onLoadEvent.target.result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
     try {
-      const { data } = await axios.put(`${ROUTE}/user/edit/profile`,  imgAvatar , { withCredentials: true });
-      console.log('okay')
+      var formData = new FormData();
+      formData.append("file", e.target.files[0]);
+      handleClose();
+      const { data } = await axios.post(
+        `${ROUTE}/user/edit/picture`,
+        formData,
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      dispatch(setUser(data));
     } catch (err) {
       console.error("desde PROFILE,index", err);
     }
-
-    handleClose();
   };
 
   return (
@@ -83,7 +85,7 @@ export const Profile = () => {
           </Avatar>
         ) : (
           <Avatar
-            src={imgAvatar}
+          src={user.picture ? user.picture : ""}
             onMouseEnter={() => setHover(true)}
             sx={{ width: "10rem", height: "10rem" }}
           ></Avatar>
