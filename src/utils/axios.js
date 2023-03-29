@@ -40,7 +40,6 @@ export async function axiosPutOffice(id, obj) {
 }
 
 export async function axiosPostOffice(obj) {
-  console.log(obj);
   try {
     const offices = await axios.post(`${ROUTE}/offices/add`, obj, {
       withCredentials: true,
@@ -49,6 +48,17 @@ export async function axiosPostOffice(obj) {
     return offices.data;
   } catch (error) {
     toast.error("Failed to add new Office");
+    console.error(error);
+  }
+}
+
+export async function axiosGetMe() {
+  try {
+    const loggedUser = await axios.get(`${ROUTE}/user/me`, {
+      withCredentials: true,
+    });
+    return loggedUser.data;
+  } catch (error) {
     console.error(error);
   }
 }

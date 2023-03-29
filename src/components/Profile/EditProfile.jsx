@@ -3,11 +3,10 @@ import Box from "@mui/material/Box";
 import toast from "react-hot-toast";
 import Modal from "@mui/material/Modal";
 import { styleEditProfile } from "../../utils/styleMUI";
-import { Button, TextField } from "@mui/material";
+import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUser } from "../../state/user";
-
 
 export default function EditProfile() {
   const ROUTE = process.env.REACT_APP_ROUTE;
@@ -16,13 +15,15 @@ export default function EditProfile() {
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  
+  const offices = useSelector((state) => state.office);
 
   const [inputName, setInputName] = React.useState(user?.name);
   const [inputLastName, setInputLastName] = React.useState(user?.lastName);
   const [inputEmail, setinputEmail] = React.useState(user?.email);
   const [inputRole, setInputRole] = React.useState(user?.role);
   const [inputAddress, setInputAddress] = React.useState(user?.address);
+  const [inputOffice, setInputOffice] = React.useState(user?.office);
+
 
   const handleSubmit = async () => {
     if (
@@ -30,26 +31,29 @@ export default function EditProfile() {
       inputLastName === "" ||
       inputEmail === "" ||
       inputRole === ""
-    ) return toast.error("Please enter required data");
-  
+    )
+      return toast.error("Please enter required data");
+
     const obj = {
       name: inputName,
       lastName: inputLastName,
       email: inputEmail,
       role: inputRole,
       address: inputAddress,
+      office: inputOffice
     };
-    
+
     try {
-      const { data } = await axios.put(`${ROUTE}/user/edit/profile`, obj, { withCredentials: true });
+      const { data } = await axios.put(`${ROUTE}/user/edit/profile`, obj, {
+        withCredentials: true,
+      });
       dispatch(setUser(data));
-      toast.success("Profile changed successfully ")
+      toast.success("Profile changed successfully ");
       handleClose();
     } catch (err) {
       console.error(err);
     }
   };
-  
 
   return (
     <div>
@@ -117,6 +121,21 @@ export default function EditProfile() {
             onChange={(e) => setInputAddress(e.target.value)}
             sx={{ mb: ".5rem" }}
           />
+          <InputLabel id="demo-simple-select-label">Office</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={inputOffice}
+            label="Office"
+            onChange={(e) => setInputOffice(e.target.value)}
+          >
+            {offices?.map((office) => (
+              <MenuItem
+                value={office._id}
+                key={office._id}
+              >{`${office.name}, ${office.address.street}`}</MenuItem>
+            ))}
+          </Select>
           <Button
             onClick={handleSubmit}
             variant="contained"
