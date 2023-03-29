@@ -65,7 +65,7 @@ export default function MenuNav() {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
               >
-                <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+                <Avatar src={user.picture ? user.picture : ""} sx={{ width: 32, height: 32 }}></Avatar>
               </IconButton>
             </Tooltip>
           </Box>
@@ -110,7 +110,7 @@ export default function MenuNav() {
                 navigate("/user/profile");
               }}
             >
-              <Avatar /> Profile
+              <Avatar src={user.picture ? user.picture : ""} /> Profile
             </MenuItem>
             <Divider />
             {checkType(user.type)=== 14 && (
