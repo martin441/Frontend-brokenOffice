@@ -8,7 +8,7 @@ import { BackLink } from "../../../../commons/BackLink";
 export const OfficeAdd = () => {
   return (
     <Container component="main" maxWidth="lg">
-      <BackLink text="Back to Offices" />
+      <BackLink text="Back to Offices" href="/admin/offices" />
       <Box
         sx={{
           my: 8,

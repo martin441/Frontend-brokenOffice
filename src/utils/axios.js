@@ -62,3 +62,40 @@ export async function axiosGetMe() {
     console.error(error);
   }
 }
+
+export async function axiosGetAllUsers() {
+  try {
+    const users = await axios.get(`${ROUTE}/collaborators/users`, {
+      withCredentials: true,
+    });
+    return users.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function axiosRegisterUser(obj) {
+  try {
+    const user = await axios.post(`${ROUTE}/collaborators/create/user`, obj, {
+      withCredentials: true,
+    });
+    toast.success('Registered succesfully')
+    return user
+  } catch (error) {
+    toast.error('Register failed')
+    console.error(error);
+  }
+}
+
+export async function axiosDeleteUser(email) {
+  try {
+    const user = await axios.delete(`${ROUTE}/collaborators/delete/${email}`, {
+      withCredentials: true,
+    });
+    toast.success('Deleted succesfully')
+    return user
+  } catch (error) {
+    toast.error('Delete failed')
+    console.error(error);
+  }
+}
