@@ -21,7 +21,7 @@ export const muiStyleLoginBtn = {
 
 export const muiBtnOfficeDelete = {
   border: "none",
-  bordeRadius: 20,
+  bordeRadius: '20px',
   padding: "0.5rem 1rem",
   bgcolor: 'primary',
   color: 'secondary'

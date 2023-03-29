@@ -13,7 +13,6 @@ import EditProfile from "./EditProfile";
 import EditSensitive from "./EditSensitive";
 import { Box } from "@mui/system";
 import { styleEditProfile } from "../../utils/styleMUI";
-import { setUser } from "../../state/user";
 import axios from "axios";
 
 export const Profile = () => {
@@ -40,6 +39,7 @@ export const Profile = () => {
         }
       );
       dispatch(setUser(data));
+
     } catch (err) {
       console.error("desde PROFILE,index", err);
     }

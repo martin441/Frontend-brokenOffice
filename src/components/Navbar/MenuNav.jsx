@@ -51,7 +51,7 @@ export default function MenuNav() {
   return (
     <>
       {user?.email ? (
-        <React.Fragment>
+        <div>
           <Box
             sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
           >
@@ -128,7 +128,7 @@ export default function MenuNav() {
             )}
 
             {checkType(user.type)=== 66 && (
-              <>
+              <div>
                 <MenuItem
                   onClick={() => {
                     handleClose();
@@ -151,11 +151,11 @@ export default function MenuNav() {
                   </ListItemIcon>
                   Offices
                 </MenuItem>
-              </>
+              </div>
             )}
 
             {checkType(user.type)=== 21 && (
-              <>
+              <div>
                 <MenuItem onClick={handleClose}>
                   <ListItemIcon>
                     <AddCircleOutlineIcon fontSize="small" />
@@ -168,7 +168,7 @@ export default function MenuNav() {
                   </ListItemIcon>
                   Tickets
                 </MenuItem>
-              </>
+              </div>
             )}
 
             <MenuItem onClick={() => handleLogout()}>
@@ -178,13 +178,13 @@ export default function MenuNav() {
               Logout
             </MenuItem>
           </Menu>
-        </React.Fragment>
+        </div>
       ) : (
-        <React.Fragment>
+        <div>
           <button onClick={() => navigate("/login")} className="btn-login">
             LOGIN
           </button>
-        </React.Fragment>
+        </div>
       )}
     </>
   );

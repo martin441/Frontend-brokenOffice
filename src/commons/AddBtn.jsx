@@ -1,16 +1,16 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { muiBtnOfficeDelete } from "../../../../utils/styleMUI";
+import { muiBtnOfficeDelete } from "../utils/styleMUI";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router";
 
-export const OfficeAddBtn = () => {
+export const AddBtn = ({href}) => {
   const navigate = useNavigate();
   return (
     <Button
       variant="contained"
       sx={muiBtnOfficeDelete}
-      onClick={() => navigate("/admin/offices/register")}
+      onClick={() => navigate(href)}
     >
       <AddIcon />
     </Button>

@@ -1,4 +1,12 @@
-import { Box, Button, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+} from "@mui/material";
 
 export const Form = ({ handleSubmit }) => {
   return (
@@ -23,17 +31,17 @@ export const Form = ({ handleSubmit }) => {
         margin="normal"
         required
         fullWidth
-        name="Last Name"
+        name="lastName"
         label="Last Name"
         type="text"
-        id="Last Name"
+        id="lastName"
         autoComplete="Last Name"
       />
       <TextField
         margin="normal"
         required
         fullWidth
-        name="Email"
+        name="email"
         label="Email"
         type="email"
         id="Email"
@@ -43,7 +51,7 @@ export const Form = ({ handleSubmit }) => {
         margin="normal"
         required
         fullWidth
-        name="Password"
+        name="password"
         label="Password"
         type="password"
         id="Password"
@@ -53,22 +61,44 @@ export const Form = ({ handleSubmit }) => {
         margin="normal"
         required
         fullWidth
-        name="Role"
-        label="Role"
-        type="text"
-        id="Role"
-        autoComplete="Role"
+        name="repeatPassword"
+        label="Repeat Password"
+        type="password"
+        id="Password"
+        autoComplete="Password"
       />
       <TextField
         margin="normal"
         required
         fullWidth
-        name="Type"
-        label="Type"
+        name="role"
+        label="Role"
         type="text"
-        id="Type"
-        autoComplete="Type"
+        id="role"
+        autoComplete="Role"
       />
+      <FormLabel radioGroup="true" id="demo-radio-buttons-group-label">
+        Type
+      </FormLabel>
+      <RadioGroup
+        row
+        aria-labelledby="demo-radio-buttons-group-label"
+        defaultValue="standard"
+        name="type"
+      >
+        <FormControlLabel
+          sx={{ m: "0 auto" }}
+          value="standard"
+          control={<Radio />}
+          label="Standard"
+        />
+        <FormControlLabel
+          sx={{ m: "0 auto" }}
+          value="service"
+          control={<Radio />}
+          label="Service"
+        />
+      </RadioGroup>
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
         Register
       </Button>

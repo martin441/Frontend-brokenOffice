@@ -13,8 +13,7 @@ export const Home = () => {
           <Typography variant="h3">{`Hey ${user.name} ${user.lastName}!`}</Typography>
           <Button
             variant="contained"
-            color="secondary"
-            sx={{ borderRadius: 20, mt: 3 }}
+            sx={{ borderRadius: 20, mt: 3, backgroundColor: 'primary.dark'}}
             onClick={() => navigate("/user/profile")}
           >
             Profile
