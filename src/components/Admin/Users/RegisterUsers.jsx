@@ -3,21 +3,36 @@ import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import { Form } from "./Form";
-import { BackLink } from "../../commons/BackLink";
+import { BackLink } from "../../../commons/BackLink";
+import { axiosRegisterUser } from "../../../utils/axios";
+import { toast } from "react-hot-toast";
 
 export const RegisterUsers = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const registerData = {
       email: data.get("email"),
       password: data.get("password"),
-    });
+      name: data.get("name"),
+      lastName: data.get("lastName"),
+      role: data.get("role"),
+      type: data.get("type"),
+    };
+
+    const password = data.get('password')
+    const repeatPassword = data.get('repeatPassword')
+
+    if(password !== repeatPassword) return toast.error('Passwords do not match!')
+
+    console.log(registerData);
+
+    axiosRegisterUser(registerData);
   };
 
   return (
     <Container component="main" maxWidth="lg">
-       <BackLink text="Back to Users" />
+      <BackLink text="Back to Users" href="/admin/users" />
       <Box
         sx={{
           my: 8,

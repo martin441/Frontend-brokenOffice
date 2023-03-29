@@ -10,12 +10,12 @@ import TableRow from "@mui/material/TableRow";
 import { Link } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import OfficeModalEdit from "./OfficeModalEdit";
-import { setOffices } from "../../../state/office";
+import { deleteOffice, setOffices } from "../../../state/office";
 import { Box } from "@mui/system";
 import { muiOfficeBar } from "../../../utils/styleMUI";
-import { OfficeAddBtn } from "./Add/OfficeAddBtn";
-import OfficeBtnDelete from "./OfficeBtnDelete";
-import { axiosGetAllOffices } from "../../../utils/axios";
+import { axiosDeleteOffice, axiosGetAllOffices } from "../../../utils/axios";
+import { AddBtn } from "../../../commons/AddBtn";
+import DeleteBtn from "../../../commons/DeleteBtn";
 
 export default function OfficeList() {
   const [page, setPage] = useState(0);
@@ -37,26 +37,31 @@ export default function OfficeList() {
     offices.then((offices) => dispatch(setOffices(offices)));
   }, [dispatch]);
 
+  function handleClick(id) {
+    axiosDeleteOffice(id);
+    dispatch(deleteOffice(id));
+  }
+
   return (
     <>
       <Box sx={muiOfficeBar}>
-        <OfficeAddBtn />
+        <AddBtn href="/admin/offices/register" />
       </Box>
       <Paper sx={{ width: "100%", overflow: "hidden", m: "0 auto" }}>
         <TableContainer sx={{ maxHeight: "100vh" }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <TableCell style={{ minWidth: 100 }} align={"center"}>
+                <TableCell style={{ minWidth: 30 }} align={"center"}>
                   Region
                 </TableCell>
                 <TableCell style={{ minWidth: 100 }} align={"center"}>
                   Adress
                 </TableCell>
-                <TableCell style={{ minWidth: 50 }} align={"center"}>
+                <TableCell style={{ minWidth: 25 }} align={"center"}>
                   Edit
                 </TableCell>
-                <TableCell style={{ minWidth: 50 }} align={"center"}>
+                <TableCell style={{ minWidth: 25 }} align={"center"}>
                   Delete
                 </TableCell>
               </TableRow>
@@ -74,7 +79,10 @@ export default function OfficeList() {
                           tabIndex={-1}
                           key={`${office.name}123`}
                         >
-                          <TableCell key={office.address.street} align={"center"}>
+                          <TableCell
+                            key={office.address.street}
+                            align={"center"}
+                          >
                             {office.name}
                           </TableCell>
 
@@ -82,14 +90,14 @@ export default function OfficeList() {
                             {`${office.address?.street}, ${office.address?.zip}, ${office.address?.floor}`}
                           </TableCell>
 
-                          <TableCell  align={"center"}>
+                          <TableCell align={"center"}>
                             <Link key={office._id}>
                               <OfficeModalEdit office={office} />
                             </Link>
                           </TableCell>
                           <TableCell key={office.name} align={"center"}>
-                            <Link >
-                              <OfficeBtnDelete office={office} />
+                            <Link onClick={() => handleClick( office._id)}>
+                              <DeleteBtn  />
                             </Link>
                           </TableCell>
                         </TableRow>
