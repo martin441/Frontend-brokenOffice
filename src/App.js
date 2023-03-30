@@ -17,15 +17,7 @@ import { OfficeAdd } from "./components/Admin/Offices/Add";
 import NotFoundPage from "./components/NotFoundPage/NotFound";
 import checkType from "./utils/checkType";
 import { setOffices } from "./state/office";
-
-// function PublicRoute({ path, ...props }) {
-//   const user = useSelector((state) => state.user);
-//   return user ? (
-//     <Navigate to="/login" replace />
-//   ) : (
-//     <Route path={path} {...props} />
-//   );
-// }
+import { ProtectedRoute } from "./commons/PrivatedRoutes";
 
 function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
@@ -41,6 +33,7 @@ function App() {
       .then((data) => dispatch(setOffices(data)));
   }, [ROUTE, dispatch]);
   const user = useSelector((state) => state.user);
+  const initialized = user !== null;
 
   return (
     <div className="App">
@@ -50,27 +43,24 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/user/profile" element={<Profile />} />
-        <Route path="/login" element={<SignInSide />} />
 
-        {/* <PublicRoute path="/login" element={<SignInSide />} /> */}
-        {(checkType(user.type) === 14 ||
-          checkType(user.type) === 66 ||
-          checkType(user.type) === 32) && (
-          <Route path="/service/report/all" element={<ReportMenu />} />
-        )}
-        {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
-          <Route path="/admin/users" element={<AdminView />} />
-        )}
-        {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
-          <Route path="/admin/offices" element={<OfficeList />} />
-        )}
-        {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
-          <Route path="/admin/offices/register" element={<OfficeAdd />} />
-        )}
-        {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
-          <Route path="/admin/users/register" element={<RegisterUsers />} />
-        )}
+        <Route
+          path="/user/profile"
+          element={
+            initialized ? (
+              <ProtectedRoute user={user} redirectTo="/login">
+                <Profile />
+              </ProtectedRoute>
+            ) : null
+          }
+        />
+
+        <Route path="/login" element={<SignInSide />} />
+        <Route path="/service/report/all" element={<ReportMenu />} />
+        <Route path="/admin/users" element={<AdminView />} />
+        <Route path="/admin/offices" element={<OfficeList />} />
+        <Route path="/admin/offices/register" element={<OfficeAdd />} />
+        <Route path="/admin/users/register" element={<RegisterUsers />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
