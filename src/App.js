@@ -20,6 +20,7 @@ import { setOffices } from "./state/office";
 import { Home } from "./components/Home/Home";
 import { ServiceHome } from "./components/Home/Service";
 import { AdminHome } from "./components/Home/Admin";
+import NewTicketForm from "./components/Home/User/NewTicket";
 
 // function PublicRoute({ path, ...props }) {
 //   const user = useSelector((state) => state.user);
@@ -59,6 +60,10 @@ function App() {
 
         {checkType(user.type) === 21 && (
           <Route path="/" element={<UserHome />} />
+        )}
+
+        {checkType(user.type) === 21 && (
+          <Route path="/user/new-ticket" element={<NewTicketForm />} />
         )}
 
         {checkType(user.type) === 14 && (

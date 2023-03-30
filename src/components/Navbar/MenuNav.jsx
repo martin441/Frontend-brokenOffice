@@ -17,6 +17,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import PeopleIcon from "@mui/icons-material/People";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import checkType from "../../utils/checkType";
+import { Link } from "react-router-dom";
 
 export default function MenuNav() {
   const user = useSelector((state) => state.user);
@@ -46,8 +47,6 @@ export default function MenuNav() {
     }
   }
 
-
-
   return (
     <>
       {user?.email ? (
@@ -65,7 +64,10 @@ export default function MenuNav() {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
               >
-                <Avatar src={user.picture ? user.picture : ""} sx={{ width: 32, height: 32 }}></Avatar>
+                <Avatar
+                  src={user.picture ? user.picture : ""}
+                  sx={{ width: 32, height: 32 }}
+                ></Avatar>
               </IconButton>
             </Tooltip>
           </Box>
@@ -113,7 +115,7 @@ export default function MenuNav() {
               <Avatar src={user.picture ? user.picture : ""} /> Profile
             </MenuItem>
             <Divider />
-            {checkType(user.type)=== 14 && (
+            {checkType(user.type) === 14 && (
               <MenuItem
                 onClick={() => {
                   handleClose();
@@ -127,7 +129,7 @@ export default function MenuNav() {
               </MenuItem>
             )}
 
-            {checkType(user.type)=== 66 && (
+            {checkType(user.type) === 66 && (
               <div>
                 <MenuItem
                   onClick={() => {
@@ -154,14 +156,16 @@ export default function MenuNav() {
               </div>
             )}
 
-            {checkType(user.type)=== 21 && (
+            {checkType(user.type) === 21 && (
               <div>
-                <MenuItem onClick={handleClose}>
-                  <ListItemIcon>
-                    <AddCircleOutlineIcon fontSize="small" />
-                  </ListItemIcon>
-                  New Ticket
-                </MenuItem>
+                <Link to={'/user/new-ticket'}>
+                  <MenuItem onClick={handleClose}>
+                    <ListItemIcon>
+                      <AddCircleOutlineIcon fontSize="small" />
+                    </ListItemIcon>
+                    New Ticket
+                  </MenuItem>
+                </Link>
                 <MenuItem onClick={handleClose}>
                   <ListItemIcon>
                     <ConfirmationNumberIcon fontSize="small" />

@@ -25,8 +25,6 @@ export const RegisterUsers = () => {
 
     if(password !== repeatPassword) return toast.error('Passwords do not match!')
 
-    console.log(registerData);
-
     axiosRegisterUser(registerData);
   };
 
