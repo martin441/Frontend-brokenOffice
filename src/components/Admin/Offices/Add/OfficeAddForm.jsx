@@ -5,6 +5,7 @@ import { muiBtnOfficeDelete } from "../../../../utils/styleMUI.js";
 import { useDispatch } from "react-redux";
 import { addOffice } from "../../../../state/office";
 import AddressAutocomplete from "mui-address-autocomplete";
+import { useNavigate } from "react-router";
 
 export const OfficeAddForm = () => {
   const [region, setRegion] = React.useState("");
@@ -13,7 +14,7 @@ export const OfficeAddForm = () => {
   const [floor, setFloor] = React.useState("");
   const [coords, setCoords] = React.useState([]);
   
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function handleStreetChange(value) {
@@ -43,6 +44,12 @@ export const OfficeAddForm = () => {
     };
     axiosPostOffice(newOffice);
     dispatch(addOffice(newOffice));
+    setStreet("");
+    setRegion("");
+    setZip("");
+    setFloor("");
+    setCoords([]);
+    navigate("/admin/offices")
   }
 
   return (
