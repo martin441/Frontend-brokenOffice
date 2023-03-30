@@ -21,15 +21,8 @@ import { Home } from "./components/Home/Home";
 import { ServiceHome } from "./components/Home/Service";
 import { AdminHome } from "./components/Home/Admin";
 import NewTicketForm from "./components/Home/User/NewTicket";
+import { LoginProtectedRoute } from "./commons/LoginProtectedRoute";
 
-// function PublicRoute({ path, ...props }) {
-//   const user = useSelector((state) => state.user);
-//   return user ? (
-//     <Navigate to="/login" replace />
-//   ) : (
-//     <Route path={path} {...props} />
-//   );
-// }
 
 function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
@@ -45,6 +38,7 @@ function App() {
       .then((data) => dispatch(setOffices(data)));
   }, [ROUTE, dispatch]);
   const user = useSelector((state) => state.user);
+  const initialized = user !== null;
 
   return (
     <div className="App">
@@ -53,7 +47,6 @@ function App() {
       </div>
       <Navbar />
       <Routes>
-        <Route path="/user/profile" element={<Profile />} />
         <Route path="/login" element={<SignInSide />} />
 
         {checkType(user.type) === 404 && <Route path="/" element={<Home />} />}
@@ -73,7 +66,18 @@ function App() {
         {checkType(user.type) === 66 && (
           <Route path="/" element={<AdminHome />} />
         )}
-        {/* <PublicRoute path="/login" element={<SignInSide />} /> */}
+
+        <Route
+          path="/user/profile"
+          element={
+            initialized ? (
+              <LoginProtectedRoute user={user} redirectTo="/login">
+                <Profile />
+              </LoginProtectedRoute>
+            ) : null
+          }
+        />
+
         {(checkType(user.type) === 14 ||
           checkType(user.type) === 66 ||
           checkType(user.type) === 32) && (

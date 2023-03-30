@@ -158,15 +158,22 @@ export default function MenuNav() {
 
             {checkType(user.type) === 21 && (
               <div>
-                <Link to={'/user/new-ticket'}>
-                  <MenuItem onClick={handleClose}>
+
+                  <MenuItem onClick={() =>
+                  navigate('/user/new-ticket')
+                  handleClose()}>
                     <ListItemIcon>
                       <AddCircleOutlineIcon fontSize="small" />
                     </ListItemIcon>
                     New Ticket
                   </MenuItem>
-                </Link>
-                <MenuItem onClick={handleClose}>
+          
+             
+                
+                <MenuItem onClick={() => {
+                  handleClose()
+                  navigate("/user/history");
+                }}>
                   <ListItemIcon>
                     <ConfirmationNumberIcon fontSize="small" />
                   </ListItemIcon>
