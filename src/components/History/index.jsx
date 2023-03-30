@@ -1,13 +1,18 @@
 import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
-import React from "react";
-import { useSelector } from "react-redux";
+import { muiDashboardHome } from "../../utils/styleMUI";
+import { ReportListHomeUser } from "../Home/User/ReportListHome";
 
 function createData(title, state) {
   return { title, state };
@@ -24,13 +29,18 @@ const tickets = [
   createData("Broken Laptop", "Rejected"),
   createData("Broken HDMI", "completed"),
   createData("Broken Headphones", "Mariano"),
+  createData("Broken Laptop", "Rejected"),
+  createData("Broken HDMI", "completed"),
+  createData("Broken Headphones", "Mariano"),
 ];
 
-export const ReportListHomeUser = () => {
-  const user = useSelector((state) => state.user);
+export const History = () => {
   return (
-    <div>
-      <TableContainer sx={{ maxHeight: 250 }}>
+    <Box sx={muiDashboardHome}>
+      <Typography sx={{mt:4}} gutterBottom variant="h5" component="div">
+        History
+      </Typography>
+      <TableContainer sx={{ maxHeight: 500 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -42,7 +52,7 @@ export const ReportListHomeUser = () => {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody style={{ overflow: 'auto' }}>
+          <TableBody style={{ overflow: "auto" }}>
             {tickets.map((ticket) => {
               return (
                 <>
@@ -61,6 +71,6 @@ export const ReportListHomeUser = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Box>
   );
 };

@@ -162,7 +162,10 @@ export default function MenuNav() {
                   </ListItemIcon>
                   New Ticket
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={() => {
+                  handleClose()
+                  navigate("/user/history");
+                }}>
                   <ListItemIcon>
                     <ConfirmationNumberIcon fontSize="small" />
                   </ListItemIcon>
