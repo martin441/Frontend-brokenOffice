@@ -13,6 +13,7 @@ import { deleteUser, setAllUsers } from "../../../state/allUsers";
 import checkType from "../../../utils/checkType";
 import { Link } from "react-router-dom";
 import DeleteBtn from "../../../commons/DeleteBtn";
+import { toast } from "react-hot-toast";
 
 export default function DataTable() {
   const [page, setPage] = useState(0);
@@ -33,9 +34,10 @@ export default function DataTable() {
     axiosGetAllUsers().then((users) => dispatch(setAllUsers(users)));
   }, [dispatch]);
 
-  function handleClick(email) {
-    axiosDeleteUser(email);
-    dispatch(deleteUser(email));
+  function handleClick(user) {
+    if (user.type === process.env.REACT_APP_ALPHA) return toast.error("You can't delete another admin")
+    axiosDeleteUser(user.email);
+    dispatch(deleteUser(user.email));
   }
 
   return (
@@ -62,6 +64,7 @@ export default function DataTable() {
             {users
               ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               ?.map((user) => {
+                if (user.type === process.env.REACT_APP_OMEGA) return
                 return (
                   <>
                     <TableRow
@@ -94,7 +97,7 @@ export default function DataTable() {
                           : "no region"}
                       </TableCell>
                       <TableCell key={user.type} align={"center"}>
-                        <Link onClick={() => handleClick(user.email)}>
+                        <Link onClick={() => handleClick(user)}>
                           <DeleteBtn />
                         </Link>
                       </TableCell>

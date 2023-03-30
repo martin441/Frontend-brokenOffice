@@ -6,8 +6,10 @@ import { Form } from "./Form";
 import { BackLink } from "../../../commons/BackLink";
 import { axiosRegisterUser } from "../../../utils/axios";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export const RegisterUsers = () => {
+  const navigate = useNavigate()
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -28,6 +30,8 @@ export const RegisterUsers = () => {
     console.log(registerData);
 
     axiosRegisterUser(registerData);
+
+    navigate("/admin/users")
   };
 
   return (
