@@ -18,7 +18,7 @@ export const DashboardUser = () => {
   const navigate = useNavigate()
   return (
     <Box sx={muiDashboardHome}>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345 }} onClick={() => navigate('/user/new-ticket')}>
         <CardActionArea>
           <CardContent>
             <BuildCircleIcon />

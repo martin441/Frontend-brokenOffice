@@ -99,3 +99,13 @@ export async function axiosDeleteUser(email) {
     console.error(error);
   }
 }
+
+export async function axiosGetAddressFromCoord(lat, lng){
+  try {
+    const address = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.REACT_APP_API_KEY}`)
+    return address.data.results[0].formatted_address
+  } catch (error) {
+    toast.error('Could not get Geolocation, please enter it manually')
+    console.error(error);
+  }
+}
