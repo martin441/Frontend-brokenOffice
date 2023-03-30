@@ -11,11 +11,13 @@ import { muiDashboardHome } from "../../../utils/styleMUI";
 import BuildCircleIcon from "@mui/icons-material/BuildCircle";
 import { ReportListHomeUser } from "./ReportListHome";
 import HistoryIcon from '@mui/icons-material/History';
+import { useNavigate } from "react-router";
 
 export const DashboardUser = () => {
+  const navigate = useNavigate()
   return (
     <Box sx={muiDashboardHome}>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345 }} onClick={() => navigate('/user/new-ticket')}>
         <CardActionArea>
           <CardContent>
             <BuildCircleIcon />
