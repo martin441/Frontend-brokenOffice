@@ -13,6 +13,7 @@ import { ReportListHomeUser } from "./ReportListHome";
 import HistoryIcon from '@mui/icons-material/History';
 import { useNavigate } from "react-router";
 
+
 export const DashboardUser = () => {
   const navigate = useNavigate()
   return (
@@ -32,7 +33,7 @@ export const DashboardUser = () => {
         <CardActions></CardActions>
       </Card>
 
-      <Card sx={{ maxWidth: 345, mt: '1rem' }}>
+      <Card sx={{ maxWidth: 345, mt: '1rem' }} onClick={() => navigate("/user/history")}>
         <CardActionArea>
           <CardContent>
             <HistoryIcon />

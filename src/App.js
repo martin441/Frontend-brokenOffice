@@ -22,6 +22,7 @@ import { ServiceHome } from "./components/Home/Service";
 import { AdminHome } from "./components/Home/Admin";
 import NewTicketForm from "./components/Home/User/NewTicket";
 import { LoginProtectedRoute } from "./commons/LoginProtectedRoute";
+import { History } from "../src/components/History";
 
 
 function App() {
@@ -94,6 +95,9 @@ function App() {
         )}
         {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
           <Route path="/admin/users/register" element={<RegisterUsers />} />
+        )}
+        {checkType(user.type) === 21 && (
+          <Route path="/user/history" element={<History />} />
         )}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

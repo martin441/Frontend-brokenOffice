@@ -27,7 +27,7 @@ const tickets = [
 ];
 
 export const ReportListHomeUser = () => {
-  const user = useSelector((state) => state.user);
+
   return (
     <div>
       <TableContainer sx={{ maxHeight: 250 }}>
