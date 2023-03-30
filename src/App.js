@@ -21,6 +21,7 @@ import { Home } from "./components/Home/Home";
 import { ServiceHome } from "./components/Home/Service";
 import { AdminHome } from "./components/Home/Admin";
 import { LoginProtectedRoute } from "./commons/LoginProtectedRoute";
+import { History } from "../src/components/History";
 
 function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
@@ -88,6 +89,9 @@ function App() {
         )}
         {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
           <Route path="/admin/users/register" element={<RegisterUsers />} />
+        )}
+        {checkType(user.type) === 21 && (
+          <Route path="/user/history" element={<History />} />
         )}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
