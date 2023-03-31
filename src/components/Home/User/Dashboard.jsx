@@ -23,7 +23,7 @@ export const DashboardUser = () => {
           <CardContent>
             <BuildCircleIcon />
             <Typography gutterBottom variant="h5" component="div">
-              New Ticket
+              New Report
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Report a problem with your office supplies

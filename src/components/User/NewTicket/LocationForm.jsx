@@ -10,8 +10,8 @@ import {
   RadioGroup,
   Select,
 } from "@mui/material";
-import getGeolocation from "../../../../utils/geoLocation";
-import { axiosGetAddressFromCoord } from "../../../../utils/axios";
+import getGeolocation from "../../../utils/geoLocation";
+import { axiosGetAddressFromCoord } from "../../../utils/axios";
 import AddressAutocomplete from "mui-address-autocomplete";
 
 export default function LocationForm() {

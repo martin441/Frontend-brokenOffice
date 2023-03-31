@@ -125,7 +125,7 @@ export default function MenuNav() {
                 <ListItemIcon>
                   <ConfirmationNumberIcon fontSize="small" />
                 </ListItemIcon>
-                Tickets
+                Reports
               </MenuItem>
             )}
 
@@ -167,7 +167,7 @@ export default function MenuNav() {
                   <ListItemIcon>
                     <AddCircleOutlineIcon fontSize="small" />
                   </ListItemIcon>
-                  New Ticket
+                  New Report
                 </MenuItem>
 
                 <MenuItem
@@ -179,7 +179,7 @@ export default function MenuNav() {
                   <ListItemIcon>
                     <ConfirmationNumberIcon fontSize="small" />
                   </ListItemIcon>
-                  Tickets
+                  Reports
                 </MenuItem>
               </div>
             )}
