@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import DescriptionForm from "./DescriptionForm";
 import LocationForm from "./LocationForm";
 import ReviewNewTicket from "./Review";
+import { useDispatch } from "react-redux";
 
 const steps = ["Description", "Location", "Review"];
 

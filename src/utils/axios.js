@@ -109,3 +109,12 @@ export async function axiosGetAddressFromCoord(lat, lng){
     console.error(error);
   }
 }
+
+export async function axiosGetClosestOffices(lat, lng){
+  try {
+    const closestOffices = await axios.get(`${ROUTE}/reports/geoffice?lat=${lat}&long=${lng}`, {withCredentials: true})
+    return closestOffices.data
+  } catch (error) {
+    console.error(error)
+  }
+}
