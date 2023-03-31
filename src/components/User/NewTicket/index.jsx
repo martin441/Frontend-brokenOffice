@@ -74,7 +74,7 @@ export default function NewTicketForm() {
                 Thank you for your Report.
               </Typography>
               <Typography variant="subtitle1">
-                Your order number is #number. We have emailed your order
+                Your report number is #number. We have emailed your report
                 confirmation, and will send you an update check the app or your inbox for updates.
               </Typography>
             </React.Fragment>
@@ -93,7 +93,7 @@ export default function NewTicketForm() {
                   onClick={handleNext}
                   sx={{ mt: 3, ml: 1 }}
                 >
-                  {activeStep === steps.length - 1 ? "Place order" : "Next"}
+                  {activeStep === steps.length - 1 ? "Submit" : "Next"}
                 </Button>
               </Box>
             </React.Fragment>
