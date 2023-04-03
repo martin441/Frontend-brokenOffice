@@ -1,6 +1,6 @@
 import { Box } from "@mui/system";
 import { AddBtn } from "../../../commons/AddBtn";
-import DataTable from "./DataTable";
+import Table from "./Table/index"
 
 export const AdminView = () => {
   return (
@@ -8,7 +8,7 @@ export const AdminView = () => {
       <Box sx={{ display: "flex", justifyContent: 'space-evenly', padding: 2 }}>
         <AddBtn href="/admin/users/register" />
       </Box>
-      <DataTable />
+      <Table />
     </div>
   );
 };

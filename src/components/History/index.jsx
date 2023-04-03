@@ -1,76 +1,66 @@
+import * as React from "react";
 import {
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
-import { muiDashboardHome } from "../../utils/styleMUI";
-import { ReportListHomeUser } from "../Home/User/ReportListHome";
+  DataGrid,
+  GridToolbarContainer,
+  GridToolbarColumnsButton,
+  GridToolbarFilterButton,
+  GridToolbarExport,
+} from "@mui/x-data-grid";
+import { Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { axiosGetReportHistory } from "../../utils/axios";
+import { setAllReports } from "../../state/allReports";
 
-function createData(title, state) {
-  return { title, state };
+function CustomToolbar() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarColumnsButton />
+      <GridToolbarFilterButton />
+      <GridToolbarExport />
+    </GridToolbarContainer>
+  );
 }
 
-const tickets = [
-  createData("Broken Phone", "Pending"),
-  createData("Broken Chair", "Completed"),
-  createData("Broken Laptop", "Rejected"),
-  createData("Broken HDMI", "completed"),
-  createData("Broken Headphones", "Mariano"),
-  createData("Broken Phone", "Pending"),
-  createData("Broken Chair", "Completed"),
-  createData("Broken Laptop", "Rejected"),
-  createData("Broken HDMI", "completed"),
-  createData("Broken Headphones", "Mariano"),
-  createData("Broken Laptop", "Rejected"),
-  createData("Broken HDMI", "completed"),
-  createData("Broken Headphones", "Mariano"),
+const columns = [
+  {
+    field: "title",
+    headerName: "Title",
+    headerAlign: "center",
+    align: "center",
+    flex: 0.5,
+    editable: true,
+  },
+  {
+    field: "status",
+    headerName: "State",
+    headerAlign: "center",
+    align: "center",
+    flex: 0.5,
+    editable: true,
+  },
 ];
 
 export const History = () => {
+  const dispatch = useDispatch();
+  const reports = useSelector((state) => state.allReports);
+
+  React.useEffect(() => {
+    axiosGetReportHistory().then((res) => dispatch(setAllReports(res)));
+  }, []);
+
   return (
-    <Box sx={muiDashboardHome}>
-      <Typography sx={{mt:4}} gutterBottom variant="h5" component="div">
+    <div style={{ height: 400, width: "100%" }}>
+      <Typography sx={{ mt: 4 }} gutterBottom variant="h5" component="div">
         History
       </Typography>
-      <TableContainer sx={{ maxHeight: 500 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              <TableCell style={{ minWidth: 100 }} align={"center"}>
-                Title
-              </TableCell>
-              <TableCell style={{ minWidth: 100 }} align={"center"}>
-                State
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody style={{ overflow: "auto" }}>
-            {tickets.map((ticket) => {
-              return (
-                <>
-                  <TableRow hover role="checkbox" tabIndex={-1} key={ticket.id}>
-                    <TableCell key={(ticket.id += 1)} align={"center"}>
-                      {ticket.title}
-                    </TableCell>
-
-                    <TableCell key={(ticket.id += 1)} align={"center"}>
-                      {ticket.state}
-                    </TableCell>
-                  </TableRow>
-                </>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
+      <DataGrid
+        sx={{ padding: 1 }}
+        columns={columns}
+        rows={reports}
+        rowHeight={80}
+        getRowId={(row) => row._id}
+        slots={{ toolbar: CustomToolbar }}
+      />
+    </div>
   );
 };
