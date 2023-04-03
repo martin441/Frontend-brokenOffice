@@ -3,6 +3,8 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 export const setTitle = createAction("SET_NEW_REPORT_TITLE");
 export const setDescription = createAction("SET_NEW_REPORT_DESCRIPTION");
 export const setOffice = createAction("SET_NEW_REPORT_OFFICE");
+export const clearReport = createAction("SET_REPORT");
+
 
 const initialState = {
   title: "",
@@ -18,7 +20,10 @@ const reducer = createReducer(initialState, {
   state.description = action.payload;
   },
   [setOffice]: (state, action) => {
-   state.office = action.payload;
+    state.office = action.payload;
+  },
+  [clearReport]: (state, action) => {
+    state = initialState
   },
 });
 

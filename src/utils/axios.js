@@ -118,3 +118,12 @@ export async function axiosGetClosestOffices(lat, lng){
     console.error(error)
   }
 }
+
+export async function axiosPostNewReport(obj){
+try {
+  const office = await axios.post(`${ROUTE}/reports/create`, obj, {withCredentials: true})
+  return office.data
+} catch (error) {
+  console.error(error)
+}
+}

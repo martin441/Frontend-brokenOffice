@@ -48,7 +48,8 @@ export default function DescriptionForm() {
             <TextField
               variant="outlined"
               type="file"
-              onChange={""}
+              fullWidth
+              // onChange={""}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

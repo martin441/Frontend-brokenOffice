@@ -5,6 +5,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import {
   FormControl,
   InputLabel,
+  ListItemText,
   MenuItem,
   Radio,
   RadioGroup,
@@ -108,7 +109,7 @@ export default function LocationForm() {
                 }}
               />
             </Grid>
-            <Grid sx={{ mt: 2 }} item xs={12} md={6}>
+            <Grid sx={{ mt: 2 }} item xs={12} fullWidth>
               <Typography>
                 {" "}
                 Please choose the Office that suits you best
@@ -129,10 +130,12 @@ export default function LocationForm() {
                   }}
                 >
                   {closestOffice?.map((office) => (
-                    <MenuItem
-                      key={office._id}
-                      value={office}
-                    >{`${office.address.street}, ${office.address.zip}, ${office.name}`}</MenuItem>
+                    <MenuItem key={office._id} value={office}>
+                      <ListItemText
+                        primary={`${office.address.street}, ${office.address.zip}, ${office.name}`}
+                        secondary={`Open Reports: ${office.openReports}`}
+                      />
+                    </MenuItem>
                   ))}
                 </Select>
               </FormControl>
@@ -140,14 +143,27 @@ export default function LocationForm() {
           </>
         ) : (
           <>
-            <Grid sx={{ mt: 2 }} item xs={12} md={6}>
+            <Grid sx={{ mt: 2 }} item xs={12} fullWidth>
               <Typography sx={{ fontWeight: "600" }} gutterBottom>
                 {" "}
                 Preferred office state:{" "}
               </Typography>
-
-              <Typography>{`${user.office.address.street}, ${user.office.address.zip}, ${user.office.name}`}</Typography>
-              <Typography>{`Open Reports: ${user.office.openReports}`}</Typography>
+              {user?.office.address ? (
+                <>
+                  <Typography>{`${user.office.address.street}, ${user.office.address.zip}, ${user.office.name}`}</Typography>
+                  <Typography>{`Open Reports: ${user.office.openReports}`}</Typography>
+                </>
+              ) : (
+                <>
+                  <Typography>
+                    Sorry you have no default office! You can modify this on
+                    your profile
+                  </Typography>
+                  <Typography>
+                    Please choose <u>Geolocate me</u>
+                  </Typography>
+                </>
+              )}
             </Grid>
           </>
         )}

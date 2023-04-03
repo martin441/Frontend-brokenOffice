@@ -12,7 +12,10 @@ import Typography from "@mui/material/Typography";
 import DescriptionForm from "./DescriptionForm";
 import LocationForm from "./LocationForm";
 import ReviewNewTicket from "./Review";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+import { axiosPostNewReport } from "../../../utils/axios";
+import { clearReport } from "../../../state/newReport";
 
 const steps = ["Description", "Location", "Review"];
 
@@ -31,9 +34,32 @@ function getStepContent(step) {
 
 export default function NewTicketForm() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const report = useSelector((state) => state.newReport);
+  const dispatch = useDispatch();
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    if (activeStep === 0) {
+      if (
+        report.title &&
+        report.description
+        // report.image
+      ) {
+        setActiveStep(activeStep + 1);
+      } else {
+        toast.error(`Input cannot be null`);
+      }
+    }
+    if (activeStep === 1) {
+      if (report.office.address) {
+        setActiveStep(activeStep + 1);
+      } else {
+        toast.error(`Input cannot be null`);
+      }
+    }
+    if (activeStep === 2) {
+      axiosPostNewReport(report);
+      dispatch(clearReport());
+    }
   };
 
   const handleBack = () => {
@@ -50,10 +76,9 @@ export default function NewTicketForm() {
         sx={{
           position: "relative",
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
-          zIndex: '-1'
+          zIndex: "-1",
         }}
-      >
-      </AppBar>
+      ></AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper
           variant="outlined"
@@ -76,7 +101,8 @@ export default function NewTicketForm() {
               </Typography>
               <Typography variant="subtitle1">
                 Your report number is #number. We have emailed your report
-                confirmation, and will send you an update check the app or your inbox for updates.
+                confirmation, and will send you an update check the app or your
+                inbox for updates.
               </Typography>
             </React.Fragment>
           ) : (
@@ -88,14 +114,15 @@ export default function NewTicketForm() {
                     Back
                   </Button>
                 )}
-
-                <Button
-                  variant="contained"
-                  onClick={handleNext}
-                  sx={{ mt: 3, ml: 1 }}
-                >
-                  {activeStep === steps.length - 1 ? "Submit" : "Next"}
-                </Button>
+                <Box>
+                  <Button
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 3, ml: 1 }}
+                  >
+                    {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                  </Button>
+                </Box>
               </Box>
             </React.Fragment>
           )}
