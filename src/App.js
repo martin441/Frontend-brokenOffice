@@ -23,7 +23,9 @@ import { AdminHome } from "./components/Home/Admin";
 import NewTicketForm from "./components/User/NewTicket";
 import { LoginProtectedRoute } from "./commons/LoginProtectedRoute";
 import { History } from "../src/components/History";
-
+import { SuperAdminHome } from "./components/Home/SuperAdmin";
+import { SuperAdminView } from "./components/SuperAdmin/Users";
+import { SARegisterUsers } from "./components/SuperAdmin/Users/SARegisterUsers.jsx";
 
 function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
@@ -68,6 +70,10 @@ function App() {
           <Route path="/" element={<AdminHome />} />
         )}
 
+        {checkType(user.type) === 32 && (
+          <Route path="/" element={<SuperAdminHome />} />
+        )}
+
         <Route
           path="/user/profile"
           element={
@@ -84,9 +90,13 @@ function App() {
           checkType(user.type) === 32) && (
           <Route path="/service/report/all" element={<ReportMenu />} />
         )}
-        {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
+        {checkType(user.type) === 66 && (
           <Route path="/admin/users" element={<AdminView />} />
         )}
+        {checkType(user.type) === 32 && (
+          <Route path="/superadmin/users" element={<SuperAdminView />} />
+        )}
+
         {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
           <Route path="/admin/offices" element={<OfficeList />} />
         )}
@@ -96,6 +106,13 @@ function App() {
         {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
           <Route path="/admin/users/register" element={<RegisterUsers />} />
         )}
+        {checkType(user.type) === 32 && (
+          <Route
+            path="/superadmin/users/register"
+            element={<SARegisterUsers />}
+          />
+        )}
+
         {checkType(user.type) === 21 && (
           <Route path="/user/history" element={<History />} />
         )}
