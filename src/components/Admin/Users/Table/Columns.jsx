@@ -6,7 +6,8 @@ import { deleteUser } from "../../../../state/allUsers";
 import { axiosDeleteUser } from "../../../../utils/axios";
 import checkType from "../../../../utils/checkType";
 
-export const Columns = () => {
+export const Columns = (type) => {
+
   let columns = [];
   const dispatch = useDispatch();
   const handleClick = (user) => {
@@ -16,7 +17,9 @@ export const Columns = () => {
     dispatch(deleteUser(user.email));
   };
 
-  return (columns = [
+  const number = checkType(type)
+
+  return (number  === 32 ? columns = [
     {
       field: "fullName",
       headerName: "Full name",
@@ -54,19 +57,19 @@ export const Columns = () => {
       headerAlign: "center",
       align: "center",
       flex: 0.5,
-      editable: true,
+      editable: false,
     },
     {
       headerName: "Delete",
       headerAlign: "center",
       align: "center",
       flex: 0.5,
-      editable: true,
+      editable: false,
       renderCell: (params) => (
         <IconButton onClick={() => handleClick(params.row)}>
           <DeleteBtn />
         </IconButton>
       ),
     },
-  ]);
+  ] : "");
 };

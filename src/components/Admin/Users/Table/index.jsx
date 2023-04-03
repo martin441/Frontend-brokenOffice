@@ -12,10 +12,10 @@ import { axiosGetAllUsers } from "../../../../utils/axios";
 import { deleteUser, setAllUsers } from "../../../../state/allUsers";
 import { Columns } from "./Columns";
 
-export default function BasicExampleDataGrid() {
+export default function BasicExampleDataGrid({type}) {
   const users = useSelector((state) => state.allUsers);
   const dispatch = useDispatch();
-  const columns = Columns();
+  const columns = Columns(type);
 
   React.useEffect(() => {
     axiosGetAllUsers().then((users) => dispatch(setAllUsers(users)));
