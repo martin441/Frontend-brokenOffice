@@ -9,24 +9,9 @@ import {
 import React from "react";
 import { useSelector } from "react-redux";
 
-function createData(title, state) {
-  return { title, state };
-}
-
-const tickets = [
-  createData("Broken Phone", "Pending"),
-  createData("Broken Chair", "Completed"),
-  createData("Broken Laptop", "Rejected"),
-  createData("Broken HDMI", "completed"),
-  createData("Broken Headphones", "Mariano"),
-  createData("Broken Phone", "Pending"),
-  createData("Broken Chair", "Completed"),
-  createData("Broken Laptop", "Rejected"),
-  createData("Broken HDMI", "completed"),
-  createData("Broken Headphones", "Mariano"),
-];
 
 export const ReportListHomeUser = () => {
+  const reports = useSelector((state) => state.allReports);
 
   return (
     <div>
@@ -43,16 +28,16 @@ export const ReportListHomeUser = () => {
             </TableRow>
           </TableHead>
           <TableBody style={{ overflow: 'auto' }}>
-            {tickets.map((ticket) => {
+            {reports.map((ticket) => {
               return (
                 <>
                   <TableRow hover role="checkbox" tabIndex={-1} key={ticket.id}>
-                    <TableCell key={(ticket.id += 1)} align={"center"}>
+                    <TableCell key={ticket._id} align={"center"}>
                       {ticket.title}
                     </TableCell>
 
-                    <TableCell key={(ticket.id += 1)} align={"center"}>
-                      {ticket.state}
+                    <TableCell key={ticket._id} align={"center"}>
+                      {ticket.status}
                     </TableCell>
                   </TableRow>
                 </>

@@ -79,10 +79,10 @@ export async function axiosRegisterUser(obj) {
     const user = await axios.post(`${ROUTE}/collaborators/create/user`, obj, {
       withCredentials: true,
     });
-    toast.success('Registered succesfully')
-    return user
+    toast.success("Registered succesfully");
+    return user;
   } catch (error) {
-    toast.error('Register failed')
+    toast.error("Register failed");
     console.error(error);
   }
 }
@@ -92,20 +92,34 @@ export async function axiosDeleteUser(email) {
     const user = await axios.delete(`${ROUTE}/collaborators/delete/${email}`, {
       withCredentials: true,
     });
-    toast.success('Deleted succesfully')
-    return user
+    toast.success("Deleted succesfully");
+    return user;
   } catch (error) {
-    toast.error('Delete failed')
+    toast.error("Delete failed");
     console.error(error);
   }
 }
 
-export async function axiosGetAddressFromCoord(lat, lng){
+export async function axiosGetAddressFromCoord(lat, lng) {
   try {
-    const address = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.REACT_APP_API_KEY}`)
-    return address.data.results[0].formatted_address
+    const address = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.REACT_APP_API_KEY}`
+    );
+    return address.data.results[0].formatted_address;
   } catch (error) {
-    toast.error('Could not get Geolocation, please enter it manually')
+    toast.error("Could not get Geolocation, please enter it manually");
+    console.error(error);
+  }
+}
+
+
+export async function axiosGetReportHistory() {
+  try {
+    const reports = await axios.get(`${ROUTE}/reports/history`, {
+      withCredentials: true,
+    });
+    return reports.data;
+  } catch (error) {
     console.error(error);
   }
 }
@@ -127,3 +141,4 @@ try {
   console.error(error)
 }
 }
+
