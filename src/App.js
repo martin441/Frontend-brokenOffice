@@ -26,6 +26,7 @@ import { History } from "../src/components/History";
 import { SuperAdminHome } from "./components/Home/SuperAdmin";
 import { SuperAdminView } from "./components/SuperAdmin/Users";
 import { SARegisterUsers } from "./components/SuperAdmin/Users/SARegisterUsers.jsx";
+import { setAllReports } from "./state/allReports";
 
 function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
@@ -39,6 +40,10 @@ function App() {
       .get(`${ROUTE}/offices`, { withCredentials: true })
       .then((res) => res.data)
       .then((data) => dispatch(setOffices(data)));
+    axios
+      .get(`${ROUTE}/reports/history`, { withCredentials: true})
+      .then((res) => res.data)
+      .then((data) => dispatch(setAllReports(data)));
   }, [ROUTE, dispatch]);
   const user = useSelector((state) => state.user);
   const initialized = user !== null;

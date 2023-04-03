@@ -41,12 +41,7 @@ const columns = [
 ];
 
 export const History = () => {
-  const dispatch = useDispatch();
   const reports = useSelector((state) => state.allReports);
-
-  React.useEffect(() => {
-    axiosGetReportHistory().then((res) => dispatch(setAllReports(res)));
-  }, []);
 
   return (
     <div style={{ height: 400, width: "100%" }}>
