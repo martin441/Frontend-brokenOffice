@@ -4,8 +4,12 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { Button, IconButton, InputAdornment } from "@mui/material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+import { useDispatch } from "react-redux";
+import { setDescription, setTitle } from "../../../state/newReport";
 
 export default function DescriptionForm() {
+  const dispatch = useDispatch();
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -23,6 +27,7 @@ export default function DescriptionForm() {
             type="text"
             autoFocus
             helperText="Provide a brief and descriptive title"
+            onChange={(e) => dispatch(setTitle(e.target.value))}
           />
         </Grid>
         <Grid item xs={12}>
@@ -35,6 +40,7 @@ export default function DescriptionForm() {
             type="text"
             id="newTicketDescription"
             helperText="Provide an explanation of what happened"
+            onChange={(e) => dispatch(setDescription(e.target.value))}
           />
         </Grid>
         <Grid item xs={12}>
@@ -42,7 +48,8 @@ export default function DescriptionForm() {
             <TextField
               variant="outlined"
               type="file"
-              onChange={""}
+              fullWidth
+              // onChange={""}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

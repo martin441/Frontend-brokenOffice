@@ -3,7 +3,12 @@ import officeReducer from "./office";
 import userReducer from "./user";
 import addressReducer from "./address";
 import allUsersReducer from './allUsers'
+
 import allReportsReducer from './allReports'
+
+import newReportReducer from './newReport'
+import activeStepReducer from './activeStep'
+
 
 const store = configureStore({
   reducer: {
@@ -11,7 +16,12 @@ const store = configureStore({
     user: userReducer,
     address: addressReducer,
     allUsers: allUsersReducer,
+
     allReports: allReportsReducer,
+
+    newReport: newReportReducer,
+    activeStep: activeStepReducer
+
   },
 });
 

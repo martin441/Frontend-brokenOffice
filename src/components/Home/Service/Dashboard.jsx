@@ -19,7 +19,7 @@ import { ReportListHomeService } from "./ReportsListHome";
             <CardContent>
               <HistoryIcon />
               <Typography gutterBottom variant="h5" component="div">
-                Pending Tickets
+                Pending Reports
               </Typography>
               <ReportListHomeService />
             </CardContent>
