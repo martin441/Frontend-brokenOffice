@@ -28,9 +28,9 @@ export default function ReviewNewTicket() {
           <Typography variant="subtitle1">Image</Typography>
         </ListItem>
         
-      <ListItem sx={{ py: 1, px: 0 }}>
+      <ListItem sx={{ py: 1, px: 0 }} >
           <ListItemText primary='Office:'  />
-          <Typography variant="subtitle1">{`${newReport.office.address.street}, ${newReport.office.address.zip}, ${newReport.office.name}`}</Typography>
+          <Typography align='right' variant="subtitle1">{`${newReport.office.address.street}, ${newReport.office.address.zip}, ${newReport.office.name}`}</Typography>
         </ListItem>
       </List>
 

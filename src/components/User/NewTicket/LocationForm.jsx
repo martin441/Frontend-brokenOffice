@@ -143,7 +143,7 @@ export default function LocationForm() {
           </>
         ) : (
           <>
-            <Grid sx={{ mt: 2 }} item xs={12} fullWidth>
+            <Grid sx={{ mt: 2 }} item xs={12}>
               <Typography sx={{ fontWeight: "600" }} gutterBottom>
                 {" "}
                 Preferred office state:{" "}
