@@ -156,6 +156,33 @@ export default function MenuNav() {
               </div>
             )}
 
+            {checkType(user.type) === 32 && (
+              <div>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    navigate("/superadmin/users");
+                  }}
+                >
+                  <ListItemIcon>
+                    <PeopleIcon fontSize="small" />
+                  </ListItemIcon>
+                  Users
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    navigate("/admin/offices");
+                  }}
+                >
+                  <ListItemIcon>
+                    <AddLocationIcon fontSize="small" />
+                  </ListItemIcon>
+                  Offices
+                </MenuItem>
+              </div>
+            )}
+
             {checkType(user.type) === 21 && (
               <div>
                 <MenuItem
