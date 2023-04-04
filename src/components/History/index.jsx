@@ -28,7 +28,7 @@ const columns = [
     headerAlign: "center",
     align: "center",
     flex: 0.5,
-    editable: true,
+    editable: false,
   },
   {
     field: "status",
@@ -36,7 +36,7 @@ const columns = [
     headerAlign: "center",
     align: "center",
     flex: 0.5,
-    editable: true,
+    editable: false,
   },
 ];
 
@@ -44,7 +44,7 @@ export const History = () => {
   const reports = useSelector((state) => state.allReports);
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: 500, width: "100%" }}>
       <Typography sx={{ mt: 4 }} gutterBottom variant="h5" component="div">
         History
       </Typography>
