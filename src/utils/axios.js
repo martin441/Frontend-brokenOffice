@@ -144,4 +144,17 @@ export async function axiosPostNewReport(obj) {
   } catch (error) {
     console.error(error);
   }
+
+}
+export async function axiosPutUserType(obj) {
+  try {
+    const { data } = await axios.put(`${ROUTE}/collaborators/edit/type`, obj, {
+      withCredentials: true,
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+
+
 }

@@ -146,7 +146,7 @@ export default function EditProfile() {
             variant="contained"
             sx={{ mt: 2, mx: "auto" }}
           >
-            Submit
+            Confirm
           </Button>
         </Box>
       </Modal>

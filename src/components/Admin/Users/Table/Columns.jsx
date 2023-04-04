@@ -4,10 +4,11 @@ import { useDispatch } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteBtn from "../../../../commons/DeleteBtn";
 import { deleteUser } from "../../../../state/allUsers";
+import { changeTypeUser } from "../../../../state/changeTypeUser";
 import { axiosDeleteUser } from "../../../../utils/axios";
 import checkType from "../../../../utils/checkType";
 
-export const Columns = (type) => {
+export const Columns = (type, handleOpen) => {
   let columns = [];
   const dispatch = useDispatch();
   const handleClick = (user) => {
@@ -16,10 +17,6 @@ export const Columns = (type) => {
     axiosDeleteUser(user.email);
     dispatch(deleteUser(user.email));
   };
-
-  const HandleEdit = (user) => {
-    
-  }
 
   const number = checkType(type);
 
@@ -42,24 +39,148 @@ export const Columns = (type) => {
           headerAlign: "center",
           align: "center",
           flex: 0.5,
-          editable: true,
+          editable: false,
+          renderCell: (params) => {
+            switch (checkType(params.row.type)) {
+              case 66:
+                return (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      width: "100%",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                      gap: 1,
+                    }}
+                  >
+                    <Box>
+                      <p>Admin</p>
+                    </Box>
+                    <Box>
+                      <IconButton
+                        sx={{ padding: 0 }}
+                        onClick={() => {
+                          dispatch(changeTypeUser(params.row));
+                          handleOpen();
+                        }}
+                      >
+                        <EditIcon fontSize="small" />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                );
+              case 14:
+                return (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      width: "100%",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                      gap: 1,
+                    }}
+                  >
+                    <Box>
+                      <p>Service</p>
+                    </Box>
+                    <Box>
+                      <IconButton
+                        sx={{ padding: 0 }}
+                        onClick={() => {
+                          dispatch(changeTypeUser(params.row));
+                          handleOpen();
+                        }}
+                      >
+                        <EditIcon fontSize="small" />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                );
+              case 21:
+                return (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      width: "100%",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                      gap: 1,
+                    }}
+                  >
+                    <Box>
+                      <p>Standard</p>
+                    </Box>
+                    <Box>
+                      <IconButton
+                        sx={{ padding: 0 }}
+                        onClick={() => {
+                          dispatch(changeTypeUser(params.row));
+                          handleOpen();
+                        }}
+                      >
+                        <EditIcon fontSize="small" />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                );
+              default:
+                return "";
+            }
+          },
+        },
+        {
+          field: "addressName",
+          headerName: "Region",
+          headerAlign: "center",
+          align: "center",
+          flex: 0.5,
+          editable: false,
+          valueGetter: (params) =>
+            !params.row.addressName ? "(No region)" : params.row.addressName,
+        },
+        {
+          headerName: "Delete",
+          headerAlign: "center",
+          align: "center",
+          sortable: false,
+          flex: 0.5,
+          editable: false,
+          renderCell: (params) => (
+            <IconButton onClick={() => handleClick(params.row)}>
+              <DeleteBtn />
+            </IconButton>
+          ),
+        },
+      ])
+    : (columns = [
+        {
+          field: "fullName",
+          headerName: "Full name",
+          headerAlign: "center",
+          align: "center",
+          description: "This column has a value getter and is not sortable.",
+          sortable: true,
+          flex: 0.5,
+          editable: false,
+          valueGetter: (params) =>
+            `${params.row.name || ""} ${params.row.lastName || ""}`,
+        },
+        {
+          field: "type",
+          headerName: "Type",
+          headerAlign: "center",
+          align: "center",
+          flex: 0.5,
+          editable: false,
           renderCell: (params) => {
             switch (checkType(params.row.type)) {
               case 66:
                 return "Admin";
               case 14:
-                return (
-                  <Box sx={{display:'flex', width:'100%',justifyContent: 'center', alignItems:'center',flexWrap:'wrap', gap:1}} >
-                    <Box>
-                      <p>Service</p>
-                    </Box>
-                    <Box>
-                      <IconButton sx={{padding:0}} onClick={(params) => HandleEdit(params.row)}>
-                        <EditIcon fontSize="small"/>
-                      </IconButton>
-                    </Box>
-                  </Box>
-                );
+                return "Services";
               case 21:
                 return "Standard";
               default:
@@ -90,6 +211,5 @@ export const Columns = (type) => {
             </IconButton>
           ),
         },
-      ])
-    : "";
+      ]);
 };

@@ -80,7 +80,7 @@ export default function EditSensitive() {
             variant="contained"
             sx={{ mt: 2, mx: "auto" }}
           >
-            Submit
+            Confirm
           </Button>
         </Box>
       </Modal>
