@@ -15,8 +15,6 @@ import { useParams } from "react-router";
 
 export const SingleTicket = () => {
   const { id } = useParams();
-  const idSlice = id.slice(0, -1)
-
 
   const imageSrc =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png";
@@ -32,7 +30,7 @@ export const SingleTicket = () => {
         setSingleReport(res.data);
       })
       .catch((err) => console.error(err));
-  }, [idSlice]);
+  }, [id]);
 
   const handleDelete = () => {
     console.info("You clicked the delete icon.");

@@ -39,11 +39,7 @@ export default function NewTicketForm() {
 
   const handleNext = () => {
     if (activeStep === 0) {
-      if (
-        report.title &&
-        report.description
-        // report.image
-      ) {
+      if (report.title && report.description && report.image) {
         setActiveStep(activeStep + 1);
       } else {
         toast.error(`Input cannot be null`);
@@ -57,8 +53,9 @@ export default function NewTicketForm() {
       }
     }
     if (activeStep === 2) {
-      axiosPostNewReport(report);
+      axiosPostNewReport({...report, office: report.office._id});
       dispatch(clearReport());
+      setActiveStep(activeStep + 1);
     }
   };
 
@@ -100,9 +97,8 @@ export default function NewTicketForm() {
                 Thank you for your Report.
               </Typography>
               <Typography variant="subtitle1">
-                Your report number is #number. We have emailed your report
-                confirmation, and will send you an update check the app or your
-                inbox for updates.
+                We have emailed your report confirmation, and will send you an
+                update check the app or your inbox for updates.
               </Typography>
             </React.Fragment>
           ) : (

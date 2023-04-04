@@ -42,9 +42,10 @@ function App() {
       .then((res) => res.data)
       .then((data) => dispatch(setOffices(data)));
     axios
-      .get(`${ROUTE}/reports/history`, { withCredentials: true })
+      .get(`${ROUTE}/reports/history`, {withCredentials: true})
       .then((res) => res.data)
-      .then((data) => dispatch(setAllReports(data)));
+      .then((data) => dispatch(setAllReports(data)))
+      .catch((err) => console.log(err));
   }, [ROUTE, dispatch]);
   const user = useSelector((state) => state.user);
   const initialized = user !== null;

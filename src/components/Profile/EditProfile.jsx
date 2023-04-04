@@ -51,11 +51,11 @@ export default function EditProfile() {
       role: inputRole,
       addressName: inputAddress,
       addressCoor: { type: "Point", coordinates: addressCoor },
-      office: inputOffice._id,
+      office: inputOffice,
     };
 
     try {
-      console.log(obj);
+     
       const { data } = await axios.put(`${ROUTE}/user/edit/profile`, obj, {
         withCredentials: true,
       });
@@ -114,7 +114,7 @@ export default function EditProfile() {
             onChange={(e) => setInputRole(e.target.value)}
             sx={{ mb: ".5rem" }}
           />
-          <Typography>Current Office: {user.office.address.street}, {user.office.name}</Typography>
+          <Typography>Current Office: {user.office.address?.street}, {user.office?.name}</Typography>
           <TextField
             sx={{ mt: 1 }}
             select
