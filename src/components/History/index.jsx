@@ -10,6 +10,7 @@ import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosGetReportHistory } from "../../utils/axios";
 import { setAllReports } from "../../state/allReports";
+import { useNavigate } from "react-router";
 
 function CustomToolbar() {
   return (
@@ -42,6 +43,7 @@ const columns = [
 
 export const History = () => {
   const reports = useSelector((state) => state.allReports);
+  const navigate = useNavigate();
 
   return (
     <div style={{ height: '80vh', width: "100%" }}>
@@ -55,6 +57,9 @@ export const History = () => {
         rowHeight={80}
         getRowId={(row) => row._id}
         slots={{ toolbar: CustomToolbar }}
+        onRowClick={(event, rowData) => {
+          navigate(`/user/ticket/${event.id}`);
+        }}
       />
     </div>
   );

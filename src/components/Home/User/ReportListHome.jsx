@@ -8,10 +8,12 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 
 export const ReportListHomeUser = () => {
   const reports = useSelector((state) => state.allReports);
+  const navigate = useNavigate()
 
   return (
     <div>
@@ -31,7 +33,7 @@ export const ReportListHomeUser = () => {
             {reports.map((ticket) => {
               return (
                 <>
-                  <TableRow hover role="checkbox" tabIndex={-1} key={ticket.id}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={ticket._id} onClick={()=> navigate(`/user/ticket/${ticket._id}`)}>
                     <TableCell key={ticket._id} align={"center"}>
                       {ticket.title}
                     </TableCell>

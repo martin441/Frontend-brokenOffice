@@ -65,6 +65,7 @@ export default function DataTable() {
             {users
               ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               ?.map((user) => {
+                // eslint-disable-next-line array-callback-return
                 if (user.type === process.env.REACT_APP_OMEGA) return;
                 return (
                   <>

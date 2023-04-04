@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import toast from "react-hot-toast";
 import Modal from "@mui/material/Modal";
 import { styleEditProfile } from "../../utils/styleMUI";
-import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Button, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import AddressAutocomplete from "mui-address-autocomplete";
@@ -20,7 +20,6 @@ export default function EditProfile() {
 
   const [inputName, setInputName] = React.useState(user?.name);
   const [inputLastName, setInputLastName] = React.useState(user?.lastName);
-  const [inputEmail, setinputEmail] = React.useState(user?.email);
   const [inputRole, setInputRole] = React.useState(user?.role);
   const [inputAddress, setInputAddress] = React.useState(user?.addressName);
   const [inputOffice, setInputOffice] = React.useState(user?.office);
@@ -37,12 +36,11 @@ export default function EditProfile() {
     setAddressCoor([lng, lat]);
     if (!value) toast.error("Address not valid");
   }
-
+  
   const handleSubmit = async () => {
     if (
       inputName === "" ||
       inputLastName === "" ||
-      inputEmail === "" ||
       inputRole === ""
     )
       return toast.error("Please enter required data");
@@ -50,21 +48,22 @@ export default function EditProfile() {
     const obj = {
       name: inputName,
       lastName: inputLastName,
-      email: inputEmail,
       role: inputRole,
       addressName: inputAddress,
       addressCoor: { type: "Point", coordinates: addressCoor },
-      office: inputOffice,
+      office: inputOffice._id,
     };
 
     try {
+      console.log(obj);
       const { data } = await axios.put(`${ROUTE}/user/edit/profile`, obj, {
         withCredentials: true,
       });
       dispatch(setUser(data));
-      toast.success("Profile changed successfully ");
+      toast.success("Profile changed successfully");
       handleClose();
     } catch (err) {
+      toast.error("Could not change Profile");
       console.error(err);
     }
   };
@@ -107,16 +106,6 @@ export default function EditProfile() {
           />
           <TextField
             id="standard-multiline-static"
-            label="Email"
-            multiline
-            placeholder="New email..."
-            variant="standard"
-            value={inputEmail}
-            onChange={(e) => setinputEmail(e.target.value)}
-            sx={{ mb: ".5rem" }}
-          />
-          <TextField
-            id="standard-multiline-static"
             label="Role"
             multiline
             placeholder="New role..."
@@ -125,6 +114,7 @@ export default function EditProfile() {
             onChange={(e) => setInputRole(e.target.value)}
             sx={{ mb: ".5rem" }}
           />
+          <Typography>Current Office: {user.office.address.street}, {user.office.name}</Typography>
           <TextField
             sx={{ mt: 1 }}
             select

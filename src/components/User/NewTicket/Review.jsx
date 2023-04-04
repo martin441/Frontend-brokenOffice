@@ -33,8 +33,6 @@ export default function ReviewNewTicket() {
           <Typography align='right' variant="subtitle1">{`${newReport.office.address.street}, ${newReport.office.address.zip}, ${newReport.office.name}`}</Typography>
         </ListItem>
       </List>
-
-  
     </React.Fragment>
   );
 }
