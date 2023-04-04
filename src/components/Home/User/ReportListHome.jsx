@@ -33,7 +33,7 @@ export const ReportListHomeUser = () => {
             {reports.map((ticket) => {
               return (
                 <>
-                  <TableRow hover role="checkbox" tabIndex={-1} key={ticket._id} onClick={()=> navigate(`/user/ticket/${ticket._id}}`)}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={ticket._id} onClick={()=> navigate(`/user/ticket/${ticket._id}`)}>
                     <TableCell key={ticket._id} align={"center"}>
                       {ticket.title}
                     </TableCell>

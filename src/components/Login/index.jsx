@@ -104,10 +104,6 @@ export default function SignInSide() {
                   id="password"
                   autoComplete="current-password"
                 />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                />
                 <Button
                   type="submit"
                   fullWidth
@@ -118,9 +114,9 @@ export default function SignInSide() {
                 </Button>
                 <Grid sx={muiStyleLoginBtn}>
                   <Grid item xs>
-                    <Link href="#" variant="body2">
+                    {/* <Link href="#" variant="body2">
                       Forgot password?
-                    </Link>
+                    </Link> */}
                   </Grid>
                 </Grid>
               </Box>

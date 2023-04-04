@@ -17,6 +17,7 @@ export const SingleTicket = () => {
   const { id } = useParams();
   const idSlice = id.slice(0, -1)
 
+
   const imageSrc =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png";
 
@@ -24,7 +25,7 @@ export const SingleTicket = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_ROUTE}/reports/single/${idSlice}`, {
+      .get(`${process.env.REACT_APP_ROUTE}/reports/single/${id}`, {
         withCredentials: true,
       })
       .then((res) => { 
