@@ -2,13 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import officeReducer from "./office";
 import userReducer from "./user";
 import addressReducer from "./address";
-import allUsersReducer from './allUsers'
+import allUsersReducer from "./allUsers";
 
-import allReportsReducer from './allReports'
+import allReportsReducer from "./allReports";
 
-import newReportReducer from './newReport'
-import activeStepReducer from './activeStep'
-
+import newReportReducer from "./newReport";
+import activeStepReducer from "./activeStep";
+import changeTypeUserReducer from "./changeTypeUser";
 
 const store = configureStore({
   reducer: {
@@ -20,11 +20,9 @@ const store = configureStore({
     allReports: allReportsReducer,
 
     newReport: newReportReducer,
-    activeStep: activeStepReducer
-
+    activeStep: activeStepReducer,
+    changeType: changeTypeUserReducer,
   },
 });
-
-
 
 export default store;

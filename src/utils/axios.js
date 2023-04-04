@@ -112,7 +112,6 @@ export async function axiosGetAddressFromCoord(lat, lng) {
   }
 }
 
-
 export async function axiosGetReportHistory() {
   try {
     const reports = await axios.get(`${ROUTE}/reports/history`, {
@@ -124,21 +123,35 @@ export async function axiosGetReportHistory() {
   }
 }
 
-export async function axiosGetClosestOffices(lat, lng){
+export async function axiosGetClosestOffices(lat, lng) {
   try {
-    const closestOffices = await axios.get(`${ROUTE}/reports/geoffice?lat=${lat}&long=${lng}`, {withCredentials: true})
-    return closestOffices.data
+    const closestOffices = await axios.get(
+      `${ROUTE}/reports/geoffice?lat=${lat}&long=${lng}`,
+      { withCredentials: true }
+    );
+    return closestOffices.data;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
-export async function axiosPostNewReport(obj){
-try {
-  const office = await axios.post(`${ROUTE}/reports/create`, obj, {withCredentials: true})
-  return office.data
-} catch (error) {
-  console.error(error)
+export async function axiosPostNewReport(obj) {
+  try {
+    const office = await axios.post(`${ROUTE}/reports/create`, obj, {
+      withCredentials: true,
+    });
+    return office.data;
+  } catch (error) {
+    console.error(error);
+  }
 }
+export async function axiosPutUserType(obj) {
+  try {
+    const { data } = await axios.put(`${ROUTE}/collaborators/edit/type`, obj, {
+      withCredentials: true,
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 }
-
