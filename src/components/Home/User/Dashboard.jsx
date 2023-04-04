@@ -10,15 +10,14 @@ import React from "react";
 import { muiDashboardHome } from "../../../utils/styleMUI";
 import BuildCircleIcon from "@mui/icons-material/BuildCircle";
 import { ReportListHomeUser } from "./ReportListHome";
-import HistoryIcon from '@mui/icons-material/History';
+import HistoryIcon from "@mui/icons-material/History";
 import { useNavigate } from "react-router";
 
-
 export const DashboardUser = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Box sx={muiDashboardHome}>
-      <Card sx={{ maxWidth: 345 }} onClick={() => navigate('/user/new-ticket')}>
+      <Card sx={{ maxWidth: 345 }} onClick={() => navigate("/user/new-ticket")}>
         <CardActionArea>
           <CardContent>
             <BuildCircleIcon />
@@ -33,17 +32,18 @@ export const DashboardUser = () => {
         <CardActions></CardActions>
       </Card>
 
-      <Card sx={{ maxWidth: 345, mt: '1rem' }} onClick={() => navigate("/user/history")}>
+      <Card sx={{ maxWidth: 345, mt: "1rem" }}>
         <CardActionArea>
-          <CardContent>
+          <CardContent onClick={() => navigate("/user/history")}>
             <HistoryIcon />
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography sx={{p: 0, m:0}} gutterBottom variant="h5" component="div">
               History
             </Typography>
+          </CardContent>
+          <CardContent>
             <ReportListHomeUser />
           </CardContent>
         </CardActionArea>
-        <CardActions></CardActions>
       </Card>
     </Box>
   );
