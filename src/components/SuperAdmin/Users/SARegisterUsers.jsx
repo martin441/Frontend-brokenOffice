@@ -30,7 +30,7 @@ export const SARegisterUsers = () => {
 
     axiosRegisterUser(registerData);
 
-    navigate("/admin/users");
+    navigate("/superadmin/users");
   };
 
   return (
