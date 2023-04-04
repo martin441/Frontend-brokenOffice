@@ -2,17 +2,32 @@ import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import { Button, IconButton, InputAdornment } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  IconButton,
+  InputAdornment,
+  LinearProgress,
+} from "@mui/material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { useDispatch } from "react-redux";
-import { setDescription, setTitle } from "../../../state/newReport";
+import {
+  setDescription,
+  setImage,
+  setProductTag,
+  setTitle,
+} from "../../../state/newReport";
 import * as ml5 from "ml5";
 import { Box } from "@mui/system";
+import { productOpt } from "../../../utils/productOptions";
+import axios from "axios";
 
 export default function DescriptionForm() {
   const dispatch = useDispatch();
   const [file, setFile] = useState("");
   const [imageSrc, setImageSrc] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [productLabel, setProductLabel] = useState("");
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -24,6 +39,17 @@ export default function DescriptionForm() {
         setImageSrc(e.target.result);
       };
       reader.readAsDataURL(file);
+
+      let formData = new FormData();
+      formData.append("file", e.target.files[0]);
+
+      axios
+        .post(`${process.env.REACT_APP_ROUTE}/reports/create/img`, formData, {
+          withCredentials: true,
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((res) => dispatch(setImage(res.data)))
+        .catch((err) => console.error(err));
     }
   };
 
@@ -32,19 +58,23 @@ export default function DescriptionForm() {
       console.error(error);
     } else {
       console.log(results);
+      setProductLabel(results[0].label);
+      dispatch(setProductTag(results[0].label));
+      setIsLoading(false);
     }
   }
 
   useEffect(() => {
     if (imageSrc !== "") {
+      setIsLoading(true);
       const img = new Image();
-      img.src = imageSrc;
       img.onload = () => {
         let classifier = ml5.imageClassifier("MobileNet", function () {
           console.log("Model loaded.");
         });
         classifier.predict(img, gotResult);
       };
+      img.src = imageSrc;
     }
   }, [imageSrc]);
 
@@ -100,13 +130,42 @@ export default function DescriptionForm() {
               }}
             />
           </Button>
+
+          {isLoading && (
+            <>
+              <LinearProgress />
+            </>
+          )}
+
           {file && (
             <Box
               component="img"
               alt="Input Image"
               src={imageSrc}
-              sx={{ maxWidth: "100%" }}
+              sx={{ maxWidth: "100%", mt: 1 }}
             />
+          )}
+
+          {!isLoading && productLabel && (
+            <>
+              <Typography>
+                We think your image is a{" "}
+                <span style={{ fontWeight: "bold" }}>{productLabel}</span> *
+              </Typography>
+              <Typography sx={{ mt: 2 }}>* Not Right? </Typography>
+              <Autocomplete
+                disablePortal
+                onInputChange={(event, newInputValue) => {
+                  dispatch(setProductTag(newInputValue));
+                }}
+                fullWidth={true}
+                id="combo-box-demo"
+                options={productOpt}
+                renderInput={(params) => (
+                  <TextField {...params} label="Product" />
+                )}
+              />
+            </>
           )}
         </Grid>
       </Grid>

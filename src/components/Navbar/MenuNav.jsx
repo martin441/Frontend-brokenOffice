@@ -17,7 +17,6 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import PeopleIcon from "@mui/icons-material/People";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import checkType from "../../utils/checkType";
-import { Link } from "react-router-dom";
 
 export default function MenuNav() {
   const user = useSelector((state) => state.user);
@@ -42,6 +41,7 @@ export default function MenuNav() {
         { withCredentials: true }
       );
       if (user) dispatch(setUser({}));
+      navigate('/')
     } catch (error) {
       console.error(error);
     }

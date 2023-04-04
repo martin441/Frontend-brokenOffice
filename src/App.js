@@ -1,6 +1,6 @@
 import "./App.css";
 import { Navbar } from "./components/Navbar";
-import { Route, Routes, Navigate } from "react-router";
+import { Route, Routes } from "react-router";
 import { Profile } from "./components/Profile";
 import { UserHome } from "./components/Home/User";
 import SignInSide from "./components/Login";
@@ -27,6 +27,7 @@ import { SuperAdminHome } from "./components/Home/SuperAdmin";
 import { SuperAdminView } from "./components/SuperAdmin/Users";
 import { SARegisterUsers } from "./components/SuperAdmin/Users/SARegisterUsers.jsx";
 import { setAllReports } from "./state/allReports";
+import { SingleTicket } from "./components/User/SingleTicket";
 
 function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
@@ -41,9 +42,10 @@ function App() {
       .then((res) => res.data)
       .then((data) => dispatch(setOffices(data)));
     axios
-      .get(`${ROUTE}/reports/history`, { withCredentials: true})
+      .get(`${ROUTE}/reports/history`, {withCredentials: true})
       .then((res) => res.data)
-      .then((data) => dispatch(setAllReports(data)));
+      .then((data) => dispatch(setAllReports(data)))
+      .catch((err) => console.log(err));
   }, [ROUTE, dispatch]);
   const user = useSelector((state) => state.user);
   const initialized = user !== null;
@@ -95,6 +97,11 @@ function App() {
           checkType(user.type) === 32) && (
           <Route path="/service/report/all" element={<ReportMenu />} />
         )}
+
+        {checkType(user.type) !== 404 && (
+          <Route path="/user/ticket/:id" element={<SingleTicket />} />
+        )}
+
         {checkType(user.type) === 66 && (
           <Route path="/admin/users" element={<AdminView />} />
         )}

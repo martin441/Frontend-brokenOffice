@@ -144,6 +144,7 @@ export async function axiosPostNewReport(obj) {
   } catch (error) {
     console.error(error);
   }
+
 }
 export async function axiosPutUserType(obj) {
   try {
@@ -154,4 +155,6 @@ export async function axiosPutUserType(obj) {
   } catch (error) {
     console.error(error);
   }
+
+
 }
