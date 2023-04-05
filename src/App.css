@@ -61,7 +61,7 @@
 
 .header-container-home {
   background-image: url('https://brand.globant.com/wp-content/uploads/2021/10/bg.png');
-  height: 100vh;
+  min-height: 100vh;
   object-fit: contain;
 }
 

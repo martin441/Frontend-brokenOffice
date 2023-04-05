@@ -47,7 +47,7 @@ export const History = () => {
 
   return (
     <div style={{ height: '80vh', width: "100%" }}>
-      <Typography sx={{ mt: 4 }} gutterBottom variant="h5" component="div">
+      <Typography sx={{ mt: 4 }} gutterBottom variant="h4" component="div">
         History
       </Typography>
       <DataGrid
