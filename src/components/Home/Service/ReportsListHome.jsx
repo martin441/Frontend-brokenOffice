@@ -7,32 +7,26 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { setAssignedReports } from "../../../state/service";
+import { axiosGetAssignedReportsService } from "../../../utils/axios";
 
-function createData(title, state) {
-  return { title, state };
-}
-
-const tickets = [
-  createData("Broken Phone", "Pending"),
-  createData("Broken Chair", "Completed"),
-  createData("Broken Laptop", "Rejected"),
-  createData("Broken HDMI", "completed"),
-  createData("Broken Headphones", "Mariano"),
-  createData("Broken Phone", "Pending"),
-  createData("Broken Chair", "Completed"),
-  createData("Broken Laptop", "Rejected"),
-  createData("Broken HDMI", "completed"),
-  createData("Broken Headphones", "Mariano"),
-];
 
 export const ReportListHomeService = () => {
-  const user = useSelector((state) => state.user);
+  const reports = useSelector((state) => state.service);
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    axiosGetAssignedReportsService().then((reports) => {
+      dispatch(setAssignedReports(reports));
+    });
+  }, [dispatch]);
 
   return (
     <div>
       {" "}
-      <TableContainer sx={{ maxHeight: "100vh" }}>
+      <TableContainer sx={{ maxHeight: "35vh" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -40,13 +34,13 @@ export const ReportListHomeService = () => {
                 Title
               </TableCell>
               <TableCell style={{ minWidth: 100 }} align={"center"}>
-                State
+                Issuer
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {tickets
-              .filter((ticket) => ticket.state === "Pending")
+            {reports
+              .filter((ticket) => ticket.status === "issued")
               .map((ticket) => {
                 return (
                   <>
@@ -54,14 +48,15 @@ export const ReportListHomeService = () => {
                       hover
                       role="checkbox"
                       tabIndex={-1}
-                      key={ticket.id}
+                      key={ticket._id}
+                      onClick={() => navigate(`/service/ticket/${ticket._id}`)}
                     >
-                      <TableCell key={(ticket.id += 1)} align={"center"}>
+                      <TableCell key={(ticket.date)} align={"center"}>
                         {ticket.title}
                       </TableCell>
 
-                      <TableCell key={(ticket.id += 1)} align={"center"}>
-                        {ticket.state}
+                      <TableCell key={(ticket.title)} align={"center"}>
+                        {ticket.issuer.name} {ticket.issuer.lastName}
                       </TableCell>
                     </TableRow>
                   </>

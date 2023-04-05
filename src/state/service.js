@@ -1,11 +1,11 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
-export const setActiveStep = createAction("SET_ACTIVE_STEP");
+export const setAssignedReports = createAction("SET_ASSIGNED_REPORTS");
 
 const reducer = createReducer(
- 0,
+ [],
   {
-    [setActiveStep]: (state, action) => {
+    [setAssignedReports]: (state, action) => {
       return action.payload;
     },
   }

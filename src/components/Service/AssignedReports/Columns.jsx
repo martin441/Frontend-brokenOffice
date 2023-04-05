@@ -1,0 +1,64 @@
+import { IconButton } from "@mui/material";
+import { useDispatch } from "react-redux";
+import EditIcon from '@mui/icons-material/Edit';
+import checkType from "../../../utils/checkType";
+import { useNavigate } from "react-router";
+
+
+export const Columns = (type, handleOpen) => {
+  const navigate = useNavigate()
+  const handleClick = (report) => {
+    navigate(`/service/ticket/${report._id}`)
+  };
+
+  const number = checkType(type);
+
+  return (
+    number === 14 && [
+      {
+        field: "Date",
+        headerName: "Date",
+        headerAlign: "center",
+        align: "center",
+        description: "This column has a value getter and is not sortable.",
+        sortable: true,
+        flex: 0.5,
+        valueGetter: (params) => `${params.row.date.substring(0, 10) || ""}`,
+      },
+      {
+        field: "Title",
+        headerName: "Title",
+        headerAlign: "center",
+        align: "center",
+        description: "This column has a value getter and is not sortable.",
+        sortable: true,
+        flex: 0.5,
+        valueGetter: (params) => `${params.row.title || ""}`,
+      },
+      {
+        field: "Sender",
+        headerName: "Sender",
+        headerAlign: "center",
+        align: "center",
+        flex: 0.5,
+        editable: false,
+        valueGetter: (params) =>
+          `${params.row.issuer.name || ""} ${params.row.issuer.lastName || ""}`,
+      },
+      {
+        field: "Status",
+        headerName: "Status",
+        headerAlign: "center",
+        align: "center",
+        sortable: false,
+        flex: 0.5,
+        editable: false,
+        renderCell: (params) => (
+          <IconButton onClick={() => handleClick(params.row)}>
+            <EditIcon  />
+          </IconButton>
+        ),
+      },
+    ]
+  );
+};

@@ -1,18 +1,13 @@
 import {
-  Divider,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { ReportData } from "./ReportData";
+import {  ReportDataService } from "./ReportData";
 
-export const SingleTicket = () => {
+export const SingleTicketService = () => {
   const { id } = useParams();
 
   const [singleReport, setSingleReport] = useState("");
@@ -37,7 +32,7 @@ export const SingleTicket = () => {
       <Typography variant="h4" gutterBottom>
         Report
       </Typography>
-      <ReportData singleReport={singleReport} />
+      <ReportDataService singleReport={singleReport} />
     </Box>
   );
 };

@@ -155,6 +155,14 @@ export async function axiosPutUserType(obj) {
   } catch (error) {
     console.error(error);
   }
+}
 
-
+export async function axiosGetAssignedReportsService(){
+  try {
+    const reports = await axios.get(`${ROUTE}/reports/service`, {withCredentials: true})
+    console.log(reports.data);
+    return reports.data
+  } catch (error) {
+    console.error(error);
+  }
 }

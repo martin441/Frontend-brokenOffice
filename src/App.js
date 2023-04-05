@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router";
 import { Profile } from "./components/Profile";
 import { UserHome } from "./components/Home/User";
 import SignInSide from "./components/Login";
-import { ReportMenu } from "./components/Service/ReportMenu";
 import { AdminView } from "./components/Admin/Users";
 import OfficeList from "./components/Admin/Offices/OfficeList";
 import { Toaster } from "react-hot-toast";
@@ -28,6 +27,10 @@ import { SuperAdminView } from "./components/SuperAdmin/Users";
 import { SARegisterUsers } from "./components/SuperAdmin/Users/SARegisterUsers.jsx";
 import { setAllReports } from "./state/allReports";
 import { SingleTicket } from "./components/User/SingleTicket";
+import ServerReportList from "./components/Service/AssignedReports";
+import { axiosGetAssignedReportsService } from "./utils/axios";
+import { setAssignedReports } from "./state/service";
+import { SingleTicketService } from "./components/Service/SingleAssignedReport";
 
 function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
@@ -48,9 +51,15 @@ function App() {
         .then((data) => dispatch(setAllReports(data)))
         .catch((err) => console.log(err));
     }
-
+    if (checkType(user?.type) === 14) {
+      console.log(checkType(user?.type) === 14);
+      axiosGetAssignedReportsService().then((reports) => {
+        dispatch(setAssignedReports(reports));
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ROUTE, dispatch]);
+
   const user = useSelector((state) => state.user);
   const initialized = user !== null;
 
@@ -99,11 +108,15 @@ function App() {
         {(checkType(user.type) === 14 ||
           checkType(user.type) === 66 ||
           checkType(user.type) === 32) && (
-          <Route path="/service/report/all" element={<ReportMenu />} />
+          <Route path="/service/report/all" element={<ServerReportList />} />
         )}
 
         {checkType(user.type) !== 404 && (
           <Route path="/user/ticket/:id" element={<SingleTicket />} />
+        )}
+
+        {checkType(user.type) === 14 && (
+          <Route path="/service/ticket/:id" element={<SingleTicketService />} />
         )}
 
         {checkType(user.type) === 66 && (
