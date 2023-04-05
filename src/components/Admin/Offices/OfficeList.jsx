@@ -7,7 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Link } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import OfficeModalEdit from "./OfficeModalEdit";
 import { deleteOffice, setOffices } from "../../../state/office";
@@ -45,10 +45,12 @@ export default function OfficeList() {
   return (
     <>
       <Box sx={muiOfficeBar}>
-        <AddBtn href="/admin/offices/register" />
+      <Typography variant="h4">Offices</Typography>
+
+        <AddBtn href="/admin/offices/register" text='New Office' />
       </Box>
       <Paper sx={{ width: "100%", overflow: "hidden", m: "0 auto" }}>
-        <TableContainer sx={{ maxHeight: "100vh" }}>
+        <TableContainer sx={{ maxHeight: "79vh" }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>

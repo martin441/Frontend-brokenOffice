@@ -26,15 +26,15 @@ export const muiBtnOfficeDelete = {
   bordeRadius: '20px',
   padding: "0.5rem 1rem",
   bgcolor: 'primary',
-  color: 'secondary'
+  color: 'secondary',
 };
 
 export const muiOfficeBar = {
-  display: "inline-flex",
+  display: "flex",
   alignItems: "center",
-  justifyContent: "space-evenly",
-  width: '100%',
-  my: 4
+  justifyContent: "space-between",
+  width: '90%',
+  m:2
 }
 
 export const muiBackLink = {
