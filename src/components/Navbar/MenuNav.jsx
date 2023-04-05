@@ -183,7 +183,7 @@ export default function MenuNav() {
               </div>
             )}
 
-            {checkType(user.type) === 21 && (
+            {checkType(user.type) !== 404 && (
               <div>
                 <MenuItem
                   onClick={() => {
