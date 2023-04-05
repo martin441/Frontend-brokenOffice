@@ -1,7 +1,7 @@
 export const productOpt = [
   "modem",
   "hdmi",
-  "screen",
+  "monitor",
   "mobile",
   "notebook",
   "headset",

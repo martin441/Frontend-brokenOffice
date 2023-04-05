@@ -1,11 +1,9 @@
 import {
-  Chip,
   Divider,
   Grid,
   List,
   ListItem,
   ListItemText,
-  Stack,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -32,10 +30,6 @@ export const SingleTicket = () => {
       .catch((err) => console.error(err));
   }, [id]);
 
-  const handleDelete = () => {
-    console.info("You clicked the delete icon.");
-  };
-
   return (
     <Box
       sx={{
@@ -59,7 +53,7 @@ export const SingleTicket = () => {
           <Box
             component="img"
             alt="Input Image"
-            src={imageSrc}
+            src={singleReport.image ? singleReport?.image : imageSrc}
             sx={{ maxWidth: "100%" }}
           ></Box>
         </Grid>
@@ -86,7 +80,7 @@ export const SingleTicket = () => {
                 maxWidth={"50%"}
                 sx={{ wordWrap: "break-word", textAlign: "right" }}
               >
-                {singleReport.description}
+                {singleReport?.description}
               </Typography>
             </ListItem>
             <Divider></Divider>
@@ -108,16 +102,16 @@ export const SingleTicket = () => {
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Status:" />
               <Typography align="right" variant="subtitle1">
-                {singleReport.status}
+                {singleReport?.status}
               </Typography>
             </ListItem>
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Product:" />
-              <Stack direction="row" spacing={1}>
-                <Chip label="Deletable" onDelete={handleDelete} />
-              </Stack>
+              <Typography align="right" variant="subtitle1">
+                {singleReport?.product}
+              </Typography>
             </ListItem>
             <Divider></Divider>
           </List>

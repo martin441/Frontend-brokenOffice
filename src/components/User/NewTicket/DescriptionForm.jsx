@@ -69,7 +69,7 @@ export default function DescriptionForm() {
       setIsLoading(true);
       const img = new Image();
       img.onload = () => {
-        let classifier = ml5.imageClassifier("MobileNet", function () {
+        let classifier = ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/PcNBqmMqD/", function () {
           console.log("Model loaded.");
         });
         classifier.predict(img, gotResult);

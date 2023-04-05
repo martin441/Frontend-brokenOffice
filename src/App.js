@@ -33,19 +33,23 @@ function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
   const dispatch = useDispatch();
   useEffect(() => {
-    axios
-      .get(`${ROUTE}/user/me`, { withCredentials: true })
-      .then((res) => res.data)
-      .then((data) => dispatch(setUser(data)));
-    axios
-      .get(`${ROUTE}/offices`, { withCredentials: true })
-      .then((res) => res.data)
-      .then((data) => dispatch(setOffices(data)));
-    axios
-      .get(`${ROUTE}/reports/history`, {withCredentials: true})
-      .then((res) => res.data)
-      .then((data) => dispatch(setAllReports(data)))
-      .catch((err) => console.log(err));
+    if (user) {
+      axios
+        .get(`${ROUTE}/user/me`, { withCredentials: true })
+        .then((res) => res.data)
+        .then((data) => dispatch(setUser(data)));
+      axios
+        .get(`${ROUTE}/offices`, { withCredentials: true })
+        .then((res) => res.data)
+        .then((data) => dispatch(setOffices(data)));
+      axios
+        .get(`${ROUTE}/reports/history`, { withCredentials: true })
+        .then((res) => res.data)
+        .then((data) => dispatch(setAllReports(data)))
+        .catch((err) => console.log(err));
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ROUTE, dispatch]);
   const user = useSelector((state) => state.user);
   const initialized = user !== null;
@@ -65,7 +69,7 @@ function App() {
           <Route path="/" element={<UserHome />} />
         )}
 
-        {checkType(user.type) === 21 && (
+        {checkType(user.type) !== 404 && (
           <Route path="/user/new-ticket" element={<NewTicketForm />} />
         )}
 
@@ -125,7 +129,7 @@ function App() {
           />
         )}
 
-        {checkType(user.type) === 21 && (
+        {checkType(user.type) !== 404 && (
           <Route path="/user/history" element={<History />} />
         )}
         <Route path="*" element={<NotFoundPage />} />

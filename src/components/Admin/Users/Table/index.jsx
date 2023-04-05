@@ -74,7 +74,7 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
   };
 
   return (
-    <Box sx={{ height: 500, width: "100%" }}>
+    <Box sx={{ height: '85vh', width: "100%" }}>
       <Modal
         open={open}
         onClose={handleClose}
