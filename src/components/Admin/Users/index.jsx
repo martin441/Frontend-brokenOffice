@@ -25,9 +25,9 @@ export const AdminView = () => {
       </Box>
       <Box sx={muiOfficeBar}>
         <Typography variant="h4">Users</Typography>
-        <RadioGroup setForType={[type, setType]} />
         <AddBtn href="/admin/users/register" text="New User" />
       </Box>
+        <RadioGroup setForType={[type, setType]} />
       <Table filterForType={type} />
     </div>
   );
