@@ -35,6 +35,7 @@ import { SingleTicketService } from "./components/Service/SingleAssignedReport";
 function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
   const dispatch = useDispatch();
+  const reports = useSelector(state => state.allReports)
   useEffect(() => {
     if (user) {
       axios
@@ -49,7 +50,7 @@ function App() {
         .get(`${ROUTE}/reports/history`, { withCredentials: true })
         .then((res) => res.data)
         .then((data) => dispatch(setAllReports(data)))
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     }
     if (checkType(user?.type) === 14) {
       console.log(checkType(user?.type) === 14);
