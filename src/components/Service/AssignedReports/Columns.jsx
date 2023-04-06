@@ -48,7 +48,7 @@ export const Columns = (type, handleOpen) => {
         renderCell: (params) => (
           <>
             <Typography>{params.row?.status}</Typography>
-            {params.row && <ModalEditStatus data={params.row} />}
+            {/* {params.row && <ModalEditStatus data={params.row} />} */}
           </>
         ),
       },
