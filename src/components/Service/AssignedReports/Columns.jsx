@@ -1,16 +1,8 @@
-import { IconButton } from "@mui/material";
-import { useDispatch } from "react-redux";
-import EditIcon from '@mui/icons-material/Edit';
+import { Typography } from "@mui/material";
 import checkType from "../../../utils/checkType";
-import { useNavigate } from "react-router";
-
+import ModalEditStatus from "./ModalEditStatus";
 
 export const Columns = (type, handleOpen) => {
-  const navigate = useNavigate()
-  const handleClick = (report) => {
-    navigate(`/service/ticket/${report._id}`)
-  };
-
   const number = checkType(type);
 
   return (
@@ -54,9 +46,10 @@ export const Columns = (type, handleOpen) => {
         flex: 0.5,
         editable: false,
         renderCell: (params) => (
-          <IconButton onClick={() => handleClick(params.row)}>
-            <EditIcon  />
-          </IconButton>
+          <>
+            <Typography>{params.row?.status}</Typography>
+            {params.row && <ModalEditStatus data={params.row} />}
+          </>
         ),
       },
     ]

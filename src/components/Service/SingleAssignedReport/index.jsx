@@ -1,11 +1,10 @@
-import {
-  Typography,
-} from "@mui/material";
+import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import {  ReportDataService } from "./ReportData";
+import { BackLink } from "../../../commons/BackLink";
+import { ReportDataService } from "./ReportData";
 
 export const SingleTicketService = () => {
   const { id } = useParams();
@@ -29,6 +28,9 @@ export const SingleTicketService = () => {
         mt: 4,
       }}
     >
+      <Box sx={{ ml: 2 }}>
+        <BackLink text="Back to Assigned Reports" href="/service/report/all" />
+      </Box>
       <Typography variant="h4" gutterBottom>
         Report
       </Typography>

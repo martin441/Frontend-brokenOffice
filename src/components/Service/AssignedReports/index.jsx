@@ -17,11 +17,8 @@ import { useNavigate } from "react-router";
 export default function ServerReportList() {
   const reports = useSelector((state) => state.service);
   const dispatch = useDispatch();
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const type = useSelector((state) => state.user.type);
-  const columns = Columns(type, handleOpen);
+  const columns = Columns(type);
   const navigate = useNavigate()
 
   React.useEffect(() => {
