@@ -144,7 +144,6 @@ export async function axiosPostNewReport(obj) {
   } catch (error) {
     console.error(error);
   }
-
 }
 export async function axiosPutUserType(obj) {
   try {
@@ -157,12 +156,29 @@ export async function axiosPutUserType(obj) {
   }
 }
 
-export async function axiosGetAssignedReportsService(){
+export async function axiosGetAssignedReportsService() {
   try {
-    const reports = await axios.get(`${ROUTE}/reports/service`, {withCredentials: true})
-    console.log(reports.data);
-    return reports.data
+    const reports = await axios.get(`${ROUTE}/reports/service`, {
+      withCredentials: true,
+    });
+    return reports.data;
   } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function axiosPutReportStatus(id, obj) {
+  console.log(obj);
+  try {
+    const updatedReport = await axios.put(
+      `${ROUTE}/reports/edit/state/${id}`,
+      obj,
+      { withCredentials: true }
+    );
+    toast.success("Report Status changed successfully");
+    return updatedReport.data;
+  } catch (error) {
+    toast.error("Report status could not be changed");
     console.error(error);
   }
 }
