@@ -15,7 +15,7 @@ import { useNavigate } from "react-router";
     const navigate = useNavigate();
     return (
       <Box sx={muiDashboardHome}>
-        <Card sx={{ maxWidth: 345, mt: '1rem' }}>
+        <Card sx={{ minWidth: 345, mt: '1rem' }}>
           <CardActionArea>
             <CardContent  onClick={() => navigate("/service/report/all")}>
               <HistoryIcon />
