@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React from "react";
 import ResolveRejectBtn from "./ResolveReject";
 
 export const ReportDataService = ({ singleReport }) => {
@@ -62,6 +62,18 @@ export const ReportDataService = ({ singleReport }) => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText primary="Date of issue:" />
+              <Typography
+                variant="subtitle1"
+                maxWidth={"50%"}
+                sx={{ wordWrap: "break-word", textAlign: "right" }}
+              >
+                {singleReport?.date?.substring(0, 10)}
+              </Typography>
+            </ListItem>
+            <Divider></Divider>
+
+            <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Office:" />
               <Typography align="right" variant="subtitle1">
                 {singleReport.office &&
@@ -88,7 +100,7 @@ export const ReportDataService = ({ singleReport }) => {
 
             <ListItem sx={{ py: 2, px: 0 }}>
               <ListItemText primary="Resolve:" />
-              <ResolveRejectBtn  />
+              {singleReport && <ResolveRejectBtn singleReport={singleReport} />}
             </ListItem>
             <Divider></Divider>
           </List>

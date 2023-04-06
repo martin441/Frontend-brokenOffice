@@ -168,7 +168,6 @@ export async function axiosGetAssignedReportsService() {
 }
 
 export async function axiosPutReportStatus(id, obj) {
-  console.log(obj);
   try {
     const updatedReport = await axios.put(
       `${ROUTE}/reports/edit/state/${id}`,
