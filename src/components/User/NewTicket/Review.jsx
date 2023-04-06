@@ -4,9 +4,11 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { useSelector } from "react-redux";
+import { Box } from "@mui/material";
 
 export default function ReviewNewTicket() {
   const newReport = useSelector(state => state.newReport)
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -25,7 +27,7 @@ export default function ReviewNewTicket() {
 
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Image:" />
-          <Typography variant="subtitle1">Image</Typography>
+          <Box component="img" alt="Report" src={newReport.image} sx={{maxWidth: '20vh', maxHeight: '20vh'}}></Box>
         </ListItem>
         
       <ListItem sx={{ py: 1, px: 0 }} >
