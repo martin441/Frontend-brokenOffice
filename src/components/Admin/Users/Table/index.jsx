@@ -23,15 +23,15 @@ import {
 import { styleEditProfile } from "../../../../utils/styleMUI";
 import checkType from "../../../../utils/checkType";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export default function BasicExampleDataGrid({ type, filterForType }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const users = useSelector((state) => state.allUsers);
   const user = useSelector((state) => state.changeType);
   const [userType, setUserType] = React.useState("");
   const [open, setOpen] = React.useState(false);
- 
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const columns = Columns(type, handleOpen);
@@ -46,6 +46,8 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
       })
       .catch(() => toast.error("Invalid Changes"));
   };
+
+
   React.useEffect(() => {
     axiosGetAllUsers().then((users) => dispatch(setAllUsers(users)));
   }, [dispatch]);
@@ -131,6 +133,9 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
         rowHeight={80}
         getRowId={(row) => row._id}
         slots={{ toolbar: CustomToolbar }}
+        onRowClick={(event, rowData) => {
+          navigate(`/admin/user/${event.id}`);
+        }}
       />
     </Box>
   );
