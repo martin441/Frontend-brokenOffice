@@ -1,16 +1,12 @@
-import {
-  Divider,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { LinearProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ReportData } from "./ReportData";
+
+import { Link } from "react-router-dom";
+
 import { BackLink } from "../../../commons/BackLink";
 
 export const SingleTicket = () => {
@@ -36,12 +32,18 @@ export const SingleTicket = () => {
         margin: 1,
       }}
     >
-      <BackLink text="Back to Reports" href="/user/history" />
+      <Box marginLeft={"30px"}>
+      <BackLink text="Back to History" href="/user/history" />
+      </Box>
+      <Typography variant="h4" gutterBottom sx={{textAlign:'center'}}>
+        Report
 
-      <Typography variant="h4" gutterBottom>
-        Report Details
       </Typography>
-      <ReportData singleReport={singleReport} />
+      {singleReport ? (
+        <ReportData singleReport={singleReport} />
+      ) : (
+        <LinearProgress />
+      )}
     </Box>
   );
 };

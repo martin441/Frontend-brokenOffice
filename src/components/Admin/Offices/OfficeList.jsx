@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -10,38 +9,29 @@ import TableRow from "@mui/material/TableRow";
 import { Link, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import OfficeModalEdit from "./OfficeModalEdit";
-import { deleteOffice, setOffices } from "../../../state/office";
 import { Box } from "@mui/system";
+import { deleteOffice, setOffices } from "../../../state/office";
 import { muiOfficeBar } from "../../../utils/styleMUI";
 import { axiosDeleteOffice, axiosGetAllOffices } from "../../../utils/axios";
 import { AddBtn } from "../../../commons/AddBtn";
 import DeleteBtn from "../../../commons/DeleteBtn";
+import Table from "./Table"
 
 export default function OfficeList() {
+  const userType = useSelector((state) => state.user.type);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const dispatch = useDispatch();
   const offices = useSelector((state) => state.office);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
   useEffect(() => {
     const offices = axiosGetAllOffices();
     offices.then((offices) => dispatch(setOffices(offices)));
   }, [dispatch]);
 
-  function handleClick(id) {
-    axiosDeleteOffice(id);
-    dispatch(deleteOffice(id));
-  }
-
+  // function handleClick(id) {
+  //   axiosDeleteOffice(id);
+  //   dispatch(deleteOffice(id));
+  // }
   return (
     <>
       <Box sx={muiOfficeBar}>
@@ -49,7 +39,8 @@ export default function OfficeList() {
 
         <AddBtn href="/admin/offices/register" text='New Office' />
       </Box>
-      <Paper sx={{ width: "100%", overflow: "hidden", m: "0 auto" }}>
+      <Table type={userType} offices={offices}/>
+      {/* <Paper sx={{ width: "100%", overflow: "hidden", m: "0 auto" }}>
         <TableContainer sx={{ maxHeight: "79vh" }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -118,7 +109,7 @@ export default function OfficeList() {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-      </Paper>
+      </Paper> */}
     </>
   );
 }

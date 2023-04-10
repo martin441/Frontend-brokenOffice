@@ -181,3 +181,14 @@ export async function axiosPutReportStatus(id, obj) {
     console.error(error);
   }
 }
+
+export async function axiosShareReport(reportId, emailTo) {
+  try {
+    const sent = await axios.post(`${ROUTE}/reports/share`, {reportId, emailTo}, {
+      withCredentials: true,
+    });
+    return sent.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
