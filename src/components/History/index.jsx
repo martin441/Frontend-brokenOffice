@@ -24,12 +24,17 @@ function CustomToolbar() {
   );
 }
 
-export const History = () => {
+export const History = ({ reportsOtherUser }) => {
   const reports = useSelector((state) => state.allReports);
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [reportId, setReportId] = React.useState("");
   const [email, setEmail] = React.useState("");
+  
+  const [rowData, setRowData] = React.useState("");
+  React.useEffect(() => {
+    reportsOtherUser ? setRowData(reportsOtherUser) : setRowData(reports);
+  }, [reports, reportsOtherUser]);
 
   const columns = [
     {
@@ -118,7 +123,7 @@ export const History = () => {
       <DataGrid
         sx={{ padding: 1 }}
         columns={columns}
-        rows={reports}
+        rows={rowData}
         rowHeight={80}
         getRowId={(row) => row._id}
         slots={{ toolbar: CustomToolbar }}
