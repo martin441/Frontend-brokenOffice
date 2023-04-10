@@ -28,7 +28,7 @@ export const SingleUser = () => {
       }}
     >
       <Typography variant="h4" gutterBottom>
-        Report
+        User
       </Typography>
       <UserData singleUser={singleUser} />
     </Box>

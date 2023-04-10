@@ -36,16 +36,16 @@ export const ReportData = ({singleReport}) => {
 
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Title:" />
-          <Typography variant="subtitle1">{singleReport?.title}</Typography>
+          <Typography variant="subtitle1" sx={{ wordWrap: "break-word", textAlign: "right", maxWidth: '80%' }}>{singleReport?.title}</Typography>
         </ListItem>
         <Divider></Divider>
 
         <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary="Description:" />
+          <ListItemText primary="Description:"  />
           <Typography
             variant="subtitle1"
             maxWidth={"50%"}
-            sx={{ wordWrap: "break-word", textAlign: "right" }}
+            sx={{ wordWrap: "break-word", textAlign: "right", maxWidth: '80%' }}
           >
             {singleReport?.description}
           </Typography>
@@ -53,14 +53,8 @@ export const ReportData = ({singleReport}) => {
         <Divider></Divider>
 
         <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary="Image:" />
-          <Typography variant="subtitle1">Image</Typography>
-        </ListItem>
-        <Divider></Divider>
-
-        <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Office:" />
-          <Typography align="right" variant="subtitle1">
+          <Typography align="right" variant="subtitle1" sx={{ maxWidth: '80%' }}>
             {singleReport.office && `${singleReport?.office.address.street}, ${singleReport?.office.address.zip}, ${singleReport?.office.address.floor}, ${singleReport.office.name}`}
           </Typography>
         </ListItem>

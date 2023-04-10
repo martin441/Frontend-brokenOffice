@@ -76,6 +76,7 @@ export default function DescriptionForm() {
       };
       img.src = imageSrc;
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageSrc]);
 
   return (
@@ -88,6 +89,7 @@ export default function DescriptionForm() {
           <TextField
             margin="normal"
             required
+            multiline
             fullWidth
             id="newTicketTitle"
             label="Title"
@@ -103,6 +105,7 @@ export default function DescriptionForm() {
             margin="normal"
             required
             fullWidth
+            multiline
             name="newTicketDescription"
             label="Description"
             type="text"

@@ -33,7 +33,7 @@ export const UserData = ({ singleUser }) => {
 
   const imageSrc =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
-    
+
   return (
     <div>
       {" "}
@@ -46,7 +46,7 @@ export const UserData = ({ singleUser }) => {
         alignItems="center"
         sx={{ maxWidth: "70%", margin: "0 auto" }}
       >
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={3}>
           <Box
             component="img"
             alt="Input Image"
@@ -66,7 +66,7 @@ export const UserData = ({ singleUser }) => {
 
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Name:" />
-              <Typography variant="subtitle1">{`${singleUser?.name} ${singleUser?.lastName}`}</Typography>
+              <Typography variant="subtitle1" sx={{ maxWidth: '80%' }}>{`${singleUser?.name} ${singleUser?.lastName}`}</Typography>
             </ListItem>
             <Divider></Divider>
 
@@ -78,7 +78,7 @@ export const UserData = ({ singleUser }) => {
 
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Address:" />
-              <Typography align="right" variant="subtitle1">
+              <Typography align="right" variant="subtitle1" sx={{ maxWidth: '80%' }}>
                 {singleUser?.addressName}
               </Typography>
             </ListItem>
@@ -86,7 +86,7 @@ export const UserData = ({ singleUser }) => {
 
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Role:" />
-              <Typography align="right" variant="subtitle1">
+              <Typography align="right" variant="subtitle1" sx={{ maxWidth: '80%' }}>
                 {singleUser?.role}
               </Typography>
             </ListItem>
