@@ -69,14 +69,17 @@ export default function DescriptionForm() {
       setIsLoading(true);
       const img = new Image();
       img.onload = () => {
-        let classifier = ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/PcNBqmMqD/", function () {
-          console.log("Model loaded.");
-        });
+        let classifier = ml5.imageClassifier(
+          "https://teachablemachine.withgoogle.com/models/PcNBqmMqD/",
+          function () {
+            console.log("Model loaded.");
+          }
+        );
         classifier.predict(img, gotResult);
       };
       img.src = imageSrc;
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageSrc]);
 
   return (
@@ -119,6 +122,7 @@ export default function DescriptionForm() {
             <TextField
               variant="outlined"
               type="file"
+              helperText="Files up to 2MB or 2000x2000"
               fullWidth
               onChange={(e) => handleFileChange(e)}
               InputProps={{
