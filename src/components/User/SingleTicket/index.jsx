@@ -4,6 +4,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ReportData } from "./ReportData";
+import { Link } from "react-router-dom";
+import { BackLink } from "../../../commons/BackLink";
 
 export const SingleTicket = () => {
   const { id } = useParams();
@@ -27,7 +29,10 @@ export const SingleTicket = () => {
         mt: 4,
       }}
     >
-      <Typography variant="h4" gutterBottom>
+      <Box marginLeft={"30px"}>
+      <BackLink text="Back to History" href="/user/history" />
+      </Box>
+      <Typography variant="h4" gutterBottom sx={{textAlign:'center'}}>
         Report
       </Typography>
       {singleReport ? (

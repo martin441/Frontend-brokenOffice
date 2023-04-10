@@ -61,7 +61,8 @@ export const Columns = (type, handleOpen) => {
                       <Box>
                         <IconButton
                           sx={{ padding: 0 }}
-                          onClick={() => {
+                          onClick={(event) => {
+                            event.stopPropagation();
                             dispatch(changeTypeUser(params.row));
                             handleOpen();
                           }}
@@ -90,7 +91,8 @@ export const Columns = (type, handleOpen) => {
                     <Box>
                       <IconButton
                         sx={{ padding: 0 }}
-                        onClick={() => {
+                        onClick={(event) => {
+                          event.stopPropagation();
                           dispatch(changeTypeUser(params.row));
                           handleOpen();
                         }}
@@ -118,7 +120,8 @@ export const Columns = (type, handleOpen) => {
                     <Box>
                       <IconButton
                         sx={{ padding: 0 }}
-                        onClick={() => {
+                        onClick={(event) => {
+                          event.stopPropagation();
                           dispatch(changeTypeUser(params.row));
                           handleOpen();
                         }}
@@ -151,7 +154,10 @@ export const Columns = (type, handleOpen) => {
           flex: 0.5,
           editable: false,
           renderCell: (params) => (
-            <IconButton onClick={() => handleClick(params.row)}>
+            <IconButton onClick={(event) => {
+              event.stopPropagation()
+              handleClick(params.row)
+              }}>
               <DeleteBtn />
             </IconButton>
           ),
