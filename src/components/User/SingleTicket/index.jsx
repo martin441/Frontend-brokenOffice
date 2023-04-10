@@ -4,7 +4,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ReportData } from "./ReportData";
+
 import { Link } from "react-router-dom";
+
 import { BackLink } from "../../../commons/BackLink";
 
 export const SingleTicket = () => {
@@ -27,6 +29,7 @@ export const SingleTicket = () => {
     <Box
       sx={{
         mt: 4,
+        margin: 1,
       }}
     >
       <Box marginLeft={"30px"}>
@@ -34,6 +37,7 @@ export const SingleTicket = () => {
       </Box>
       <Typography variant="h4" gutterBottom sx={{textAlign:'center'}}>
         Report
+
       </Typography>
       {singleReport ? (
         <ReportData singleReport={singleReport} />
