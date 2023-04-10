@@ -25,7 +25,7 @@ export const DashboardUser = () => {
               New Report
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Report a problem with your office supplies
+              Click here to report an incident with your office supplies
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -36,8 +36,16 @@ export const DashboardUser = () => {
         <CardActionArea>
           <CardContent onClick={() => navigate("/user/history")}>
             <HistoryIcon />
-            <Typography sx={{p: 0, m:0}} gutterBottom variant="h5" component="div">
+            <Typography
+              sx={{ p: 0, m: 0 }}
+              gutterBottom
+              variant="h5"
+              component="div"
+            >
               History
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Click here to get access to your report history
             </Typography>
           </CardContent>
           <CardContent>
