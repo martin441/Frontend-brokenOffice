@@ -82,10 +82,22 @@ export const ReportData = ({ singleReport }) => {
                 sx={{ maxWidth: "80%" }}
               >
                 {singleReport.office &&
-                  `${singleReport?.office.address.street}, ${singleReport?.office.address.zip}, ${singleReport?.office.address.floor}, ${singleReport.office.name}`}
+                  `${singleReport?.office.address.street}, ${singleReport?.office.address.zip}, ${singleReport?.office.address.floor} ${singleReport.office.name}`}
               </Typography>
             </ListItem>
             <Divider></Divider>
+
+             <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText primary="Service Desk:" />
+              <Typography
+                align="right"
+                variant="subtitle1"
+                sx={{ maxWidth: "80%" }}
+              >
+                {singleReport.solver ? singleReport?.solver.name : ''}
+              </Typography>
+            </ListItem>
+            <Divider></Divider> 
 
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Status:" />
@@ -103,7 +115,7 @@ export const ReportData = ({ singleReport }) => {
             </ListItem>
             <Divider></Divider>
           </List>
-          <Chat report={singleReport?._id}/>
+          {singleReport._id && <Chat report={singleReport?._id} />}
         </Grid>
       </Grid>
     </div>

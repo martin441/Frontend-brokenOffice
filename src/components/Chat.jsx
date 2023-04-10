@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Box, Stack, Button, Typography, Modal } from "@mui/material";
-import { muiModal } from "../utils/styleMUI";
+import {
+  Box,
+  Stack,
+  Button,
+  Typography,
+  Modal,
+  TextField,
+  ListItem,
+  List,
+} from "@mui/material";
+import { muiModalChat } from "../utils/styleMUI";
 import ChatIcon from "@mui/icons-material/Chat";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -11,25 +20,28 @@ export default function Chat({ report }) {
   const user = useSelector((state) => state.user);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [connected, setConnected] = useState(true);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    // handleLeave();
+    setOpen(false);
+  };
 
   useEffect(() => {
-    socket.on("message_received", (msg) => {
-      setMessages([...messages, msg]);
-    });
-
-    socket.on("disconnect", () => {
-      console.log("Disconnected from server");
+     socket.on("message_received", (msg) => {
+      console.log(msg, "MSGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+      setMessages(messages => [...messages, msg]);
+      console.log([...messages, msg]);
     });
 
     return () => {
       socket.off("message_received");
-      socket.off("disconnect");
     };
-  }, [messages]);
+
+  }, [messages, socket]);
 
   const handleChatConnection = async () => {
     try {
@@ -64,11 +76,6 @@ export default function Chat({ report }) {
         return;
       }
 
-      if (!connected) {
-        setInputValue("");
-        return alert("You are disconnected");
-      }
-
       const newMessage = await axios.post(
         "http://localhost:3001/chats/messages",
         { msg: inputValue, room: report },
@@ -77,16 +84,15 @@ export default function Chat({ report }) {
 
       socket.emit("message_sent", inputValue, user.name, report);
       setInputValue("");
-      setMessages([...messages, newMessage.data]);
+     setMessages([...messages, newMessage.data]);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleLeave = async () => {
+  const handleLeave = () => {
     alert("you have been disconnected");
     socket.disconnect();
-    setConnected(false);
     setMessages([]);
   };
 
@@ -107,13 +113,39 @@ export default function Chat({ report }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={muiModal}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+        <Box sx={muiModalChat}>
+          <Stack
+            sx={{ width: "100%", margin: "auto", marginTop: "2rem" }}
+            spacing={2}
+          >
+            {messages?.length > 0 && (
+              <List>
+                {messages?.map((message, index) => (
+                  <ListItem key={index}>
+                    <Stack spacing={1}>
+                      <Typography variant="caption">{message.date}</Typography>
+                      <Typography variant="button">
+                        {message.user?.name}
+                      </Typography>
+                      <Typography variant="body2">{message.content}</Typography>
+                    </Stack>
+                  </ListItem>
+                ))}
+              </List>
+            )}
+            <form onSubmit={handleSubmit}>
+              <Stack spacing={2}>
+                <TextField
+                  label="Type your message"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                />
+                <Button type="submit" variant="contained" color="primary">
+                  Send
+                </Button>
+              </Stack>
+            </form>
+          </Stack>
         </Box>
       </Modal>
     </div>
