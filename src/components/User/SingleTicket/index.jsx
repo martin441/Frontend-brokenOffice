@@ -1,11 +1,4 @@
-import {
-  Divider,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { LinearProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -37,7 +30,11 @@ export const SingleTicket = () => {
       <Typography variant="h4" gutterBottom>
         Report
       </Typography>
-      <ReportData singleReport={singleReport} />
+      {singleReport ? (
+        <ReportData singleReport={singleReport} />
+      ) : (
+        <LinearProgress />
+      )}
     </Box>
   );
 };

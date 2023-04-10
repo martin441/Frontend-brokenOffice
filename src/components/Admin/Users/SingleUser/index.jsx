@@ -1,8 +1,9 @@
-import { Typography } from "@mui/material";
+import { LinearProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { History } from "../../../History";
 import { UserData } from "./UserData";
 
 export const SingleUser = () => {
@@ -17,6 +18,7 @@ export const SingleUser = () => {
       })
       .then((res) => {
         setSingleUser(res.data);
+        console.log(res.data);
       })
       .catch((err) => console.error(err));
   }, [id]);
@@ -30,7 +32,14 @@ export const SingleUser = () => {
       <Typography variant="h4" gutterBottom>
         User
       </Typography>
-      <UserData singleUser={singleUser} />
+      {singleUser ? (
+        <>
+          <UserData singleUser={singleUser} />
+          <History reportsOtherUser={singleUser.reports} />
+        </>
+      ) : (
+        <LinearProgress />
+      )}
     </Box>
   );
 };

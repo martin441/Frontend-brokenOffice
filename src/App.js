@@ -54,7 +54,6 @@ function App() {
         .catch((err) => console.error(err));
     }
     if (checkType(user?.type) === 14) {
-      console.log(checkType(user?.type) === 14);
       axiosGetAssignedReportsService().then((reports) => {
         dispatch(setAssignedReports(reports));
       });
