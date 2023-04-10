@@ -14,7 +14,7 @@ export const Home = () => {
         <Button
           variant="contained"
           color="primary"
-          sx={{ borderRadius: 20, mt: 3 }}
+          sx={{ borderRadius: 20, mt: 3, backgroundColor: "white" }}
           onClick={() => navigate("/login")}
         >
           Login
