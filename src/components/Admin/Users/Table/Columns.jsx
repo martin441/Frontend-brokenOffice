@@ -54,21 +54,23 @@ export const Columns = (type, handleOpen) => {
                       gap: 1,
                     }}
                   >
-                    <Box>
-                      <p>Admin</p>
+                    {/* <Box sx={{backgroundColor:'red', flexWrap: "wrap", display:'flex', justifyContent:'space-between', alignItems: "center", width:'100px'}}> */}
+                      <Box sx={{marginX:2}}>
+                        <p>Admin</p>
+                      </Box>
+                      <Box>
+                        <IconButton
+                          sx={{ padding: 0 }}
+                          onClick={() => {
+                            dispatch(changeTypeUser(params.row));
+                            handleOpen();
+                          }}
+                        >
+                          <EditIcon fontSize="small" />
+                        </IconButton>
+                      </Box>
                     </Box>
-                    <Box>
-                      <IconButton
-                        sx={{ padding: 0 }}
-                        onClick={() => {
-                          dispatch(changeTypeUser(params.row));
-                          handleOpen();
-                        }}
-                      >
-                        <EditIcon fontSize="small" />
-                      </IconButton>
-                    </Box>
-                  </Box>
+                  //  </Box>
                 );
               case 14:
                 return (
@@ -82,7 +84,7 @@ export const Columns = (type, handleOpen) => {
                       gap: 1,
                     }}
                   >
-                    <Box>
+                    <Box sx={{marginX:1.5}}>
                       <p>Service</p>
                     </Box>
                     <Box>
@@ -110,7 +112,7 @@ export const Columns = (type, handleOpen) => {
                       gap: 1,
                     }}
                   >
-                    <Box>
+                    <Box sx={{marginX:1}}>
                       <p>Standard</p>
                     </Box>
                     <Box>
@@ -155,8 +157,8 @@ export const Columns = (type, handleOpen) => {
           ),
         },
       ])
-    // eslint-disable-next-line no-unused-vars
-    : (columns = [
+    : // eslint-disable-next-line no-unused-vars
+      (columns = [
         {
           field: "fullName",
           headerName: "Full name",
