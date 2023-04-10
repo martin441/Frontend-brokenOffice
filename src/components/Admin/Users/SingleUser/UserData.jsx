@@ -9,9 +9,9 @@ import {
 import { Box } from "@mui/system";
 import React from "react";
 import checkType from "../../../../utils/checkType";
+// import BackLink from "../../../../commons/BackLink";
 
 export const UserData = ({ singleUser }) => {
-
   function checkSingleUserType(type) {
     switch (checkType(type)) {
       case 66:
@@ -66,7 +66,10 @@ export const UserData = ({ singleUser }) => {
 
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Name:" />
-              <Typography variant="subtitle1" sx={{ maxWidth: '80%' }}>{`${singleUser?.name} ${singleUser?.lastName}`}</Typography>
+              <Typography
+                variant="subtitle1"
+                sx={{ maxWidth: "80%" }}
+              >{`${singleUser?.name} ${singleUser?.lastName}`}</Typography>
             </ListItem>
             <Divider></Divider>
 
@@ -78,7 +81,11 @@ export const UserData = ({ singleUser }) => {
 
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Address:" />
-              <Typography align="right" variant="subtitle1" sx={{ maxWidth: '80%' }}>
+              <Typography
+                align="right"
+                variant="subtitle1"
+                sx={{ maxWidth: "80%" }}
+              >
                 {singleUser?.addressName}
               </Typography>
             </ListItem>
@@ -86,7 +93,11 @@ export const UserData = ({ singleUser }) => {
 
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Role:" />
-              <Typography align="right" variant="subtitle1" sx={{ maxWidth: '80%' }}>
+              <Typography
+                align="right"
+                variant="subtitle1"
+                sx={{ maxWidth: "80%" }}
+              >
                 {singleUser?.role}
               </Typography>
             </ListItem>

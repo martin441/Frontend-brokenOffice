@@ -22,7 +22,7 @@ export const DashboardSuperAdmin = () => {
           <CardContent>
             <BusinessIcon />
             <Typography gutterBottom variant="h5" component="div">
-              Offices
+              Globant Offices
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Click here to view, edit, create and delete offices
@@ -40,10 +40,10 @@ export const DashboardSuperAdmin = () => {
           <CardContent>
             <PeopleAltIcon />
             <Typography gutterBottom variant="h5" component="div">
-              Users
+              Globant Users
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Click here to view, create and delete users
+              Click here to view, create, edit and delete users
             </Typography>
           </CardContent>
         </CardActionArea>
