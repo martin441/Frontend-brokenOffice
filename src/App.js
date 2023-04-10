@@ -31,6 +31,7 @@ import ServerReportList from "./components/Service/AssignedReports";
 import { axiosGetAssignedReportsService } from "./utils/axios";
 import { setAssignedReports } from "./state/service";
 import { SingleTicketService } from "./components/Service/SingleAssignedReport";
+import { SingleUser } from "./components/Admin/Users/SingleUser";
 
 function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
@@ -136,6 +137,10 @@ function App() {
         {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
           <Route path="/admin/users/register" element={<RegisterUsers />} />
         )}
+          {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
+          <Route path="/admin/user/:id" element={<SingleUser />} />
+        )}
+
         {checkType(user.type) === 32 && (
           <Route
             path="/superadmin/users/register"

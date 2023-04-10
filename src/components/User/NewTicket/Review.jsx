@@ -17,12 +17,12 @@ export default function ReviewNewTicket() {
       <List disablePadding>
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary='Title:' />
-          <Typography variant="subtitle1">{newReport.title}</Typography>
+          <Typography variant="subtitle1" sx={{ maxWidth: '80%', wordWrap: "break-word" }}>{newReport.title}</Typography>
         </ListItem>
 
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary='Description:' />
-          <Typography variant="subtitle1">{newReport.description}</Typography>
+          <Typography variant="subtitle1" sx={{ maxWidth: '80%', wordWrap: "break-word" }}>{newReport.description}</Typography>
         </ListItem>
 
         <ListItem sx={{ py: 1, px: 0 }}>

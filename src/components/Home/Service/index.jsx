@@ -10,8 +10,7 @@ export const ServiceHome = () => {
     <Box className="header-container-home home-text" >
       {user?.email && (
         <Box sx={{ mt: 4 }}>
-          <Typography variant="h4">{`Hey ${user.name} ${user.lastName}!`}</Typography>
-
+          <Typography variant="h4" sx={{fontWeight: '600'}}>{`Hey ${user.name} ${user.lastName}!`}</Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} md={7}>
               <DashboardService />

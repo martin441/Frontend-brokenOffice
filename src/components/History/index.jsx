@@ -7,9 +7,7 @@ import {
   GridToolbarExport,
 } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { axiosGetReportHistory } from "../../utils/axios";
-import { setAllReports } from "../../state/allReports";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 function CustomToolbar() {
@@ -46,7 +44,7 @@ export const History = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ height: '80vh', width: "100%" }}>
+    <div style={{ height: "80vh", width: "100%" }}>
       <Typography sx={{ mt: 4 }} gutterBottom variant="h4" component="div">
         History
       </Typography>
