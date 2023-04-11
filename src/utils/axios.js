@@ -174,7 +174,7 @@ export async function axiosPutReportStatus(id, obj) {
       obj,
       { withCredentials: true }
     );
-    toast.success("Report Status changed successfully");
+    toast.success("Report status changed successfully");
     return updatedReport.data;
   } catch (error) {
     toast.error("Report status could not be changed");

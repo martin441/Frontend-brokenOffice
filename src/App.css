@@ -56,6 +56,7 @@
   background-image: url('https://brand.globant.com/wp-content/uploads/2021/10/bg.png');
   min-height: 100vh;
   object-fit: contain;
+  padding: 20px 0px;
 }
 
 .header-container-home-dark {

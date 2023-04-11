@@ -10,7 +10,7 @@ export const UserHome = () => {
     <Box className={theme === 'light' ? 'header-container-home home-text' : 'header-container-home-dark home-text'} sx={{color:'text.primary'}} >
       {user?.email && (
         <Box sx={{ mt: 4 }}>
-          <Typography variant="h4" sx={{fontWeight: '600'}}>{`Hey ${user.name} ${user.lastName}!`}</Typography>
+          <Typography variant="h4" sx={{fontWeight: '600', mb:'1rem'}}>{`Hey ${user.name} ${user.lastName}!`}</Typography>
           <DashboardUser />
         </Box>
       )}

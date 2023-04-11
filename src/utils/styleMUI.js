@@ -9,6 +9,7 @@ export const muiStyleApp = {
 
 export const styleEditProfile = {
   display: "flex",
+  gap:3,
   flexDirection: "column",
   position: "absolute",
   top: "50%",
@@ -21,6 +22,8 @@ export const styleEditProfile = {
   p: 4,
   backgroundColor:'secondary.main',
   color: 'text.primary'
+  maxWidth:300
+
 };
 
 export const muiStyleLoginBtn = {
@@ -60,7 +63,6 @@ export const muiDashboardHome = {
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  mt: '1rem'
 }
 
 export const muiModal = {

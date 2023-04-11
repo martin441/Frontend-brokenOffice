@@ -12,12 +12,20 @@ import BusinessIcon from "@mui/icons-material/Business";
 import { Link } from "react-router-dom";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+import checkType from "../../../utils/checkType";
 
 export const DashboardSuperAdmin = () => {
   const navigate = useNavigate();
+  const userType = useSelector(state => state.user.type)
+
+  let num = checkType(userType)
   return (
     <Box sx={muiDashboardHome}>
-      <Card sx={{ minWidth: 345 }} onClick={() => navigate("/admin/offices")}>
+      <Card
+        sx={{ minWidth: 345, height: 196, display:'flex', flexDirection:'column', justifyContent:'center' }}
+        onClick={() => navigate("/admin/offices")}
+      >
         <CardActionArea>
           <CardContent>
             <BusinessIcon />
@@ -25,7 +33,7 @@ export const DashboardSuperAdmin = () => {
               Globant Offices
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Click here to view, edit, create and delete offices
+              {num === 66 ? 'Click here to view, create and delete offices':'Click here to view, edit, create and delete offices'}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -33,8 +41,8 @@ export const DashboardSuperAdmin = () => {
       </Card>
 
       <Card
-        sx={{ minWidth: 345, mt: "1rem" }}
-        onClick={() => navigate("/superadmin/users")}
+        sx={{ minWidth: 345, height: 196, mt: "1rem", display:'flex', flexDirection:'column', justifyContent:'center' }}
+        onClick={() => navigate(`/${num === 66 ? "admin": "superadmin"}/users`)}
       >
         <CardActionArea>
           <CardContent>
@@ -43,7 +51,7 @@ export const DashboardSuperAdmin = () => {
               Globant Users
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Click here to view, create, edit and delete users
+            {num === 66 ? 'Click here to view, create and delete users':'Click here to view, edit, create and delete users'}
             </Typography>
           </CardContent>
         </CardActionArea>
