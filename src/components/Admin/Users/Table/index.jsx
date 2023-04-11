@@ -9,7 +9,7 @@ import {
 import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosGetAllUsers, axiosPutUserType } from "../../../../utils/axios";
-import { deleteUser, setAllUsers } from "../../../../state/allUsers";
+import {  setAllUsers } from "../../../../state/allUsers";
 import { Columns } from "./Columns";
 import {
   Button,
@@ -76,7 +76,7 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
   };
 
   return (
-    <Box sx={{ height: '85vh', width: "100%" }}>
+    <Box sx={{ height: '77vh', width: "100%", backgroundColor:'secondary.main'}}>
       <Modal
         open={open}
         onClose={handleClose}
@@ -89,6 +89,7 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              backgroundColor:'secondary.main'
             }}
           >
             <FormLabel id="demo-radio-buttons-group-label">Type</FormLabel>
@@ -127,7 +128,7 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
         </Box>
       </Modal>
       <DataGrid
-        sx={{ padding: 1 }}
+        sx={{ padding: 1, backgroundColor:'secondary.main' }}
         columns={columns}
         rows={filterForType === "all" ? users : filter(filterForType)}
         rowHeight={80}

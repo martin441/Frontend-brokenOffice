@@ -10,15 +10,15 @@ export const DashboardService = () => {
   const navigate = useNavigate();
   return (
     <Box sx={muiDashboardHome}>
-      <Card sx={{ minWidth: 345, mt: "1rem" }}>
+      <Card sx={{ width: 345}}>
         <CardActionArea>
-          <CardContent onClick={() => navigate("/service/report/all")}>
+          <CardContent>
             <HistoryIcon />
             <Typography gutterBottom variant="h5" component="div">
               Pending Reports
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Click here to access the list of reports assigned to you
+              Click here to access the reports assigned to you
             </Typography>
           </CardContent>
           <CardContent>

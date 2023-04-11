@@ -38,10 +38,10 @@ export default function ServerReportList() {
   }
 
   return (
-    <Box sx={{ height: "85vh", width: "100%" }}>
-        <Typography variant="h4" sx={{my: 2}}>Assigned Reports</Typography>
+    <Box sx={{ height: "85vh", width: "100%", backgroundColor:'secondary.main' }}>
+        <Typography variant="h4" color='secondary.dark' sx={{py: 2}}>Assigned Reports</Typography>
       <DataGrid
-        sx={{ padding: 1 }}
+        sx={{ padding: 1, backgroundColor:'secondary.main' }}
         columns={columns}
         rows={reports}
         rowHeight={80}

@@ -15,11 +15,11 @@ import { useNavigate } from "react-router";
 
 export const DashboardUser = () => {
   const navigate = useNavigate();
-  const [hover, setHover] = useState(false);
 
   return (
+
     <Box sx={muiDashboardHome}>
-      <Card sx={{width: 345 }} onClick={() => navigate("/user/new-ticket")}>
+      <Card sx={{ width: 345, height: 204, display:'flex', flexDirection:'column', justifyContent:'center' }} onClick={() => navigate("/user/new-ticket")}>
         <CardActionArea>
           <CardContent>
             <BuildCircleIcon />
@@ -27,7 +27,7 @@ export const DashboardUser = () => {
               New Report
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Click here to report an incident with your office supplies
+              Report an incident with your office supplies
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -35,23 +35,15 @@ export const DashboardUser = () => {
       </Card>
 
       <Card
-        onMouseMove={() => setHover(true)}
-        onMouseOut={() => setHover(false)}
         sx={{
           minWidth: 345,
           // maxWidth: 345,
           mt: "1rem",
-          ":hover": {
-            bgcolor: "rgba(0,0,0,0.9)",
-            color: "white",
-            opacity: 0.7,
-            transition: ".4s",
-          },
         }}
       >
         <CardActionArea>
+
           <CardContent>
-            {/* onClick={() => navigate("/user/history")} */}
 
             <HistoryIcon />
             <Typography
@@ -67,7 +59,7 @@ export const DashboardUser = () => {
             </Typography>
           </CardContent>
           <CardContent>
-            <ReportListHomeUser expand={hover} />
+            <ReportListHomeUser />
           </CardContent>
         </CardActionArea>
       </Card>
