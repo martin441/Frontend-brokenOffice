@@ -1,4 +1,11 @@
-import reportIcon from '../assets/report_logo.svg'
+export const muiStyleApp = {
+  textAlign: 'center',
+  boxSizing: 'border-box',
+  margin: 0,
+  padding: 0,
+  fontFamily: "Heebo",
+  backgroundColor: 'secondary.main'
+}
 
 export const styleEditProfile = {
   display: "flex",
@@ -12,6 +19,8 @@ export const styleEditProfile = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  backgroundColor:'secondary.main',
+  color: 'text.primary'
 };
 
 export const muiStyleLoginBtn = {
@@ -43,7 +52,7 @@ export const muiBackLink = {
   justifyContent: "start",
   width: '100%',
   mt: 2,
-  color: 'secondary.dark'
+  color: 'text.primary'
 }
 
 export const muiDashboardHome = {

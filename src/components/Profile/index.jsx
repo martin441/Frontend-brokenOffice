@@ -47,7 +47,7 @@ export const Profile = () => {
   };
 
   return (
-    <>
+    <Box sx={{minHeight: '100vh'}}>
       <Modal
         open={open}
         onClose={handleClose}
@@ -94,17 +94,17 @@ export const Profile = () => {
       </div>
 
       <div className="profile-data">
-        <Typography variant="h6"> {user?.name} </Typography>
-        <Typography variant="h6"> {user?.lastName} </Typography>
+        <Typography color='text.primary' variant="h6"> {user?.name} </Typography>
+        <Typography color='text.primary' variant="h6"> {user?.lastName} </Typography>
         <Typography variant="subtitle2" sx={{ color: "#666666" }}>
           {user?.role}
         </Typography>
-        <Typography>{user?.email}</Typography>
+        <Typography color='text.primary'>{user?.email}</Typography>
         <Typography variant="p">{user?.address}</Typography>
       </div>
 
       <EditProfile />
       <EditSensitive />
-    </>
+    </Box>
   );
 };

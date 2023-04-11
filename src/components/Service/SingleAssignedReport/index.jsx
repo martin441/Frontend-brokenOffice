@@ -26,6 +26,8 @@ export const SingleTicketService = () => {
     <Box
       sx={{
         mt: 4,
+        minHeight: '90vh',
+        color: 'text.primary'
       }}
     >
       <Box sx={{ ml: 2 }}>

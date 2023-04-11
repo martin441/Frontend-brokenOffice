@@ -34,6 +34,7 @@ export default function ResolveRejectBtn({ singleReport }) {
           justifyContent: "end",
           flexWrap: "wrap",
           gap: "2rem",
+          
         }}
       >
         <Button variant="contained" onClick={(e) => handleOpen(e, 'closed')}>

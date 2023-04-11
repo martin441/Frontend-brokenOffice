@@ -18,9 +18,9 @@ export const DashboardUser = () => {
   const [hover, setHover] = useState(false);
 
   return (
-    <Box sx={muiDashboardHome}>
-      <Card sx={{ minWidth: 345 }} onClick={() => navigate("/user/new-ticket")}>
-        <CardActionArea>
+    <Box sx={muiDashboardHome} >
+      <Card sx={{ minWidth: 345 }} onClick={() => navigate("/user/new-ticket")} >
+        <CardActionArea >
           <CardContent>
             <BuildCircleIcon />
             <Typography gutterBottom variant="h5" component="div">
@@ -50,7 +50,7 @@ export const DashboardUser = () => {
         }}
       >
         <CardActionArea>
-          <CardContent>
+          <CardContent >
             {/* onClick={() => navigate("/user/history")} */}
 
             <HistoryIcon />

@@ -7,7 +7,7 @@ import {
   GridToolbarExport,
 } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { Columns } from "./Columns";
 
@@ -35,9 +35,9 @@ export default function BasicExampleDataGrid({ type, offices }) {
   }
 
   return (
-    <Box sx={{ height: "85vh", width: "100%" }}>
+    <Box sx={{ height: "85vh", width: "100%", backgroundColor:'secondary.main' }}>
       <DataGrid
-        sx={{ padding: 1 }}
+        sx={{ padding: 1, backgroundColor: "secondary.main" }}
         columns={columns}
         rows={offices}
         rowHeight={80}

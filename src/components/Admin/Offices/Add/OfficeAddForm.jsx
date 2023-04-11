@@ -58,7 +58,7 @@ export const OfficeAddForm = () => {
         component="form"
         noValidate
         onSubmit={handleSubmit}
-        sx={{ mt: 1, width: "70%" }}
+        sx={{ mt: 1, width: "70%", color:'text.primary' }}
       >
         <AddressAutocomplete
           apiKey={process.env.REACT_APP_API_KEY}

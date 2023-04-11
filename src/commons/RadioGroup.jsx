@@ -26,10 +26,10 @@ export default function RowRadioBRuttonsGroup({ setForType }) {
         localStorage.setItem("value", type);
       }
     }
-  }, [type]);
+  }, [type, userType]);
 
   return (
-    <FormControl>
+    <FormControl sx={{color:'text.primary'}}>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
