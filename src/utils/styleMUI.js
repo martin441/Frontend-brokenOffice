@@ -21,7 +21,7 @@ export const styleEditProfile = {
   boxShadow: 24,
   p: 4,
   backgroundColor:'secondary.main',
-  color: 'text.primary'
+  color: 'text.primary',
   maxWidth:300
 
 };
