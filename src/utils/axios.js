@@ -192,3 +192,27 @@ export async function axiosShareReport(reportId, emailTo) {
     console.error(error);
   }
 }
+
+export async function axiosPostGenerateRestoreLink(email) {
+  try {
+    const sent = await axios.post(`${ROUTE}/user/restore/password`, {email}, {
+      withCredentials: true,
+    });
+    if (!sent) return {error: true, data: "Something went wrong"}
+    return sent;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function axiosPostRestorePass(token, password) {
+  try {
+    const sent = await axios.post(`${ROUTE}/user/restore/password/${token}`, {password}, {
+      withCredentials: true,
+    });
+    if (!sent) return {error: true, data: "Something went wrong"}
+    return sent;
+  } catch (error) {
+    console.error(error);
+  }
+}
