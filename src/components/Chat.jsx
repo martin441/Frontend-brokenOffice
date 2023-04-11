@@ -1,21 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-    Box,
-    Stack,
-    Button,
-    Typography,
-    Modal,
-    TextField,
-    ListItem,
-    List,
-  } from "@mui/material";
-  import {
-    muiChatRecipientMsg,
-    muiChatSenderMsg,
-    muiModalChat,
-    muiModalChatForm,
-  } from "../utils/styleMUI";
+  Box,
+  Stack,
+  Button,
+  Typography,
+  Modal,
+  TextField,
+  ListItem,
+  List,
+} from "@mui/material";
+import {
+  muiChatRecipientMsg,
+  muiChatSenderMsg,
+  muiModalChat,
+  muiModalChatForm,
+} from "../utils/styleMUI";
 import ChatIcon from "@mui/icons-material/Chat";
+import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
@@ -23,14 +24,14 @@ import checkType from "../utils/checkType";
 const socket = io("http://localhost:3001");
 
 function useChatScroll(dep) {
-    const ref = React.useRef();
-    React.useEffect(() => {
-      if (ref.current) {
-        ref.current.scrollTop = ref.current.scrollHeight;
-      }
-    }, [dep]);
-    return ref;
-  }
+  const ref = React.useRef();
+  React.useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollTop = ref.current.scrollHeight;
+    }
+  }, [dep]);
+  return ref;
+}
 
 export default function Chat({ report, chatType }) {
   const user = useSelector((state) => state.user);
@@ -41,27 +42,24 @@ export default function Chat({ report, chatType }) {
 
   useEffect(() => {
     socket.on("message_received", (msg) => {
-        console.log(msg)
       setMessages((messages) => [...messages, msg]);
     });
-    console.log("mensajes RECIBIDO")
-    return (() => {
-        socket.off("message_received")
-    })
+    return () => {
+      socket.off("message_received");
+    };
   }, [socket]);
 
   const handleOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     // handleLeave();
     setOpen(false);
   };
-  
 
   const handleChatConnection = async () => {
     try {
-
       const newChat = await axios.post(
         "http://localhost:3001/chats/create",
         { room: report },
@@ -101,20 +99,20 @@ export default function Chat({ report, chatType }) {
 
       socket.emit("message_sent", inputValue, user.name, report);
       setInputValue("");
-       setMessages([...messages, newMessage.data]);
+      setMessages([...messages, newMessage.data]);
     } catch (error) {
       console.error(error);
     }
   };
 
-//   const handleLeave = () => {
-//     alert("you have been disconnected");
-//     socket.disconnect();
-//     setConnection(false)
-//     setMessages([]);
-//   };
+  //   const handleLeave = () => {
+  //     alert("you have been disconnected");
+  //     socket.disconnect();
+  //     setConnection(false)
+  //     setMessages([]);
+  //   };
 
-return (
+  return (
     <div>
       <Stack direction="row" spacing={2} mt={2}>
         <Button
@@ -122,8 +120,9 @@ return (
           variant="contained"
           startIcon={<ChatIcon />}
         >
-            {checkType(user.type) === 14 && chatType === "assigned" ? "Assist issuer" : " Ask for help"}
-         
+          {checkType(user.type) === 14 && chatType === "assigned"
+            ? "Assist issuer"
+            : " Ask for help"}
         </Button>
       </Stack>
 
@@ -133,7 +132,7 @@ return (
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={muiModalChat} ref={ref}>
+        <Box sx={muiModalChat}>
           <List sx={{ flexGrow: 1, overflow: "auto" }}>
             {messages?.length > 0 && (
               <>
@@ -147,7 +146,7 @@ return (
                           alignItems="flex-end"
                           sx={{ width: "100%", textAlign: "right" }}
                         >
-                          <Box sx={muiChatSenderMsg}>
+                          <Box sx={muiChatSenderMsg} ref={ref}>
                             <Typography variant="button">
                               {message.user?.name}
                             </Typography>
@@ -210,9 +209,14 @@ return (
                 onChange={handleInputChange}
                 sx={{ flexGrow: 1 }}
               />
-              <Button type="submit" variant="contained" color="primary">
-                Send
-              </Button>
+              <Button
+                type="submit"
+                variant="text"
+                color="secondary"
+                startIcon={
+                  <SendIcon style={{ fontSize: 40 }} color="primary" />
+                }
+              ></Button>
             </Stack>
           </Box>
         </Box>

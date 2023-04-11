@@ -1,4 +1,4 @@
-import reportIcon from '../assets/report_logo.svg'
+import reportIcon from "../assets/report_logo.svg";
 
 export const styleEditProfile = {
   display: "flex",
@@ -9,7 +9,7 @@ export const styleEditProfile = {
   transform: "translate(-50%, -50%)",
   width: "50%",
   bgcolor: "white",
-  border: "2px solid #000",
+  border: "1px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -23,48 +23,48 @@ export const muiStyleLoginBtn = {
 
 export const muiBtnOfficeDelete = {
   border: "none",
-  bordeRadius: '20px',
+  bordeRadius: "20px",
   padding: "0.5rem 1rem",
-  bgcolor: 'primary',
-  color: 'secondary',
+  bgcolor: "primary",
+  color: "secondary",
 };
 
 export const muiOfficeBar = {
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  width: '90%',
-  m:2
-}
+  width: "90%",
+  m: 2,
+};
 
 export const muiBackLink = {
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "start",
-  width: '100%',
+  width: "100%",
   mt: 2,
-  color: 'secondary.dark'
-}
+  color: "secondary.dark",
+};
 
 export const muiDashboardHome = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  mt: '1rem'
-}
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  mt: "1rem",
+};
 
 export const muiModal = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "1px solid #000",
   boxShadow: 24,
   p: 4,
-}
+};
 
 export const muiModalChat = {
   position: "absolute",
@@ -73,9 +73,9 @@ export const muiModalChat = {
   transform: "translate(-50%, -50%)",
   width: "80%",
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "1px solid #000",
   boxShadow: 24,
-  overflow: "scroll",
+  overflow: "auto",
   height: "70%",
 };
 
@@ -89,14 +89,14 @@ export const muiModalChatForm = {
 
 export const muiChatSenderMsg = {
   backgroundColor: "#BFD732",
-  borderRadius: "8px",
-  padding: ".5rem",
-  wordBreak:'break-word'
+  borderRadius: "14px",
+  padding: ".5rem .5rem .5rem 3rem",
+  wordBreak: "break-word",
 };
 
 export const muiChatRecipientMsg = {
   backgroundColor: "#F5F6F7",
-  borderRadius: "8px",
-  padding: ".5rem",
-  wordBreak:'break-word'
+  borderRadius: "14px",
+  padding: ".5rem 3rem .5rem .5rem",
+  wordBreak: "break-word",
 };
