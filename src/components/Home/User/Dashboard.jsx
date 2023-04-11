@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import { muiDashboardHome } from "../../../utils/styleMUI";
 import BuildCircleIcon from "@mui/icons-material/BuildCircle";
 import { ReportListHomeUser } from "./ReportListHome";
@@ -15,6 +15,8 @@ import { useNavigate } from "react-router";
 
 export const DashboardUser = () => {
   const navigate = useNavigate();
+  const [hover, setHover] = useState(false);
+
   return (
     <Box sx={muiDashboardHome}>
       <Card sx={{ minWidth: 345 }} onClick={() => navigate("/user/new-ticket")}>
@@ -32,9 +34,25 @@ export const DashboardUser = () => {
         <CardActions></CardActions>
       </Card>
 
-      <Card sx={{ minWidth: 345, mt: "1rem" }}>
+      <Card
+        onMouseMove={() => setHover(true)}
+        onMouseOut={() => setHover(false)}
+        sx={{
+          minWidth: 345,
+          // maxWidth: 345,
+          mt: "1rem",
+          ":hover": {
+            bgcolor: "rgba(0,0,0,0.9)",
+            color: "white",
+            opacity: 0.7,
+            transition: ".4s",
+          },
+        }}
+      >
         <CardActionArea>
-          <CardContent onClick={() => navigate("/user/history")}>
+          <CardContent>
+            {/* onClick={() => navigate("/user/history")} */}
+
             <HistoryIcon />
             <Typography
               sx={{ p: 0, m: 0 }}
@@ -49,7 +67,7 @@ export const DashboardUser = () => {
             </Typography>
           </CardContent>
           <CardContent>
-            <ReportListHomeUser />
+            <ReportListHomeUser expand={hover} />
           </CardContent>
         </CardActionArea>
       </Card>

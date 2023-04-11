@@ -1,24 +1,25 @@
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { Container } from "@mui/material";
+import { Container, InputAdornment } from "@mui/material";
 import { muiStyleLoginBtn } from "../../utils/styleMUI";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { setUser } from "../../state/user";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useState } from "react";
 
 export default function SignInSide() {
   const ROUTE = process.env.REACT_APP_ROUTE;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -100,9 +101,12 @@ export default function SignInSide() {
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   autoComplete="current-password"
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end" onClick={() => setShowPassword(i => !i)}>{showPassword ? <VisibilityIcon/> : <VisibilityOffIcon />}</InputAdornment>,
+                  }}
                 />
                 <Button
                   type="submit"
