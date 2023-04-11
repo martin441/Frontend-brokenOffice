@@ -17,6 +17,7 @@ export const DashboardUser = () => {
   const navigate = useNavigate();
 
   return (
+
     <Box sx={muiDashboardHome}>
       <Card sx={{ width: 345, height: 204, display:'flex', flexDirection:'column', justifyContent:'center' }} onClick={() => navigate("/user/new-ticket")}>
         <CardActionArea>
@@ -41,7 +42,9 @@ export const DashboardUser = () => {
         }}
       >
         <CardActionArea>
+
           <CardContent>
+
             <HistoryIcon />
             <Typography
               sx={{ p: 0, m: 0 }}

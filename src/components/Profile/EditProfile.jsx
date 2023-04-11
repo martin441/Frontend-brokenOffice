@@ -114,7 +114,9 @@ export default function EditProfile() {
             onChange={(e) => setInputRole(e.target.value)}
             sx={{ mb: ".5rem" }}
           />
-          <Typography>Current Office: {user.office.address?.street}{user.office?.name}</Typography>
+
+          <Typography color='text.primary'>Current Office: {user.office.address?.street}{user.office?.name}</Typography>
+
           <TextField
             sx={{ mt: 1 }}
             select
