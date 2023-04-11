@@ -67,15 +67,36 @@ export const muiModal = {
 }
 
 export const muiModalChat = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "80%",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
-  p: 4,
-  overflow: 'scroll',
-  height: '20rem'
-}
+  overflow: "scroll",
+  height: "70%",
+};
+
+export const muiModalChatForm = {
+  borderTop: "1px solid grey",
+  position: "sticky",
+  bottom: 0,
+  backgroundColor: "white",
+  p: 2,
+};
+
+export const muiChatSenderMsg = {
+  backgroundColor: "#BFD732",
+  borderRadius: "8px",
+  padding: ".5rem",
+  wordBreak:'break-word'
+};
+
+export const muiChatRecipientMsg = {
+  backgroundColor: "#F5F6F7",
+  borderRadius: "8px",
+  padding: ".5rem",
+  wordBreak:'break-word'
+};

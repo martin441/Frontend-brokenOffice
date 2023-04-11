@@ -32,7 +32,6 @@ import { axiosGetAssignedReportsService } from "./utils/axios";
 import { setAssignedReports } from "./state/service";
 import { SingleTicketService } from "./components/Service/SingleAssignedReport";
 import { SingleUser } from "./components/Admin/Users/SingleUser";
-import Chat from "./components/Chat";
 
 function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
@@ -152,7 +151,7 @@ function App() {
         {checkType(user.type) !== 404 && (
           <Route path="/user/history" element={<History />} />
         )}
-         <Route path="/chat" element = {<Chat/>}/>
+       
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

@@ -119,7 +119,7 @@ export const ReportDataService = ({ singleReport }) => {
             </ListItem>
             <Divider></Divider>
           </List>
-          {singleReport._id && <Chat report={singleReport?._id} />}
+          {singleReport._id && <Chat report={singleReport?._id} chatType={"assigned"}/>}
         </Grid>
       </Grid>
     </div>
