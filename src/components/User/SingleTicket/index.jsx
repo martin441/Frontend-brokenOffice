@@ -4,7 +4,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ReportData } from "./ReportData";
-import { Link } from "react-router-dom";
 import { BackLink } from "../../../commons/BackLink";
 
 export const SingleTicket = () => {

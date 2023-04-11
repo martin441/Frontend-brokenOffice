@@ -42,15 +42,10 @@ export const Columns = (type, handleOpen) => {
         headerName: "Status",
         headerAlign: "center",
         align: "center",
-        sortable: false,
         flex: 0.5,
         editable: false,
-        renderCell: (params) => (
-          <>
-            <Typography>{params.row?.status}</Typography>
-            {/* {params.row && <ModalEditStatus data={params.row} />} */}
-          </>
-        ),
+        valueGetter: (params) =>
+          `${params.row.status || ""}`,
       },
     ]
   );

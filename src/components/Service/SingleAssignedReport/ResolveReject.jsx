@@ -4,8 +4,12 @@ import { Button, Divider, Modal, TextField, Typography } from "@mui/material";
 import { styleEditProfile } from "../../../utils/styleMUI";
 import { toast } from "react-hot-toast";
 import { axiosPutReportStatus } from "../../../utils/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { updateStatusReport } from "../../../state/updatedStatusReport";
 
-export default function ResolveRejectBtn({ singleReport }) {
+export default function ResolveRejectBtn() {
+  const dispatch = useDispatch();
+  const singleReport = useSelector((state) => state.updateStatusReport)
   const [open, setOpen] = useState(false);
   const handleOpen = (e, status) => {
     setStatus(status)
@@ -16,13 +20,21 @@ export default function ResolveRejectBtn({ singleReport }) {
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState('')
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if(!title || !description) toast.error('Description and Title must be filled')
+    if(!title || !description) return toast.error('Description and Title must be filled')
     const obj = {status: status, title: title, description: description}
-    axiosPutReportStatus(singleReport?._id, obj)
-    setTitle('')
-    setDescription('')
+    console.log(obj);
+    try {
+      const updtReport = await axiosPutReportStatus(singleReport._id, obj)
+      dispatch(updateStatusReport(updtReport))
+      setTitle('')
+      setDescription('')
+    } catch (error) {
+      console.error(error)
+      toast.error("Something went wrong...")
+    }
+    
   }
 
   return (
@@ -36,10 +48,10 @@ export default function ResolveRejectBtn({ singleReport }) {
           gap: "2rem",
         }}
       >
-        <Button variant="contained" onClick={(e) => handleOpen(e, 'closed')}>
-          {'Resolve'}
+        <Button variant="contained" onClick={(e) => handleOpen(e, 'resolved')}>
+          Resolve
         </Button>
-        <Button variant="contained" color="error" onClick={(e) => handleOpen(e, 'closed')}>
+        <Button variant="contained" color="error" onClick={(e) => handleOpen(e, 'rejected')}>
           Reject
         </Button>
       </Box>
