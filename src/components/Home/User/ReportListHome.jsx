@@ -7,14 +7,16 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import CardBtn from "../../../commons/CardBtn";
 import { setAllReports } from "../../../state/allReports";
 import { axiosGetReportHistory } from "../../../utils/axios";
 
-export const ReportListHomeUser = ({ expand }) => {
+export const ReportListHomeUser = () => {
   const [handleClick, setHandleClick] = useState(false);
   const reports = useSelector((state) => state.allReports);
   const navigate = useNavigate();
@@ -26,33 +28,7 @@ export const ReportListHomeUser = ({ expand }) => {
 
   return (
     <div>
-      {expand && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 3,
-          }}
-        >
-          <Button
-            color="secondary"
-            variant="outlined"
-            sx={{ mb: 1, borderRadius: 20 }}
-            onClick={() => setHandleClick(!handleClick)}
-          >
-            {handleClick ? "Less Details" : "More Details"}
-          </Button>
-          <Button
-            color="secondary"
-            variant="outlined"
-            sx={{ mb: 1, borderRadius: 20 }}
-            onClick={() => navigate("/user/history")}
-          >
-            View History
-          </Button>
-        </Box>
-      )}
+      <CardBtn text={'History'} rute={'/user/history'} handleClick={handleClick} setHandleClick={setHandleClick}/>
       <TableContainer sx={handleClick ? { maxHeight: 250 } : { height: 12 }}>
         {handleClick && (
           <Table stickyHeader aria-label="sticky table">
