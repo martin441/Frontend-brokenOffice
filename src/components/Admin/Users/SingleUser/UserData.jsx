@@ -9,7 +9,6 @@ import {
 import { Box } from "@mui/system";
 import React from "react";
 import checkType from "../../../../utils/checkType";
-// import BackLink from "../../../../commons/BackLink";
 
 export const UserData = ({ singleUser }) => {
   function checkSingleUserType(type) {
@@ -36,7 +35,6 @@ export const UserData = ({ singleUser }) => {
 
   return (
     <div>
-      {" "}
       <Grid
         container
         spacing={2}
@@ -74,7 +72,6 @@ export const UserData = ({ singleUser }) => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-
               <ListItemText primary="Name:" sx={{ mr: 1 }} />
               <Typography
                 variant="subtitle1"
@@ -84,7 +81,6 @@ export const UserData = ({ singleUser }) => {
                   maxWidth: "80%",
                 }}
               >{`${singleUser?.user.name} ${singleUser?.user.lastName}`}</Typography>
-
             </ListItem>
             <Divider></Divider>
 
@@ -104,7 +100,6 @@ export const UserData = ({ singleUser }) => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-
               <ListItemText primary="Address:" sx={{ mr: 1 }} />
               <Typography
                 align="right"
@@ -116,13 +111,11 @@ export const UserData = ({ singleUser }) => {
                 }}
               >
                 {singleUser?.user.addressName}
-
               </Typography>
             </ListItem>
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-
               <ListItemText primary="Role:" sx={{ mr: 1 }} />
               <Typography
                 align="right"
@@ -134,7 +127,6 @@ export const UserData = ({ singleUser }) => {
                 }}
               >
                 {singleUser?.user.role}
-
               </Typography>
             </ListItem>
             <Divider></Divider>
