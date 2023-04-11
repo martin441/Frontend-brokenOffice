@@ -58,6 +58,14 @@
   object-fit: contain;
 }
 
+.header-container-home-dark {
+  background-image: url('https://statics.globant.com/production/public/2022-11/Hero-Globant.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  object-fit: contain;
+}
+
 .home-text{
   display: flex;
   align-items: center;

@@ -27,6 +27,7 @@ export const SingleUser = () => {
     <Box
       sx={{
         mt: 4,
+        color: 'text.primary'
       }}
     >
       <Typography variant="h4" gutterBottom>
