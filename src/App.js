@@ -32,6 +32,7 @@ import { axiosGetAssignedReportsService } from "./utils/axios";
 import { setAssignedReports } from "./state/service";
 import { SingleTicketService } from "./components/Service/SingleAssignedReport";
 import { SingleUser } from "./components/Admin/Users/SingleUser";
+import RestorePass from "./components/RestorePass";
 
 import { getDesignTokens } from "./utils/themeConfig";
 import { ThemeProvider } from "@mui/system";
@@ -83,6 +84,8 @@ function App() {
 
           <Routes>
             <Route path="/login" element={<SignInSide />} />
+            
+            <Route path="/user/restore/password/:token" element={<RestorePass />} />
 
             {checkType(user.type) === 404 && (
               <Route path="/" element={<Home />} />
@@ -173,7 +176,6 @@ function App() {
           </Routes>
         </Box>
       </ThemeProvider>
-
   );
 }
 
