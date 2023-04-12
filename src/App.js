@@ -21,11 +21,8 @@ import { History } from "../src/components/History";
 import { setAllReports } from "./state/allReports";
 import { axiosGetAssignedReportsService } from "./utils/axios";
 import { setAssignedReports } from "./state/service";
-const ServiceHome = lazy(() => import("./components/Home/Service"));
-const AdminHome = lazy(() => import("./components/Home/Admin"));
 const Home = lazy(() => import("./components/Home/Home"));
-const UserHome = lazy(() => import("./components/Home/User"));
-const SuperAdminHome = lazy(() => import("./components/Home/SuperAdmin"));
+const UserHome = lazy(() => import("./components/Home/LoggedUser/index"));
 const NewTicketForm = lazy(() => import("./components/User/NewTicket"));
 const Profile = lazy(() => import("./components/Profile"));
 const ServerReportList = lazy(() =>
@@ -33,9 +30,7 @@ const ServerReportList = lazy(() =>
 );
 const AdminView = lazy(() => import("./components/Admin/Users"));
 const SuperAdminView = lazy(() => import("./components/SuperAdmin/Users"));
-const OfficeList = lazy(() =>
-  import("./components/Admin/Offices")
-);
+const OfficeList = lazy(() => import("./components/Admin/Offices"));
 const OfficeAdd = lazy(() => import("./components/Admin/Offices/Add"));
 const SARegisterUsers = lazy(() =>
   import("./components/SuperAdmin/Users/SARegisterUsers.jsx")
@@ -47,9 +42,7 @@ const SingleTicketService = lazy(() =>
 );
 const NotFoundPage = lazy(() => import("./components/NotFoundPage/NotFound"));
 
-
 function App() {
- 
   const modeTheme = useSelector((state) => state.theme.mode);
   const ROUTE = process.env.REACT_APP_ROUTE;
   const dispatch = useDispatch();
@@ -98,7 +91,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/login" element={<SignInSide />} />
-          <Route path="/user/restore/password/:token" element={<RestorePass />} />
+          <Route
+            path="/user/restore/password/:token"
+            element={<RestorePass />}
+          />
+
           {checkType(user.type) === 404 && (
             <Route
               path="/"
@@ -110,7 +107,7 @@ function App() {
             />
           )}
 
-          {checkType(user.type) === 21 && (
+          {checkType(user.type) !== 404 && (
             <Route
               path="/"
               element={
@@ -127,39 +124,6 @@ function App() {
               element={
                 <Suspense fallback={<LinearProgress />}>
                   <NewTicketForm />
-                </Suspense>
-              }
-            />
-          )}
-
-          {checkType(user.type) === 14 && (
-            <Route
-              path="/"
-              element={
-                <Suspense fallback={<LinearProgress />}>
-                  <ServiceHome />
-                </Suspense>
-              }
-            />
-          )}
-
-          {checkType(user.type) === 66 && (
-            <Route
-              path="/"
-              element={
-                <Suspense fallback={<LinearProgress />}>
-                  <AdminHome />
-                </Suspense>
-              }
-            />
-          )}
-
-          {checkType(user.type) === 32 && (
-            <Route
-              path="/"
-              element={
-                <Suspense fallback={<LinearProgress />}>
-                  <SuperAdminHome />
                 </Suspense>
               }
             />

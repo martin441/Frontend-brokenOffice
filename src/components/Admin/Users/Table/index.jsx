@@ -8,12 +8,17 @@ import {
 } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 import {
   axiosDeleteUser,
   axiosGetAllUsers,
   axiosPutUserType,
 } from "../../../../utils/axios";
 import { deleteUser, setAllUsers } from "../../../../state/allUsers";
+=======
+import { axiosDeleteUser, axiosGetAllUsers, axiosPutUserType } from "../../../../utils/axios";
+import {  deleteUser, setAllUsers } from "../../../../state/allUsers";
+>>>>>>> develop
 import { Columns } from "./Columns";
 import {
   Button,
@@ -23,6 +28,7 @@ import {
   Modal,
   Radio,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 import { styleEditProfile } from "../../../../utils/styleMUI";
 import checkType from "../../../../utils/checkType";
@@ -37,8 +43,11 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
   const user = useSelector((state) => state.changeType);
   const [userType, setUserType] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+  const [data, setData] = React.useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+<<<<<<< HEAD
 
   const handleClick = (user) => {
     if (
@@ -49,6 +58,13 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
     axiosDeleteUser(user.email);
     dispatch(deleteUser(user.email));
   };
+=======
+  const handleConfirm = (data) => {
+    setOpen2(true);
+    setData(data);
+  }
+  const columns = Columns(type, handleOpen, handleConfirm);
+>>>>>>> develop
 
   const handleSubmit = () => {
     const obj = { email: user.email, type: userType };
@@ -77,10 +93,55 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
     );
   }
 
+<<<<<<< HEAD
   return (
     <Box
       sx={{ height: "77vh", width: "100%", backgroundColor: "secondary.main" }}
     >
+=======
+  const filter = (filterForType) => {
+    switch (filterForType) {
+      case "admin":
+        return users.filter((user) => checkType(user.type) === 66);
+      case "service":
+        return users.filter((user) => checkType(user.type) === 14);
+      case "standard":
+        return users.filter((user) => checkType(user.type) === 21);
+      default:
+        break;
+    }
+  };
+
+  const submitConfirm = async () => {
+    await axiosDeleteUser(data);
+    dispatch(deleteUser(data));
+    setOpen2(false)
+    setData("")
+  }
+
+  return (
+    <Box sx={{ height: '77vh', width: "100%", backgroundColor:'secondary.main'}}>
+      <Modal open={open2}
+        onClose={() => {
+          setOpen2(false);
+          
+        }}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+          <Box sx={styleEditProfile} component="form">
+          <Typography variant="h5" gutterBottom sx={{textAlign:"center"}}>
+            Are you sure to delete this user?
+          </Typography>
+          <Button
+              onClick={submitConfirm}
+              variant="contained"
+              sx={{ mt: 2, mx: "auto" }}
+            >
+              Confirm
+            </Button>
+          </Box>
+      </Modal>
+>>>>>>> develop
       <Modal
         open={open}
         onClose={handleClose}

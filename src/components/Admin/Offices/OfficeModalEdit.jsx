@@ -6,7 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { styleEditProfile } from "../../../utils/styleMUI";
 import { muiBtnOfficeDelete } from "../../../utils/styleMUI.js";
 import { axiosPutOffice } from "../../../utils/axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateOffices } from "../../../state/office";
 import AddressAutocomplete from "mui-address-autocomplete";
 
@@ -15,7 +15,7 @@ export default function OfficeModalEdit({ office }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
-
+  const themeMode = useSelector((state) => state.theme.mode);
   const [region, setRegion] = React.useState(office.name);
   const [street, setStreet] = React.useState(office.address?.street);
   const [zip, setZip] = React.useState(office.address?.zip);
@@ -57,7 +57,7 @@ export default function OfficeModalEdit({ office }) {
         component="button"
         variant="body2"
         onClick={handleOpen}
-        sx={{ mt: 2, color: "#444444" }}
+        sx={{ mt: 2, color: themeMode === "light" && "#444444" }}
       >
         <EditIcon />
       </Link>
