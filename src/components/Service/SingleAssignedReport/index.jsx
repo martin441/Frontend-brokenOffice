@@ -1,4 +1,4 @@
-import { Button, IconButton, Modal, TextField, Typography } from "@mui/material";
+import { Button, IconButton, Modal, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -28,6 +28,7 @@ export const SingleTicketService = () => {
         dispatch(updateStatusReport(res.data))
       })
       .catch((err) => console.error(err));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleConfirm = async () => {

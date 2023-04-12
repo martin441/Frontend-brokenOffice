@@ -37,7 +37,7 @@ export const SingleUser = () => {
       default:
         break;
     }
-  }, []);
+  }, [userType]);
 
   return (
     <Box

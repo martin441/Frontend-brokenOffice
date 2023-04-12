@@ -8,6 +8,7 @@ import {
   TextField,
   ListItem,
   List,
+  CircularProgress,
 } from "@mui/material";
 import {
   muiChatRecipientMsg,
@@ -23,22 +24,20 @@ import { io } from "socket.io-client";
 import checkType from "../utils/checkType";
 const socket = io("http://localhost:3001");
 
-function useChatScroll(dep) {
-  const ref = React.useRef();
-  React.useEffect(() => {
-    if (ref.current) {
-      ref.current.scrollTop = ref.current.scrollHeight;
-    }
-  }, [dep]);
-  return ref;
-}
-
 export default function Chat({ report, chatType }) {
   const user = useSelector((state) => state.user);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [open, setOpen] = useState(false);
-  const ref = useChatScroll(messages);
+  const [isSending, setIsSending] = useState(false);
+  const chatRef = useRef(null);
+
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+      console.log('gola');
+    }
+  }, [messages, chatRef]);
 
   useEffect(() => {
     socket.on("message_received", (msg) => {
@@ -47,6 +46,7 @@ export default function Chat({ report, chatType }) {
     return () => {
       socket.off("message_received");
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 
   const handleOpen = () => {
@@ -76,7 +76,7 @@ export default function Chat({ report, chatType }) {
 
       handleOpen();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -87,6 +87,8 @@ export default function Chat({ report, chatType }) {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      setIsSending(true);
+
       if (inputValue.trim() === "") {
         return;
       }
@@ -96,8 +98,8 @@ export default function Chat({ report, chatType }) {
         { msg: inputValue, room: report },
         { withCredentials: true }
       );
-
       socket.emit("message_sent", inputValue, user.name, report);
+      setIsSending(false);
       setInputValue("");
       setMessages([...messages, newMessage.data]);
     } catch (error) {
@@ -133,20 +135,20 @@ export default function Chat({ report, chatType }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={muiModalChat}>
-          <List sx={{ flexGrow: 1, overflow: "auto" }}>
+          <List sx={{ flexGrow: 1, overflow: "auto", maxHeight: '80%' }}   ref={chatRef}>
             {messages?.length > 0 && (
               <>
                 {messages?.map((message, index) => {
                   if (message.user.email === user.email) {
                     return (
-                      <ListItem key={index}>
+                      <ListItem key={index} id={index}>
                         <Stack
                           spacing={1}
                           justifyContent="flex-end"
                           alignItems="flex-end"
                           sx={{ width: "100%", textAlign: "right" }}
                         >
-                          <Box sx={muiChatSenderMsg} ref={ref}>
+                          <Box sx={muiChatSenderMsg} >
                             <Typography variant="button">
                               {message.user?.name}
                             </Typography>
@@ -209,14 +211,17 @@ export default function Chat({ report, chatType }) {
                 onChange={handleInputChange}
                 sx={{ flexGrow: 1 }}
               />
-              <Button
+             { !isSending ? (<Button
                 type="submit"
                 variant="text"
                 color="secondary"
                 startIcon={
                   <SendIcon style={{ fontSize: 40 }} color="primary" />
                 }
-              ></Button>
+              ></Button>)
+            :(
+              <CircularProgress />
+            )}
             </Stack>
           </Box>
         </Box>

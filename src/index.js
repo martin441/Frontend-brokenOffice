@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {theme, themeDark} from "../src/utils/themeConfig"
 import { BrowserRouter } from "react-router-dom";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import store from "./state/store";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

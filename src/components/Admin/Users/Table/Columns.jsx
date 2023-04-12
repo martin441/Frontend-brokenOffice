@@ -168,6 +168,7 @@ export const Columns = (type, handleOpen) => {
           ),
         },
       ])
+    // eslint-disable-next-line no-unused-vars
     : (columns = [
         {
           field: "fullName",
