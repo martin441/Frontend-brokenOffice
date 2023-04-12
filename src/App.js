@@ -3,9 +3,17 @@ import { LinearProgress } from "@mui/material";
 import { Navbar } from "./components/Navbar";
 import { Route, Routes } from "react-router";
 import SignInSide from "./components/Login";
+
 import { Toaster } from "react-hot-toast";
 import { RegisterUsers } from "./components/Admin/Users/RegisterUsers";
 import { useEffect, lazy, Suspense } from "react";
+
+import { AdminView } from "./components/Admin/Users";
+import OfficeList from "./components/Admin/Offices";
+import { Toaster } from "react-hot-toast";
+import { RegisterUsers } from "./components/Admin/Users/RegisterUsers";
+import { useEffect, useMemo } from "react";
+
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./state/user";
@@ -16,6 +24,7 @@ import { History } from "../src/components/History";
 import { setAllReports } from "./state/allReports";
 import { axiosGetAssignedReportsService } from "./utils/axios";
 import { setAssignedReports } from "./state/service";
+
 
 const ServiceHome = lazy(() => import("./components/Home/Service"));
 const AdminHome = lazy(() => import("./components/Home/Admin"));
@@ -41,10 +50,28 @@ const SingleTicketService = lazy(() =>
 );
 const NotFoundPage = lazy(() => import("./components/NotFoundPage/NotFound"));
 
+import { SingleTicketService } from "./components/Service/SingleAssignedReport";
+import { SingleUser } from "./components/Admin/Users/SingleUser";
+import RestorePass from "./components/RestorePass";
+
+import { getDesignTokens } from "./utils/themeConfig";
+import { ThemeProvider } from "@mui/system";
+import { Box, createTheme } from "@mui/material";
+import { muiStyleApp } from "./utils/styleMUI";
+
+
 function App() {
+  const modeTheme = useSelector((state) => state.theme.mode);
   const ROUTE = process.env.REACT_APP_ROUTE;
   const dispatch = useDispatch();
+
   const reports = useSelector((state) => state.allReports);
+
+
+  // Update the theme only if the mode changes
+  const theme = useMemo(() => createTheme(getDesignTokens(modeTheme)), [modeTheme]);
+
+
   useEffect(() => {
     if (user) {
       axios
@@ -73,7 +100,9 @@ function App() {
   const initialized = user !== null;
 
   return (
-    <div className="App">
+
+    <ThemeProvider theme={theme}>
+        <Box sx={muiStyleApp}>
       <div>
         <Toaster />
       </div>
@@ -280,7 +309,8 @@ function App() {
           }
         />
       </Routes>
-    </div>
+    </Box>
+     </ThemeProvider>
   );
 }
 

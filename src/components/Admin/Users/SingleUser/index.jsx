@@ -37,12 +37,13 @@ const SingleUser = () => {
       default:
         break;
     }
-  }, []);
+  }, [userType]);
 
   return (
     <Box
       sx={{
         mt: 4,
+        color: 'text.primary'
       }}
     >
       <Box marginLeft={"30px"}>

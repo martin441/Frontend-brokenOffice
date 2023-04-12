@@ -97,7 +97,7 @@ export const History = ({ reportsOtherUser }) => {
   }
 
   return (
-    <div style={{ height: "80vh", width: "100%" }}>
+    <Box sx={{ height: "85vh", width: "100%", backgroundColor:'secondary.main'  }}>
       <Modal open={open}
         onClose={() => {
           setOpen(false)
@@ -117,11 +117,11 @@ export const History = ({ reportsOtherUser }) => {
             </Button>
           </Box>
       </Modal>
-      <Typography sx={{ mt: 4 }} gutterBottom variant="h4" component="div">
+      <Typography sx={{ pt: 4 }} gutterBottom variant="h4" component="div" color='secondary.dark'>
         History
       </Typography>
       <DataGrid
-        sx={{ padding: 1 }}
+        sx={{ padding: 1, backgroundColor:'secondary.main' }}
         columns={columns}
         rows={rowData}
         rowHeight={80}
@@ -131,6 +131,6 @@ export const History = ({ reportsOtherUser }) => {
           navigate(`/user/ticket/${event.id}`)
         }}
       />
-    </div>
+    </Box>
   );
 };

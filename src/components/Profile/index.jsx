@@ -1,10 +1,8 @@
 import {
   Avatar,
-  Backdrop,
   Input,
   LinearProgress,
   Modal,
-  TextField,
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -23,7 +21,10 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
   const [open, setOpen] = useState(false);
+
   const [background, setBackground] = useState("");
+
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -52,7 +53,7 @@ const Profile = () => {
   },[])
 
   return (
-    <>
+    <Box sx={{minHeight: '100vh'}}>
       <Modal
         open={open}
         onClose={handleClose}
@@ -99,18 +100,18 @@ const Profile = () => {
       </div>
 
       <div className="profile-data">
-        <Typography variant="h6"> {user?.name} </Typography>
-        <Typography variant="h6"> {user?.lastName} </Typography>
+        <Typography color='text.primary' variant="h6"> {user?.name} </Typography>
+        <Typography color='text.primary' variant="h6"> {user?.lastName} </Typography>
         <Typography variant="subtitle2" sx={{ color: "#666666" }}>
           {user?.role}
         </Typography>
-        <Typography>{user?.email}</Typography>
+        <Typography color='text.primary'>{user?.email}</Typography>
         <Typography variant="p">{user?.address}</Typography>
       </div>
 
       <EditProfile />
       <EditSensitive />
-    </>
+    </Box>
   );
 };
 

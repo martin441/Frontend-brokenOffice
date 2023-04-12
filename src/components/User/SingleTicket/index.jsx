@@ -26,15 +26,15 @@ const SingleTicket = () => {
     <Box
       sx={{
         mt: 4,
-        margin: 1,
+        color: "text.primary",
+        minHeight: "89vh",
       }}
     >
       <Box marginLeft={"30px"}>
-      <BackLink text="Back to History" href="/user/history" />
+        <BackLink text="Back to History" href="/user/history" />
       </Box>
-      <Typography variant="h4" gutterBottom sx={{textAlign:'center'}}>
+      <Typography variant="h4" gutterBottom sx={{ textAlign: "center" }}>
         Report
-
       </Typography>
       {singleReport ? (
         <ReportData singleReport={singleReport} />

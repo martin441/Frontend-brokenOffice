@@ -7,11 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import Chat from "../../Chat";
 import React from "react";
 
 export const ReportData = ({ singleReport }) => {
   const imageSrc =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png";
+
   return (
     <div>
       {" "}
@@ -22,7 +24,7 @@ export const ReportData = ({ singleReport }) => {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        sx={{ maxWidth: "80%", margin: "0 auto" }}
+        sx={{ maxWidth: { xs: "85%", sm: "80%" }, margin: "0 auto" }}
       >
         <Grid item xs={12} md={4}>
           <Box
@@ -37,20 +39,27 @@ export const ReportData = ({ singleReport }) => {
           <Divider></Divider>
           <List disablePadding>
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="ID:" />
-              <Typography variant="subtitle1">{singleReport?._id}</Typography>
-            </ListItem>
-            <Divider></Divider>
-
-            <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Title:" />
+              <ListItemText primary="ID:" sx={{ maxWidth: "6rem" }} />
               <Typography
                 variant="subtitle1"
                 sx={{
                   wordWrap: "break-word",
-                  textAlign: "right",
-                  maxWidth: "80%",
+                  maxWidth: { xs: "60%", sm: "80%" },
                 }}
+              >
+                {singleReport?._id}
+              </Typography>
+            </ListItem>
+            <Divider></Divider>
+
+            <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText primary="Title:" sx={{ maxWidth: "6rem" }} />
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  wordWrap: "break-word",
+                  maxWidth: { xs: "60%", sm: "80%" },
+                  }}
               >
                 {singleReport?.title}
               </Typography>
@@ -58,14 +67,12 @@ export const ReportData = ({ singleReport }) => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Description:" />
+              <ListItemText primary="Description:" sx={{ maxWidth: "6rem" }} />
               <Typography
                 variant="subtitle1"
-                maxWidth={"50%"}
                 sx={{
                   wordWrap: "break-word",
-                  textAlign: "right",
-                  maxWidth: "80%",
+                  maxWidth: { xs: "60%", sm: "80%" },
                 }}
               >
                 {singleReport?.description}
@@ -74,11 +81,13 @@ export const ReportData = ({ singleReport }) => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Office:" />
+              <ListItemText primary="Office:" sx={{ maxWidth: "6rem" }} />
               <Typography
-                align="right"
                 variant="subtitle1"
-                sx={{ maxWidth: "80%" }}
+                sx={{
+                  wordWrap: "break-word",
+                  maxWidth: { xs: "60%", sm: "80%" },
+                }}
               >
                 {singleReport.office &&
                   `${singleReport?.office.address.street}, ${singleReport?.office.address.zip}, ${singleReport?.office.address.floor}, ${singleReport.office.name}`}
@@ -87,21 +96,23 @@ export const ReportData = ({ singleReport }) => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Status:" />
-              <Typography align="right" variant="subtitle1">
+              <ListItemText primary="Status:" sx={{ maxWidth: "6rem" }} />
+              <Typography variant="subtitle1">
                 {singleReport?.status}
               </Typography>
             </ListItem>
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Product:" />
-              <Typography align="right" variant="subtitle1">
+              <ListItemText primary="Product:" sx={{ maxWidth: "6rem" }} />
+              <Typography variant="subtitle1">
+
                 {singleReport?.product}
               </Typography>
             </ListItem>
             <Divider></Divider>
           </List>
+          {singleReport._id && <Chat report={singleReport?._id} chatType={"issued"} />}
         </Grid>
       </Grid>
     </div>

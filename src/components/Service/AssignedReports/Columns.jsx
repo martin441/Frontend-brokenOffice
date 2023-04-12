@@ -1,6 +1,4 @@
-import { Typography } from "@mui/material";
 import checkType from "../../../utils/checkType";
-import ModalEditStatus from "./ModalEditStatus";
 
 export const Columns = (type, handleOpen) => {
   const number = checkType(type);

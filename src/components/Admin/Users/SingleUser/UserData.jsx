@@ -42,7 +42,7 @@ export const UserData = ({ singleUser }) => {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        sx={{ maxWidth: "80%", margin: "0 auto" }}
+        sx={{ maxWidth: { xs: "85%", sm: "80%" }, margin: "0 auto" }}
       >
         <Grid item xs={12} md={3}>
           <Box
@@ -56,14 +56,13 @@ export const UserData = ({ singleUser }) => {
         <Grid item xs={16} md={8}>
           <Divider></Divider>
           <List disablePadding>
-            <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="ID:" sx={{ mr: 1 }} />
+            <ListItem sx={{ py: 1, px: 0  }}>
+              <ListItemText primary="ID:" sx={{ maxWidth: '5rem'}} />
               <Typography
                 variant="subtitle1"
                 sx={{
                   wordWrap: "break-word",
-                  textAlign: "right",
-                  maxWidth: "80%",
+                  maxWidth: { xs: "60%", sm: "80%" },
                 }}
               >
                 {singleUser?.user._id}
@@ -72,26 +71,24 @@ export const UserData = ({ singleUser }) => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Name:" sx={{ mr: 1 }} />
+              <ListItemText primary="Name:" sx={{ maxWidth: '5rem'}} />
               <Typography
                 variant="subtitle1"
                 sx={{
                   wordWrap: "break-word",
-                  textAlign: "right",
-                  maxWidth: "80%",
+                  maxWidth: { xs: "60%", sm: "80%" },
                 }}
               >{`${singleUser?.user.name} ${singleUser?.user.lastName}`}</Typography>
             </ListItem>
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Email:" sx={{ mr: 1 }} />
+              <ListItemText primary="Email:" sx={{ maxWidth: '5rem'}} />
               <Typography
                 variant="subtitle1"
                 sx={{
                   wordWrap: "break-word",
-                  textAlign: "right",
-                  maxWidth: "80%",
+                  maxWidth: { xs: "60%", sm: "80%" },
                 }}
               >
                 {singleUser?.user.email}
@@ -100,14 +97,12 @@ export const UserData = ({ singleUser }) => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Address:" sx={{ mr: 1 }} />
+              <ListItemText primary="Address:" sx={{ maxWidth: '5rem'}} />
               <Typography
-                align="right"
                 variant="subtitle1"
                 sx={{
                   wordWrap: "break-word",
-                  textAlign: "right",
-                  maxWidth: "80%",
+                  maxWidth: { xs: "60%", sm: "80%" },
                 }}
               >
                 {singleUser?.user.addressName}
@@ -116,14 +111,12 @@ export const UserData = ({ singleUser }) => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Role:" sx={{ mr: 1 }} />
+              <ListItemText primary="Role:" sx={{maxWidth: '5rem'}} />
               <Typography
-                align="right"
                 variant="subtitle1"
                 sx={{
                   wordWrap: "break-word",
-                  textAlign: "right",
-                  maxWidth: "80%",
+                  maxWidth: { xs: "60%", sm: "80%" },
                 }}
               >
                 {singleUser?.user.role}
@@ -132,8 +125,8 @@ export const UserData = ({ singleUser }) => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Type:" sx={{ mr: 1 }} />
-              <Typography align="right" variant="subtitle1">
+              <ListItemText primary="Type:" sx={{ maxWidth: '5rem'}} />
+              <Typography  variant="subtitle1">
                 {singleUser?.user.type &&
                   checkSingleUserType(singleUser.user.type)}
               </Typography>

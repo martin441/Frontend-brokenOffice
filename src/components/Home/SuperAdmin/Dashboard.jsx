@@ -9,7 +9,6 @@ import { Box } from "@mui/system";
 import React from "react";
 import { muiDashboardHome } from "../../../utils/styleMUI";
 import BusinessIcon from "@mui/icons-material/Business";
-import { Link } from "react-router-dom";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
@@ -23,7 +22,7 @@ export const DashboardSuperAdmin = () => {
   return (
     <Box sx={muiDashboardHome}>
       <Card
-        sx={{ minWidth: 345, height: 196, display:'flex', flexDirection:'column', justifyContent:'center' }}
+        sx={{ minWidth: 345, height: 214, display:'flex', flexDirection:'column', justifyContent:'center' }}
         onClick={() => navigate("/admin/offices")}
       >
         <CardActionArea>
@@ -41,7 +40,7 @@ export const DashboardSuperAdmin = () => {
       </Card>
 
       <Card
-        sx={{ minWidth: 345, height: 196, mt: "1rem", display:'flex', flexDirection:'column', justifyContent:'center' }}
+        sx={{ minWidth: 345, height: 214, mt: "1rem", display:'flex', flexDirection:'column', justifyContent:'center' }}
         onClick={() => navigate(`/${num === 66 ? "admin": "superadmin"}/users`)}
       >
         <CardActionArea>

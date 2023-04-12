@@ -1,4 +1,8 @@
+
 import { Button, IconButton, Modal, TextField, Typography, LinearProgress } from "@mui/material";
+
+
+
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -27,6 +31,7 @@ const SingleTicketService = () => {
         dispatch(updateStatusReport(res.data))
       })
       .catch((err) => console.error(err));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleConfirm = async () => {
@@ -46,6 +51,8 @@ const SingleTicketService = () => {
     <Box
       sx={{
         mt: 4,
+        minHeight: '90vh',
+        color: 'text.primary'
       }}
     >
       <Box sx={{ ml: 2 }}>

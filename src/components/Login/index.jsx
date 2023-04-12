@@ -4,8 +4,10 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { Container, InputAdornment, LinearProgress } from "@mui/material";
-import { muiStyleLoginBtn } from "../../utils/styleMUI";
+
+import { Container, InputAdornment,Modal , LinearProgress } from "@mui/material";
+import { muiStyleLoginBtn, styleEditProfile } from "../../utils/styleMUI";
+
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
@@ -13,14 +15,25 @@ import { useNavigate } from "react-router";
 import { setUser } from "../../state/user";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
 import { useEffect, useState } from "react";
+
+
+import { Link } from "react-router-dom";
+import { axiosPostGenerateRestoreLink } from "../../utils/axios";
+
 
 export default function SignInSide() {
   const ROUTE = process.env.REACT_APP_ROUTE;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
   const [img, setImg] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const [emailToRestore, setEmailToRestore] = useState("");
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,16 +49,52 @@ export default function SignInSide() {
       dispatch(setUser(loggedUser.data));
       navigate("/");
     } catch (err) {
-      toast.error("Wrong email or passwdispatch(setUser(loggedUser.data));d");
+      toast.error("Wrong email or password");
       console.error(err);
     }
   };
 
+
   useEffect(() => {
     setImg("url(https://statics.globant.com/production/public/2023-02/Ref-Globant-Canada-2.jpg)")
   },[])
+
+  const handleRestorePass = async () => {
+    const mailValidation = new RegExp(/^\w+([.-]?\w+)@\w+([.-]?\w+)(\.\w{2,})+$/);
+    if (!mailValidation.test(emailToRestore)) return toast.error("Write a valid email");
+    try {
+      const link = await axiosPostGenerateRestoreLink(emailToRestore)
+      if (link.error) return
+      toast.success("Check your email to restore")
+      setOpen(false)
+      setEmailToRestore("");
+    } catch (error) {
+      toast.error("Invalid credentials")
+    }
+  }
+
+
   return (
-    <Container component="main" maxWidth="lg">
+    <>
+    <Modal open={open}
+        onClose={() => {
+          setOpen(false);
+          setEmailToRestore("");
+        }}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+          <Box sx={styleEditProfile} component="form">
+          <TextField label="email to restore password" onChange={(e) => setEmailToRestore(e.target.value)} />
+          <Button
+              onClick={handleRestorePass}
+              variant="contained"
+              sx={{ mt: 2, mx: "auto" }}
+            >
+              Send
+            </Button>
+          </Box>
+      </Modal>
+    <Container component="main" maxWidth="lg" sx={{minHeight:'86vh'}}>
       <Box
         sx={{
           marginTop: 8,
@@ -79,6 +128,7 @@ export default function SignInSide() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                
               }}
             >
               <Typography component="h1" variant="h5">
@@ -122,10 +172,10 @@ export default function SignInSide() {
                   Log in
                 </Button>
                 <Grid sx={muiStyleLoginBtn}>
-                  <Grid item xs>
-                    {/* <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link> */}
+                  <Grid item xs >
+                    <Link variant="body1" style={{textDecoration:'none'}} onClick={() => setOpen(true)}>
+                      <Typography color='text.primary'>Forgot your password?</Typography> 
+                    </Link>
                   </Grid>
                 </Grid>
               </Box>
@@ -134,5 +184,6 @@ export default function SignInSide() {
         </Grid>
       </Box>
     </Container>
+    </>
   );
 }
