@@ -1,4 +1,5 @@
 import {
+  Divider,
   Table,
   TableBody,
   TableCell,
@@ -9,9 +10,9 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import CardBtn from "../../../commons/CardBtn";
-import { setAllReports } from "../../../state/allReports";
-import { axiosGetReportHistory } from "../../../utils/axios";
+import CardBtn from "../../../../../commons/CardBtn";
+import { setAllReports } from "../../../../../state/allReports";
+import { axiosGetReportHistory } from "../../../../../utils/axios";
 
 export const ReportListHomeUser = () => {
   const [handleClick, setHandleClick] = useState(false);
@@ -36,10 +37,18 @@ export const ReportListHomeUser = () => {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <TableCell style={{ minWidth: 100 }} align={"center"}>
+                <TableCell
+                  style={{ minWidth: 100 }}
+                  align={"center"}
+                  sx={{ background: "transparent" }}
+                >
                   Title
                 </TableCell>
-                <TableCell style={{ minWidth: 100 }} align={"center"}>
+                <TableCell
+                  style={{ minWidth: 100 }}
+                  align={"center"}
+                  sx={{ background: "transparent" }}
+                >
                   State
                 </TableCell>
               </TableRow>

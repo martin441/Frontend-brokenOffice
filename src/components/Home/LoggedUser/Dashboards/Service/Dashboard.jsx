@@ -1,7 +1,7 @@
 import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import { muiDashboardHome } from "../../../utils/styleMUI";
+import { muiDashboardHome } from "../../../../../utils/styleMUI";
 import HistoryIcon from "@mui/icons-material/History";
 import { ReportListHomeService } from "./ReportsListHome";
 

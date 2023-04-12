@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import { muiDashboardHome } from "../../../utils/styleMUI";
+import { muiDashboardHome } from "../../../../../utils/styleMUI";
 import BuildCircleIcon from "@mui/icons-material/BuildCircle";
 import { ReportListHomeUser } from "./ReportListHome";
 import HistoryIcon from "@mui/icons-material/History";
