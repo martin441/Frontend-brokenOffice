@@ -216,3 +216,29 @@ export async function axiosPostRestorePass(token, password) {
     console.error(error);
   }
 }
+
+export async function axiosGetNotificationsSingleSolver(room) {
+  try {
+    const notifications = await axios.get(`${ROUTE}/chats/checksolverlength/${room}`, {
+      withCredentials: true,
+    });
+  if(!notifications.data) return 0
+    return notifications.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function axiosGetNotificationsSingleIssuer(room) {
+  console.log('HOLA');
+  try {
+    const notifications = await axios.get(`${ROUTE}/chats/checkissuerlength/${room}`, {
+      withCredentials: true,
+    });
+    console.log(notifications.data);
+  if(!notifications.data) return 0
+    return notifications.data;
+  } catch (error) {
+    console.error(error);
+  }
+}

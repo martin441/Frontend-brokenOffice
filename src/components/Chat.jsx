@@ -9,6 +9,7 @@ import {
   ListItem,
   List,
   CircularProgress,
+  Badge,
 } from "@mui/material";
 import {
   muiChatRecipientMsg,
@@ -32,11 +33,17 @@ export default function Chat({ report, chatType }) {
   const [isSending, setIsSending] = useState(false);
   const [chatId, setChatId] = useState("");
   const chatRef = useRef(null);
+  
+  const notificationsSolver = useSelector(
+    (state) => state.chat.notifications.solver
+  );
+  const notificationsIssuer = useSelector(
+    (state) => state.chat.notifications.issuer
+  );
 
   useEffect(() => {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
-      console.log("gola");
     }
   }, [messages, chatRef]);
 
@@ -63,13 +70,21 @@ export default function Chat({ report, chatType }) {
     if (chatType === "issued") {
       const currentLength = await axios.post(
         "http://localhost:3001/chats/issuerlength",
-        { chatId: chatId, chatLength: currentChat.data.length },
+        {
+          chatId: chatId,
+          chatLength: currentChat.data.length,
+          chatRoom: report,
+        },
         { withCredentials: true }
       );
     } else {
       const currentLength = await axios.post(
         "http://localhost:3001/chats/solverlength",
-        { chatId: chatId, chatLength: currentChat.data.length },
+        {
+          chatId: chatId,
+          chatLength: currentChat.data.length,
+          chatRoom: report,
+        },
         { withCredentials: true }
       );
       console.log(currentLength);
@@ -132,15 +147,37 @@ export default function Chat({ report, chatType }) {
   return (
     <div>
       <Stack direction="row" spacing={2} mt={2}>
-        <Button
-          onClick={handleChatConnection}
-          variant="contained"
-          startIcon={<ChatIcon />}
-        >
-          {checkType(user.type) === 14 && chatType === "assigned"
-            ? "Assist issuer"
-            : " Ask for help"}
-        </Button>
+        {!notificationsSolver || !notificationsIssuer ? (
+          <Button
+            onClick={handleChatConnection}
+            variant="contained"
+            startIcon={<ChatIcon />}
+          >
+            {checkType(user.type) === 14 && chatType === "assigned"
+              ? "Assist issuer"
+              : " Ask for help"}
+          </Button>
+        ) : checkType(user.type) === 14 && chatType === "assigned" ? (
+          <Badge badgeContent={notificationsSolver} color={"success"}>
+            <Button
+              onClick={handleChatConnection}
+              variant="contained"
+              startIcon={<ChatIcon />}
+            >
+              Assist issuer
+            </Button>
+          </Badge>
+        ) : (
+          <Badge badgeContent={notificationsIssuer} color={"success"}>
+            <Button
+              onClick={handleChatConnection}
+              variant="contained"
+              startIcon={<ChatIcon />}
+            >
+              Ask for help
+            </Button>
+          </Badge>
+        )}
       </Stack>
 
       <Modal

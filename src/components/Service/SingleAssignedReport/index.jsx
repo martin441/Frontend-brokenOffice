@@ -1,8 +1,4 @@
-
-import { Button, IconButton, Modal, TextField, Typography, LinearProgress } from "@mui/material";
-
-
-
+import { Button, IconButton, Modal, Typography, LinearProgress } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -12,9 +8,10 @@ import { ReportDataService } from "./ReportData";
 import { AddTask } from "@mui/icons-material";
 import { styleEditProfile } from "../../../utils/styleMUI";
 import { toast } from "react-hot-toast";
-import { axiosPutReportStatus } from "../../../utils/axios";
+import { axiosGetNotificationsSingleIssuer, axiosGetNotificationsSingleSolver, axiosPutReportStatus } from "../../../utils/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { updateStatusReport } from "../../../state/updatedStatusReport";
+import {  setNotificationsIssuer, setNotificationsSolver } from "../../../state/chat";
 
 const SingleTicketService = () => {
   const { id } = useParams();
@@ -31,11 +28,14 @@ const SingleTicketService = () => {
         dispatch(updateStatusReport(res.data))
       })
       .catch((err) => console.error(err));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+      
+      axiosGetNotificationsSingleSolver(id).then(not => dispatch(setNotificationsSolver(not)))
+      axiosGetNotificationsSingleIssuer(id).then(not => dispatch(setNotificationsIssuer(not)))
+
+  }, [dispatch, id]);
+
 
   const handleConfirm = async () => {
-    
     try {
       const updtReport = await axiosPutReportStatus(id, {status: "in progress"})
       dispatch(updateStatusReport(updtReport))
@@ -44,7 +44,6 @@ const SingleTicketService = () => {
       console.error(error)
       toast.error("Something went wrong...")
     }
-
   }
 
   return (
