@@ -9,7 +9,7 @@ import { BackLink } from "../../../../commons/BackLink";
 import { useSelector } from "react-redux";
 import checkType from "../../../../utils/checkType";
 
-export const SingleUser = () => {
+const SingleUser = () => {
   const userType = useSelector((state) => state.user.type);
   const { id } = useParams();
   const [singleUser, setSingleUser] = useState("");
@@ -63,3 +63,5 @@ export const SingleUser = () => {
     </Box>
   );
 };
+
+export default SingleUser

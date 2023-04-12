@@ -8,7 +8,7 @@ import { axiosRegisterUser } from "../../../utils/axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router";
 
-export const SARegisterUsers = () => {
+const SARegisterUsers = () => {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -53,3 +53,4 @@ export const SARegisterUsers = () => {
     </Container>
   );
 };
+export default SARegisterUsers

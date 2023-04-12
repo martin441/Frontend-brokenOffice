@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { DashboardUser } from "./Dashboard";
 
-export const UserHome = () => {
+const UserHome = () => {
   const user = useSelector((state) => state.user);
   const theme = useSelector(state => state.theme.mode)
 
@@ -17,3 +17,5 @@ export const UserHome = () => {
     </Box>
   );
 };
+
+export default UserHome

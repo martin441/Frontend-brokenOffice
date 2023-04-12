@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
-export const Home = () => {
+const Home = () => {
   const navigate = useNavigate();
   const theme = useSelector(state => state.theme.mode)
 
@@ -25,3 +25,5 @@ export const Home = () => {
     </Box>
   );
 };
+
+export default Home

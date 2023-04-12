@@ -6,7 +6,7 @@ import { useParams } from "react-router";
 import { ReportData } from "./ReportData";
 import { BackLink } from "../../../commons/BackLink";
 
-export const SingleTicket = () => {
+const SingleTicket = () => {
   const { id } = useParams();
 
   const [singleReport, setSingleReport] = useState("");
@@ -44,3 +44,4 @@ export const SingleTicket = () => {
     </Box>
   );
 };
+ export default SingleTicket

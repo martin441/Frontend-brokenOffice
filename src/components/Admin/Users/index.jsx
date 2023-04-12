@@ -8,7 +8,7 @@ import RadioGroup from "../../../commons/RadioGroup";
 
 import { muiOfficeBar } from "../../../utils/styleMUI";
 
-export const AdminView = () => {
+const AdminView = () => {
   const [type, setType] = useState(localStorage.getItem("value") || "all");
   return (
     <div>
@@ -32,3 +32,4 @@ export const AdminView = () => {
     </div>
   );
 };
+export default AdminView

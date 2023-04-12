@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { DashboardSuperAdmin } from "./Dashboard";
 import { DashboardUser } from "../User/Dashboard";
 
-export const SuperAdminHome = () => {
+const SuperAdminHome = () => {
   const user = useSelector((state) => state.user);
   const theme = useSelector(state => state.theme.mode)
 
@@ -26,3 +26,4 @@ export const SuperAdminHome = () => {
     </Box>
   );
 };
+export default SuperAdminHome

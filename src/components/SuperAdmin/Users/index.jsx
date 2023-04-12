@@ -10,7 +10,7 @@ import { muiOfficeBar } from "../../../utils/styleMUI";
 
 import Table from "../../Admin/Users/Table";
 
-export const SuperAdminView = () => {
+const SuperAdminView = () => {
   const userType = useSelector((state) => state.user.type);
 
   const [type, setType] = useState(localStorage.getItem("type") || "all");
@@ -25,4 +25,5 @@ export const SuperAdminView = () => {
       <Table type={userType} filterForType={type} />
       </div>
 )
-  }
+}
+export default SuperAdminView

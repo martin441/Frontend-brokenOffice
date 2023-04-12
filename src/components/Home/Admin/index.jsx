@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { DashboardAdmin } from "./Dashboard";
 import { DashboardUser } from "../User/Dashboard";
 
-export const AdminHome = () => {
+const AdminHome = () => {
   const user = useSelector((state) => state.user);
   const theme = useSelector(state => state.theme.mode)
 
@@ -25,3 +25,5 @@ export const AdminHome = () => {
     </Box>
   );
 };
+
+export default AdminHome

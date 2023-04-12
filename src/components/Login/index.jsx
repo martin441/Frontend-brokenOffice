@@ -4,8 +4,10 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { Container, InputAdornment, Modal } from "@mui/material";
+
+import { Container, InputAdornment,Modal , LinearProgress } from "@mui/material";
 import { muiStyleLoginBtn, styleEditProfile } from "../../utils/styleMUI";
+
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
@@ -13,17 +15,25 @@ import { useNavigate } from "react-router";
 import { setUser } from "../../state/user";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
+
+
 import { Link } from "react-router-dom";
 import { axiosPostGenerateRestoreLink } from "../../utils/axios";
+
 
 export default function SignInSide() {
   const ROUTE = process.env.REACT_APP_ROUTE;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
+  const [img, setImg] = useState("");
+
   const [open, setOpen] = useState(false);
   const [emailToRestore, setEmailToRestore] = useState("");
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,6 +54,11 @@ export default function SignInSide() {
     }
   };
 
+
+  useEffect(() => {
+    setImg("url(https://statics.globant.com/production/public/2023-02/Ref-Globant-Canada-2.jpg)")
+  },[])
+
   const handleRestorePass = async () => {
     const mailValidation = new RegExp(/^\w+([.-]?\w+)@\w+([.-]?\w+)(\.\w{2,})+$/);
     if (!mailValidation.test(emailToRestore)) return toast.error("Write a valid email");
@@ -57,6 +72,7 @@ export default function SignInSide() {
       toast.error("Invalid credentials")
     }
   }
+
 
   return (
     <>
@@ -92,8 +108,7 @@ export default function SignInSide() {
             sm={4}
             md={7}
             sx={{
-              backgroundImage:
-                "url(https://statics.globant.com/production/public/2023-02/Ref-Globant-Canada-2.jpg)",
+              backgroundImage:img,
               backgroundRepeat: "no-repeat",
               backgroundColor: (t) =>
                 t.palette.mode === "light"
@@ -102,7 +117,9 @@ export default function SignInSide() {
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
-          />
+            >
+            {img === "" && <LinearProgress/>}
+          </Grid>
           <Grid item xs={12} sm={8} md={5} elevation={6} square="true">
             <Box
               sx={{

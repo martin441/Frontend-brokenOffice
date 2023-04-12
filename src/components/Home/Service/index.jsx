@@ -2,7 +2,9 @@ import { Box, Grid, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { DashboardService } from "./Dashboard";
 import { DashboardUser } from "../User/Dashboard";
-export const ServiceHome = () => {
+
+const ServiceHome = () => {
+
   const user = useSelector((state) => state.user);
   const theme = useSelector((state) => state.theme.mode);
 
@@ -35,3 +37,4 @@ export const ServiceHome = () => {
     </Box>
   );
 };
+export default ServiceHome
