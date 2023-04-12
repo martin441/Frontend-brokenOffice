@@ -5,31 +5,13 @@ import DeleteBtn from "../../../../commons/DeleteBtn";
 import { changeTypeUser } from "../../../../state/changeTypeUser";
 import checkType from "../../../../utils/checkType";
 
-<<<<<<< HEAD
 export const Columns = (type, handleOpen, handleClick) => {
-=======
-export const Columns = (type, handleOpen, handleConfirm) => {
->>>>>>> develop
   let columns = [];
   const dispatch = useDispatch();
 
   const number = checkType(type);
 
-<<<<<<< HEAD
-=======
-  const handleClick = (user) => {
-    if (
-      user.type === process.env.REACT_APP_ALPHA &&
-      userType !== process.env.REACT_APP_OMEGA
-    )
-      return toast.error("You can't delete another admin");
-    if (
-      user.type === process.env.REACT_APP_OMEGA
-    )
-      return toast.error("Can't delete the owner");
-    handleConfirm(user.email)
-  };
->>>>>>> develop
+
   return number === 32
     ? (columns = [
         {

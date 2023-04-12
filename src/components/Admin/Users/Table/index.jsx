@@ -8,17 +8,15 @@ import {
 } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD
+
 import {
   axiosDeleteUser,
   axiosGetAllUsers,
   axiosPutUserType,
 } from "../../../../utils/axios";
 import { deleteUser, setAllUsers } from "../../../../state/allUsers";
-=======
-import { axiosDeleteUser, axiosGetAllUsers, axiosPutUserType } from "../../../../utils/axios";
-import {  deleteUser, setAllUsers } from "../../../../state/allUsers";
->>>>>>> develop
+
+
 import { Columns } from "./Columns";
 import {
   Button,
@@ -47,7 +45,7 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
   const [data, setData] = React.useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-<<<<<<< HEAD
+
 
   const handleClick = (user) => {
     if (
@@ -58,13 +56,12 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
     axiosDeleteUser(user.email);
     dispatch(deleteUser(user.email));
   };
-=======
+
   const handleConfirm = (data) => {
     setOpen2(true);
     setData(data);
   }
-  const columns = Columns(type, handleOpen, handleConfirm);
->>>>>>> develop
+
 
   const handleSubmit = () => {
     const obj = { email: user.email, type: userType };
@@ -93,24 +90,9 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
     );
   }
 
-<<<<<<< HEAD
-  return (
-    <Box
-      sx={{ height: "77vh", width: "100%", backgroundColor: "secondary.main" }}
-    >
-=======
-  const filter = (filterForType) => {
-    switch (filterForType) {
-      case "admin":
-        return users.filter((user) => checkType(user.type) === 66);
-      case "service":
-        return users.filter((user) => checkType(user.type) === 14);
-      case "standard":
-        return users.filter((user) => checkType(user.type) === 21);
-      default:
-        break;
-    }
-  };
+
+  
+
 
   const submitConfirm = async () => {
     await axiosDeleteUser(data);
@@ -141,7 +123,7 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
             </Button>
           </Box>
       </Modal>
->>>>>>> develop
+
       <Modal
         open={open}
         onClose={handleClose}
