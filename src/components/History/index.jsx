@@ -13,6 +13,7 @@ import { useNavigate } from "react-router";
 import { styleEditProfile } from "../../utils/styleMUI";
 import { toast } from "react-hot-toast";
 import { axiosShareReport } from "../../utils/axios";
+import useReports from "../../hooks/useReports";
 
 function CustomToolbar() {
   return (
@@ -31,10 +32,7 @@ export const History = ({ reportsOtherUser }) => {
   const [reportId, setReportId] = React.useState("");
   const [email, setEmail] = React.useState("");
   
-  const [rowData, setRowData] = React.useState("");
-  React.useEffect(() => {
-    reportsOtherUser ? setRowData(reportsOtherUser) : setRowData(reports);
-  }, [reports, reportsOtherUser]);
+  const {rowData} = useReports(reports, reportsOtherUser)
 
   const columns = [
     {

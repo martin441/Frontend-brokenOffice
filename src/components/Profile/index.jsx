@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import EditProfile from "./EditProfile";
 import EditSensitive from "./EditSensitive";
@@ -14,6 +14,7 @@ import { Box } from "@mui/system";
 import { styleEditProfile } from "../../utils/styleMUI";
 import { setUser } from "../../state/user";
 import axios from "axios";
+import useImg from "../../hooks/useImg";
 
 const Profile = () => {
   const ROUTE = process.env.REACT_APP_ROUTE;
@@ -21,13 +22,9 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
   const [open, setOpen] = useState(false);
-
-  const [background, setBackground] = useState("");
-
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  
   const handleChangeInput = async (e) => {
     try {
       var formData = new FormData();
@@ -42,18 +39,17 @@ const Profile = () => {
         }
       );
       dispatch(setUser(data));
-
     } catch (err) {
       console.error("desde PROFILE,index", err);
     }
   };
 
-  useEffect(() => {
-    setBackground("https://statics.globant.com/production/public/2022-12/Mask%20Group%2061.jpeg")
-  },[])
+  const { img } = useImg(
+    "https://statics.globant.com/production/public/2022-12/Mask%20Group%2061.jpeg"
+  );
 
   return (
-    <Box sx={{minHeight: '100vh'}}>
+    <Box sx={{ minHeight: "100vh" }}>
       <Modal
         open={open}
         onClose={handleClose}
@@ -68,7 +64,7 @@ const Profile = () => {
         <div className="header-profile">
           <img
             className="header-image"
-            src={background === "" ? <LinearProgress/> : background}
+            src={img === "" ? <LinearProgress /> : img}
             alt="header profile"
           />
         </div>
@@ -92,7 +88,7 @@ const Profile = () => {
           </Avatar>
         ) : (
           <Avatar
-          src={user.picture ? user.picture : ""}
+            src={user.picture ? user.picture : ""}
             onMouseEnter={() => setHover(true)}
             sx={{ width: "10rem", height: "10rem" }}
           ></Avatar>
@@ -100,12 +96,18 @@ const Profile = () => {
       </div>
 
       <div className="profile-data">
-        <Typography color='text.primary' variant="h6"> {user?.name} </Typography>
-        <Typography color='text.primary' variant="h6"> {user?.lastName} </Typography>
+        <Typography color="text.primary" variant="h6">
+          {" "}
+          {user?.name}{" "}
+        </Typography>
+        <Typography color="text.primary" variant="h6">
+          {" "}
+          {user?.lastName}{" "}
+        </Typography>
         <Typography variant="subtitle2" sx={{ color: "#666666" }}>
           {user?.role}
         </Typography>
-        <Typography color='text.primary'>{user?.email}</Typography>
+        <Typography color="text.primary">{user?.email}</Typography>
         <Typography variant="p">{user?.address}</Typography>
       </div>
 
@@ -115,4 +117,4 @@ const Profile = () => {
   );
 };
 
-export default Profile
+export default Profile;

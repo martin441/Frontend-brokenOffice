@@ -9,7 +9,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router";
 
 export const RegisterUsers = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -22,17 +22,19 @@ export const RegisterUsers = () => {
       type: data.get("type"),
     };
 
-    const password = data.get('password')
-    const repeatPassword = data.get('repeatPassword')
+    const password = data.get("password");
+    const repeatPassword = data.get("repeatPassword");
 
-    if(password !== repeatPassword) return toast.error('Passwords do not match!')
+    if (password !== repeatPassword)
+      return toast.error("Passwords do not match!");
 
     axiosRegisterUser(registerData);
 
-    navigate("/admin/users")
+    navigate("/admin/users");
   };
 
   return (
+
     <Container component="main" maxWidth="lg" sx={{minHeight:'110vh'}}>
       <BackLink text="Back to Users" href="/admin/users" />
       <Box

@@ -1,31 +1,17 @@
 import { Box, IconButton } from "@mui/material";
-import { toast } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteBtn from "../../../../commons/DeleteBtn";
-import { deleteUser } from "../../../../state/allUsers";
 import { changeTypeUser } from "../../../../state/changeTypeUser";
-import { axiosDeleteUser } from "../../../../utils/axios";
 import checkType from "../../../../utils/checkType";
 
-export const Columns = (type, handleOpen, handleConfirm) => {
+export const Columns = (type, handleOpen, handleClick) => {
   let columns = [];
   const dispatch = useDispatch();
-  const userType = useSelector((state) => state.user.type);
+
   const number = checkType(type);
 
-  const handleClick = (user) => {
-    if (
-      user.type === process.env.REACT_APP_ALPHA &&
-      userType !== process.env.REACT_APP_OMEGA
-    )
-      return toast.error("You can't delete another admin");
-    if (
-      user.type === process.env.REACT_APP_OMEGA
-    )
-      return toast.error("Can't delete the owner");
-    handleConfirm(user.email)
-  };
+
   return number === 32
     ? (columns = [
         {
@@ -77,7 +63,6 @@ export const Columns = (type, handleOpen, handleConfirm) => {
                       </IconButton>
                     </Box>
                   </Box>
-                  //  </Box>
                 );
               case 14:
                 return (
@@ -171,8 +156,8 @@ export const Columns = (type, handleOpen, handleConfirm) => {
           ),
         },
       ])
-    // eslint-disable-next-line no-unused-vars
-    : (columns = [
+    : // eslint-disable-next-line no-unused-vars
+      (columns = [
         {
           field: "fullName",
           headerName: "Full name",
