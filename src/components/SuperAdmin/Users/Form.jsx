@@ -14,7 +14,7 @@ export const Form = ({ handleSubmit }) => {
       component="form"
       noValidate
       onSubmit={handleSubmit}
-      sx={{ mt: 1, width: "70%" }}
+      sx={{ mt: 1, width: "70%", color: 'text.primary' }}
     >
       <TextField
         margin="normal"

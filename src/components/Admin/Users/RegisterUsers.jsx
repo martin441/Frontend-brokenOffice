@@ -33,7 +33,7 @@ export const RegisterUsers = () => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" sx={{minHeight:'100vh'}}>
+    <Container component="main" maxWidth="lg" sx={{minHeight:'110vh'}}>
       <BackLink text="Back to Users" href="/admin/users" />
       <Box
         sx={{
@@ -44,8 +44,8 @@ export const RegisterUsers = () => {
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h5" color='text.primary'>
-          Register <PeopleIcon fontSize="small" />
+        <Typography component="h1" variant="h4" color='text.primary'>
+          Register <PeopleIcon fontSize="medium" />
         </Typography>
         <Form handleSubmit={handleSubmit} />
       </Box>

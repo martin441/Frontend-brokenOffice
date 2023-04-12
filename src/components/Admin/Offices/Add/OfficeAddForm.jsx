@@ -58,7 +58,7 @@ export const OfficeAddForm = () => {
         component="form"
         noValidate
         onSubmit={handleSubmit}
-        sx={{ mt: 1, width: "70%", color:'text.primary' }}
+        sx={{ mt: 3, width: "70%", color:'text.primary', display:"flex", flexDirection:"column", gap:2 }}
       >
         <AddressAutocomplete
           apiKey={process.env.REACT_APP_API_KEY}
@@ -105,6 +105,7 @@ export const OfficeAddForm = () => {
           variant="contained"
           onClick={handleSubmit}
           sx={muiBtnOfficeDelete}
+          style={{marginTop:"15px"}}
           fullWidth
         >
           Submit

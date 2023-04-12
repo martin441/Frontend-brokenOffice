@@ -34,7 +34,11 @@ const SARegisterUsers = () => {
   };
 
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component="main" maxWidth="lg" sx={{
+      mt: 4,
+      minHeight: '110vh',
+      color: 'text.primary'
+    }}>
       <BackLink text="Back to Users" href="/superadmin/users" />
       <Box
         sx={{
@@ -45,8 +49,8 @@ const SARegisterUsers = () => {
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h5">
-          Register <PeopleIcon fontSize="small" />
+        <Typography component="h1" variant="h4">
+          Register <PeopleIcon fontSize="medium" />
         </Typography>
         <Form handleSubmit={handleSubmit} />
       </Box>

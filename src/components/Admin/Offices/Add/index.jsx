@@ -16,11 +16,11 @@ const OfficeAdd = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          backgroundColor:'secondary.main'
+          backgroundColor:'secondary.main',
         }}
       >
-        <Typography component="h1" variant="h5" color='text.primary'>
-          New Office <BusinessIcon fontSize="small" />
+        <Typography component="h1" variant="h4" color='text.primary'>
+          New Office <BusinessIcon fontSize="medium" />
         </Typography>
         <OfficeAddForm />
       </Box>

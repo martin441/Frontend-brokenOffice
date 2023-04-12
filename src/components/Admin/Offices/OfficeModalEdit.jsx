@@ -57,7 +57,7 @@ export default function OfficeModalEdit({ office }) {
         component="button"
         variant="body2"
         onClick={handleOpen}
-        sx={{ mt: 2, color: themeMode === "light" && "#444444" }}
+        sx={{ mt: 2, color: "text.primary" }}
       >
         <EditIcon />
       </Link>
