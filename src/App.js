@@ -3,14 +3,10 @@ import { LinearProgress } from "@mui/material";
 import { Navbar } from "./components/Navbar";
 import { Route, Routes } from "react-router";
 import SignInSide from "./components/Login";
-
 import { RegisterUsers } from "./components/Admin/Users/RegisterUsers";
 import { useEffect, lazy, Suspense, useMemo } from "react";
-
 import { Toaster } from "react-hot-toast";
-
 import RestorePass from "./components/RestorePass";
-
 import { getDesignTokens } from "./utils/themeConfig";
 import { ThemeProvider } from "@mui/system";
 import { Box, createTheme } from "@mui/material";
@@ -102,7 +98,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/login" element={<SignInSide />} />
-
+          <Route path="/user/restore/password/:token" element={<RestorePass />} />
           {checkType(user.type) === 404 && (
             <Route
               path="/"
