@@ -8,18 +8,20 @@ import {
 } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
 import { useDispatch } from "react-redux";
-
 import { Columns } from "./Columns";
-
 import { axiosDeleteOffice } from "../../../../utils/axios";
 import { deleteOffice } from "../../../../state/office";
+import { Button, Modal, Typography } from "@mui/material";
+import { styleEditProfile } from "../../../../utils/styleMUI";
 
 export default function BasicExampleDataGrid({ type, offices }) {
   const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(false)
+  const [id, setId] = React.useState("")
 
   function handleClick(id) {
-    axiosDeleteOffice(id);
-    dispatch(deleteOffice(id));
+    setId(id);
+    setOpen(true);
   }
 
   const columns = Columns(type, handleClick);
@@ -34,8 +36,35 @@ export default function BasicExampleDataGrid({ type, offices }) {
     );
   }
 
+  const handleConfirm = async () => {
+    await axiosDeleteOffice(id);
+    dispatch(deleteOffice(id));
+    setId("")
+    setOpen(false)
+  }
+
   return (
     <Box sx={{ height: "85vh", width: "100%", backgroundColor:'secondary.main' }}>
+      <Modal open={open}
+        onClose={() => {
+          setOpen(false);
+          setId("");
+        }}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+          <Box sx={styleEditProfile} component="form">
+          <Typography variant="h5" gutterBottom sx={{textAlign:"center"}}>
+            Are you sure to delete this office?
+          </Typography>
+          <Button
+              onClick={handleConfirm}
+              variant="contained"
+              sx={{ mt: 2, mx: "auto" }}
+            >
+              Confirm
+            </Button>
+          </Box>
+      </Modal>
       <DataGrid
         sx={{ padding: 1, backgroundColor: "secondary.main" }}
         columns={columns}

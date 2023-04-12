@@ -8,8 +8,8 @@ import {
 } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { axiosGetAllUsers, axiosPutUserType } from "../../../../utils/axios";
-import {  setAllUsers } from "../../../../state/allUsers";
+import { axiosDeleteUser, axiosGetAllUsers, axiosPutUserType } from "../../../../utils/axios";
+import {  deleteUser, setAllUsers } from "../../../../state/allUsers";
 import { Columns } from "./Columns";
 import {
   Button,
@@ -19,6 +19,7 @@ import {
   Modal,
   Radio,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 import { styleEditProfile } from "../../../../utils/styleMUI";
 import checkType from "../../../../utils/checkType";
@@ -32,9 +33,15 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
   const user = useSelector((state) => state.changeType);
   const [userType, setUserType] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+  const [data, setData] = React.useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const columns = Columns(type, handleOpen);
+  const handleConfirm = (data) => {
+    setOpen2(true);
+    setData(data);
+  }
+  const columns = Columns(type, handleOpen, handleConfirm);
 
   const handleSubmit = () => {
     const obj = { email: user.email, type: userType };
@@ -46,7 +53,6 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
       })
       .catch(() => toast.error("Invalid Changes"));
   };
-
 
   React.useEffect(() => {
     axiosGetAllUsers().then((users) => dispatch(setAllUsers(users)));
@@ -75,8 +81,35 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
     }
   };
 
+  const submitConfirm = async () => {
+    await axiosDeleteUser(data);
+    dispatch(deleteUser(data));
+    setOpen2(false)
+    setData("")
+  }
+
   return (
     <Box sx={{ height: '77vh', width: "100%", backgroundColor:'secondary.main'}}>
+      <Modal open={open2}
+        onClose={() => {
+          setOpen2(false);
+          
+        }}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+          <Box sx={styleEditProfile} component="form">
+          <Typography variant="h5" gutterBottom sx={{textAlign:"center"}}>
+            Are you sure to delete this user?
+          </Typography>
+          <Button
+              onClick={submitConfirm}
+              variant="contained"
+              sx={{ mt: 2, mx: "auto" }}
+            >
+              Confirm
+            </Button>
+          </Box>
+      </Modal>
       <Modal
         open={open}
         onClose={handleClose}
