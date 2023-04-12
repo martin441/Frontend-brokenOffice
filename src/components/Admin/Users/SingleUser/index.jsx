@@ -8,24 +8,14 @@ import { UserData } from "./UserData";
 import { BackLink } from "../../../../commons/BackLink";
 import { useSelector } from "react-redux";
 import checkType from "../../../../utils/checkType";
+import useUser from "../../../../hooks/useUser";
 
 const SingleUser = () => {
   const userType = useSelector((state) => state.user.type);
   const { id } = useParams();
-  const [singleUser, setSingleUser] = useState("");
   const [type, setType] = useState("");
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_ROUTE}/collaborators/${id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setSingleUser(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.error(err));
-  }, [id]);
+  const {singleUser} = useUser(id)
 
   useEffect(() => {
     switch (checkType(userType)) {
