@@ -30,12 +30,13 @@ export default function Chat({ report, chatType }) {
   const [inputValue, setInputValue] = useState("");
   const [open, setOpen] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const [chatId, setChatId] = useState("");
   const chatRef = useRef(null);
 
   useEffect(() => {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
-      console.log('gola');
+      console.log("gola");
     }
   }, [messages, chatRef]);
 
@@ -46,15 +47,33 @@ export default function Chat({ report, chatType }) {
     return () => {
       socket.off("message_received");
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 
   const handleOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
-    // handleLeave();
+  const handleClose = async () => {
+    const currentChat = await axios.get(
+      `http://localhost:3001/chats/history/${chatId}`,
+      { withCredentials: true }
+    );
+
+    if (chatType === "issued") {
+      const currentLength = await axios.post(
+        "http://localhost:3001/chats/issuerlength",
+        { chatId: chatId, chatLength: currentChat.data.length },
+        { withCredentials: true }
+      );
+    } else {
+      const currentLength = await axios.post(
+        "http://localhost:3001/chats/solverlength",
+        { chatId: chatId, chatLength: currentChat.data.length },
+        { withCredentials: true }
+      );
+      console.log(currentLength);
+    }
     setOpen(false);
   };
 
@@ -66,12 +85,15 @@ export default function Chat({ report, chatType }) {
         { withCredentials: true }
       );
 
+      setChatId(newChat.data._id);
+
       const chatHistory = await axios.get(
         `http://localhost:3001/chats/history/${newChat.data._id}`,
         { withCredentials: true }
       );
 
       setMessages(chatHistory.data);
+
       socket.emit("join_room", report);
 
       handleOpen();
@@ -107,13 +129,6 @@ export default function Chat({ report, chatType }) {
     }
   };
 
-  //   const handleLeave = () => {
-  //     alert("you have been disconnected");
-  //     socket.disconnect();
-  //     setConnection(false)
-  //     setMessages([]);
-  //   };
-
   return (
     <div>
       <Stack direction="row" spacing={2} mt={2}>
@@ -135,7 +150,10 @@ export default function Chat({ report, chatType }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={muiModalChat}>
-          <List sx={{ flexGrow: 1, overflow: "auto", maxHeight: '80%' }}   ref={chatRef}>
+          <List
+            sx={{ flexGrow: 1, overflow: "auto", maxHeight: "80%" }}
+            ref={chatRef}
+          >
             {messages?.length > 0 && (
               <>
                 {messages?.map((message, index) => {
@@ -148,7 +166,7 @@ export default function Chat({ report, chatType }) {
                           alignItems="flex-end"
                           sx={{ width: "100%", textAlign: "right" }}
                         >
-                          <Box sx={muiChatSenderMsg} >
+                          <Box sx={muiChatSenderMsg}>
                             <Typography variant="button">
                               {message.user?.name}
                             </Typography>
@@ -211,17 +229,18 @@ export default function Chat({ report, chatType }) {
                 onChange={handleInputChange}
                 sx={{ flexGrow: 1 }}
               />
-             { !isSending ? (<Button
-                type="submit"
-                variant="text"
-                color="secondary"
-                startIcon={
-                  <SendIcon style={{ fontSize: 40 }} color="primary" />
-                }
-              ></Button>)
-            :(
-              <CircularProgress />
-            )}
+              {!isSending ? (
+                <Button
+                  type="submit"
+                  variant="text"
+                  color="secondary"
+                  startIcon={
+                    <SendIcon style={{ fontSize: 40 }} color="primary" />
+                  }
+                ></Button>
+              ) : (
+                <CircularProgress />
+              )}
             </Stack>
           </Box>
         </Box>
