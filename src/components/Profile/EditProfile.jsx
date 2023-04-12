@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import toast from "react-hot-toast";
 import Modal from "@mui/material/Modal";
 import { styleEditProfile } from "../../utils/styleMUI";
-import { Button, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Button, MenuItem, TextField, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import AddressAutocomplete from "mui-address-autocomplete";

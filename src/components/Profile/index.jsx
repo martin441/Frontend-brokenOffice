@@ -1,9 +1,7 @@
 import {
   Avatar,
-  Backdrop,
   Input,
   Modal,
-  TextField,
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -22,7 +20,6 @@ export const Profile = () => {
   const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
   const [open, setOpen] = useState(false);
-  const [imgAvatar, setImgAvatar] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

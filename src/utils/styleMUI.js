@@ -91,10 +91,11 @@ export const muiModalChat = {
 
 export const muiModalChatForm = {
   borderTop: "1px solid grey",
-  position: "sticky",
+  position: "fixed",
   bottom: 0,
-  backgroundColor: "white",
+  backgroundColor: "secondary.main",
   p: 2,
+  width: '97%',
 };
 
 export const muiChatSenderMsg = {

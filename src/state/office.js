@@ -1,5 +1,4 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
-import toast from "react-hot-toast";
 
 export const setOffices = createAction("SET_OFFICES");
 export const deleteOffice = createAction("DELETE_OFFICES");
