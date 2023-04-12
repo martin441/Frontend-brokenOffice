@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React from "react";
 import { muiDashboardHome } from "../../../utils/styleMUI";
 import BuildCircleIcon from "@mui/icons-material/BuildCircle";
 import { ReportListHomeUser } from "./ReportListHome";
@@ -19,7 +19,7 @@ export const DashboardUser = () => {
   return (
 
     <Box sx={muiDashboardHome}>
-      <Card sx={{ width: 345, height: 204, display:'flex', flexDirection:'column', justifyContent:'center' }} onClick={() => navigate("/user/new-ticket")}>
+      <Card sx={{ width: 345, height: 214, display:'flex', flexDirection:'column', justifyContent:'center' }} onClick={() => navigate("/user/new-ticket")}>
         <CardActionArea>
           <CardContent>
             <BuildCircleIcon />
@@ -37,7 +37,6 @@ export const DashboardUser = () => {
       <Card
         sx={{
           minWidth: 345,
-          // maxWidth: 345,
           mt: "1rem",
         }}
       >

@@ -31,18 +31,19 @@ const RestorePass = () => {
     }
 
   return (
-    <Container component="main" sx={{maxWidth:"500px"}}>
+    <Container component="main">
     <Box sx={{
         marginTop: 6,
+        minHeight: '88vh'
       }}>
-        <Typography component="h1" variant='h4' sx={{fontWeight: '600', mb:'1rem'}}>
+        <Typography component="h1" variant='h4' sx={{color: 'text.primary',fontWeight: '600', mb:'1rem'}}>
       Restore your password
         </Typography>
         <Box
                 component="form"
                 noValidate
                 onSubmit={handleSubmit}
-                sx={{ mt: 1 }}
+                sx={{ mt: 1, maxWidth: '35rem', margin: '0 auto' }}
               >
                 <TextField
                   margin="normal"

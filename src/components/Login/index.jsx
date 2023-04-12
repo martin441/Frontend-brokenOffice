@@ -111,6 +111,7 @@ export default function SignInSide() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                
               }}
             >
               <Typography component="h1" variant="h5">
@@ -154,9 +155,9 @@ export default function SignInSide() {
                   Log in
                 </Button>
                 <Grid sx={muiStyleLoginBtn}>
-                  <Grid item xs>
-                    <Link variant="body1" style={{color: 'black', textDecoration:'none'}} onClick={() => setOpen(true)}>
-                      Forgot your password?
+                  <Grid item xs >
+                    <Link variant="body1" style={{textDecoration:'none'}} onClick={() => setOpen(true)}>
+                      <Typography color='text.primary'>Forgot your password?</Typography> 
                     </Link>
                   </Grid>
                 </Grid>

@@ -1,13 +1,10 @@
 import {
-  Box,
-  Button,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,7 +25,12 @@ export const ReportListHomeUser = () => {
 
   return (
     <div>
-      <CardBtn text={'History'} rute={'/user/history'} handleClick={handleClick} setHandleClick={setHandleClick}/>
+      <CardBtn
+        text={"History"}
+        rute={"/user/history"}
+        handleClick={handleClick}
+        setHandleClick={setHandleClick}
+      />
       <TableContainer sx={handleClick ? { maxHeight: 250 } : { height: 12 }}>
         {handleClick && (
           <Table stickyHeader aria-label="sticky table">
