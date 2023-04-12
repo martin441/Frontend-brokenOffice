@@ -20,7 +20,7 @@ export default function OfficeList() {
   return (
     <>
       <Box sx={muiOfficeBar}>
-      <Typography variant="h4" color='text.primary' >Offices</Typography>
+      <Typography variant="h4" color='text.primary' sx={{marginLeft:"30px"}} >Offices</Typography>
 
         <AddBtn href="/admin/offices/register" text='New Office' />
       </Box>
