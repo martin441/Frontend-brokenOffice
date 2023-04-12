@@ -53,7 +53,7 @@ export default function NewTicketForm() {
       }
     }
     if (activeStep === 2) {
-      axiosPostNewReport({...report, office: report.office._id});
+      axiosPostNewReport({ ...report, office: report.office._id });
       dispatch(clearReport());
       setActiveStep(activeStep + 1);
     }
@@ -76,7 +76,7 @@ export default function NewTicketForm() {
           zIndex: "-1",
         }}
       ></AppBar>
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+      <Container component="main" maxWidth="sm" sx={{   minHeight: '87vh'}}>
         <Paper
           variant="outlined"
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
@@ -116,7 +116,7 @@ export default function NewTicketForm() {
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}
                   >
-                    {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                    {activeStep === steps.length - 1 ? "Confirm" : "Next"}
                   </Button>
                 </Box>
               </Box>

@@ -112,11 +112,11 @@ export default function LocationForm() {
             <Grid sx={{ mt: 2 }} item xs={12} fullWidth>
               <Typography>
                 {" "}
-                Please choose the Office that suits you best
+                Please choose the Office that suits you best:
               </Typography>
               <FormControl fullWidth>
                 <InputLabel sx={{ mt: 2 }} id="demo-simple-select-label">
-                  Service Desk
+                  Desk
                 </InputLabel>
                 <Select
                   sx={{ mt: 2 }}

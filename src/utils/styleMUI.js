@@ -1,7 +1,15 @@
-import reportIcon from "../assets/report_logo.svg";
+export const muiStyleApp = {
+  textAlign: 'center',
+  boxSizing: 'border-box',
+  margin: 0,
+  padding: 0,
+  fontFamily: "Heebo",
+  backgroundColor: 'secondary.main'
+}
 
 export const styleEditProfile = {
   display: "flex",
+  gap:3,
   flexDirection: "column",
   position: "absolute",
   top: "50%",
@@ -10,8 +18,11 @@ export const styleEditProfile = {
   width: "50%",
   bgcolor: "white",
   border: "1px solid #000",
-  boxShadow: 24,
+  boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
   p: 4,
+  backgroundColor:'secondary.main',
+  color: 'text.primary',
+  maxWidth:300
 };
 
 export const muiStyleLoginBtn = {
@@ -43,16 +54,15 @@ export const muiBackLink = {
   justifyContent: "start",
   width: "100%",
   mt: 2,
-  color: "secondary.dark",
-};
+  color: 'text.primary'
+}
 
 export const muiDashboardHome = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  mt: "1rem",
-};
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+}
 
 export const muiModal = {
   position: "absolute",

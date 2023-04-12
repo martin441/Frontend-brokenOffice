@@ -15,9 +15,11 @@ import { useNavigate } from "react-router";
 
 export const DashboardUser = () => {
   const navigate = useNavigate();
+
   return (
+
     <Box sx={muiDashboardHome}>
-      <Card sx={{ minWidth: 345 }} onClick={() => navigate("/user/new-ticket")}>
+      <Card sx={{ width: 345, height: 214, display:'flex', flexDirection:'column', justifyContent:'center' }} onClick={() => navigate("/user/new-ticket")}>
         <CardActionArea>
           <CardContent>
             <BuildCircleIcon />
@@ -25,19 +27,34 @@ export const DashboardUser = () => {
               New Report
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Report a problem with your office supplies
+              Report an incident with your office supplies
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions></CardActions>
       </Card>
 
-      <Card sx={{ minWidth: 345, mt: "1rem" }}>
+      <Card
+        sx={{
+          minWidth: 345,
+          mt: "1rem",
+        }}
+      >
         <CardActionArea>
-          <CardContent onClick={() => navigate("/user/history")}>
+
+          <CardContent>
+
             <HistoryIcon />
-            <Typography sx={{p: 0, m:0}} gutterBottom variant="h5" component="div">
+            <Typography
+              sx={{ p: 0, m: 0 }}
+              gutterBottom
+              variant="h5"
+              component="div"
+            >
               History
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Click here to get access to your report history
             </Typography>
           </CardContent>
           <CardContent>

@@ -5,10 +5,10 @@ import { Profile } from "./components/Profile";
 import { UserHome } from "./components/Home/User";
 import SignInSide from "./components/Login";
 import { AdminView } from "./components/Admin/Users";
-import OfficeList from "./components/Admin/Offices/OfficeList";
+import OfficeList from "./components/Admin/Offices";
 import { Toaster } from "react-hot-toast";
 import { RegisterUsers } from "./components/Admin/Users/RegisterUsers";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./state/user";
@@ -32,11 +32,21 @@ import { axiosGetAssignedReportsService } from "./utils/axios";
 import { setAssignedReports } from "./state/service";
 import { SingleTicketService } from "./components/Service/SingleAssignedReport";
 import { SingleUser } from "./components/Admin/Users/SingleUser";
+import RestorePass from "./components/RestorePass";
+
+import { getDesignTokens } from "./utils/themeConfig";
+import { ThemeProvider } from "@mui/system";
+import { Box, createTheme } from "@mui/material";
+import { muiStyleApp } from "./utils/styleMUI";
 
 function App() {
+  const modeTheme = useSelector((state) => state.theme.mode);
   const ROUTE = process.env.REACT_APP_ROUTE;
   const dispatch = useDispatch();
-  const reports = useSelector(state => state.allReports)
+
+  // Update the theme only if the mode changes
+  const theme = useMemo(() => createTheme(getDesignTokens(modeTheme)), [modeTheme]);
+
   useEffect(() => {
     if (user) {
       axios
@@ -54,7 +64,6 @@ function App() {
         .catch((err) => console.error(err));
     }
     if (checkType(user?.type) === 14) {
-      console.log(checkType(user?.type) === 14);
       axiosGetAssignedReportsService().then((reports) => {
         dispatch(setAssignedReports(reports));
       });
@@ -66,95 +75,107 @@ function App() {
   const initialized = user !== null;
 
   return (
-    <div className="App">
-      <div>
-        <Toaster />
-      </div>
-      <Navbar />
-      <Routes>
-        <Route path="/login" element={<SignInSide />} />
+      <ThemeProvider theme={theme}>
+        <Box sx={muiStyleApp}>
+          <div>
+            <Toaster />
+          </div>
+          <Navbar />
 
-        {checkType(user.type) === 404 && <Route path="/" element={<Home />} />}
+          <Routes>
+            <Route path="/login" element={<SignInSide />} />
+            
+            <Route path="/user/restore/password/:token" element={<RestorePass />} />
 
-        {checkType(user.type) === 21 && (
-          <Route path="/" element={<UserHome />} />
-        )}
+            {checkType(user.type) === 404 && (
+              <Route path="/" element={<Home />} />
+            )}
 
-        {checkType(user.type) !== 404 && (
-          <Route path="/user/new-ticket" element={<NewTicketForm />} />
-        )}
+            {checkType(user.type) === 21 && (
+              <Route path="/" element={<UserHome />} />
+            )}
 
-        {checkType(user.type) === 14 && (
-          <Route path="/" element={<ServiceHome />} />
-        )}
+            {checkType(user.type) !== 404 && (
+              <Route path="/user/new-ticket" element={<NewTicketForm />} />
+            )}
 
-        {checkType(user.type) === 66 && (
-          <Route path="/" element={<AdminHome />} />
-        )}
+            {checkType(user.type) === 14 && (
+              <Route path="/" element={<ServiceHome />} />
+            )}
 
-        {checkType(user.type) === 32 && (
-          <Route path="/" element={<SuperAdminHome />} />
-        )}
+            {checkType(user.type) === 66 && (
+              <Route path="/" element={<AdminHome />} />
+            )}
 
-        <Route
-          path="/user/profile"
-          element={
-            initialized ? (
-              <LoginProtectedRoute user={user} redirectTo="/login">
-                <Profile />
-              </LoginProtectedRoute>
-            ) : null
-          }
-        />
+            {checkType(user.type) === 32 && (
+              <Route path="/" element={<SuperAdminHome />} />
+            )}
 
-        {(checkType(user.type) === 14 ||
-          checkType(user.type) === 66 ||
-          checkType(user.type) === 32) && (
-          <Route path="/service/report/all" element={<ServerReportList />} />
-        )}
+            <Route
+              path="/user/profile"
+              element={
+                initialized ? (
+                  <LoginProtectedRoute user={user} redirectTo="/login">
+                    <Profile />
+                  </LoginProtectedRoute>
+                ) : null
+              }
+            />
 
-        {checkType(user.type) !== 404 && (
-          <Route path="/user/ticket/:id" element={<SingleTicket />} />
-        )}
+            {(checkType(user.type) === 14 ||
+              checkType(user.type) === 66 ||
+              checkType(user.type) === 32) && (
+              <Route
+                path="/service/report/all"
+                element={<ServerReportList />}
+              />
+            )}
 
-        {checkType(user.type) === 14 && (
-          <Route path="/service/ticket/:id" element={<SingleTicketService />} />
-        )}
+            {checkType(user.type) !== 404 && (
+              <Route path="/user/ticket/:id" element={<SingleTicket />} />
+            )}
 
-        {checkType(user.type) === 66 && (
-          <Route path="/admin/users" element={<AdminView />} />
-        )}
-        {checkType(user.type) === 32 && (
-          <Route path="/superadmin/users" element={<SuperAdminView />} />
-        )}
+            {checkType(user.type) === 14 && (
+              <Route
+                path="/service/ticket/:id"
+                element={<SingleTicketService />}
+              />
+            )}
 
-        {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
-          <Route path="/admin/offices" element={<OfficeList />} />
-        )}
-        {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
-          <Route path="/admin/offices/register" element={<OfficeAdd />} />
-        )}
-        {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
-          <Route path="/admin/users/register" element={<RegisterUsers />} />
-        )}
-          {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
-          <Route path="/admin/user/:id" element={<SingleUser />} />
-        )}
+            {checkType(user.type) === 66 && (
+              <Route path="/admin/users" element={<AdminView />} />
+            )}
+            {checkType(user.type) === 32 && (
+              <Route path="/superadmin/users" element={<SuperAdminView />} />
+            )}
 
-        {checkType(user.type) === 32 && (
-          <Route
-            path="/superadmin/users/register"
-            element={<SARegisterUsers />}
-          />
-        )}
+            {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
+              <Route path="/admin/offices" element={<OfficeList />} />
+            )}
+            {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
+              <Route path="/admin/offices/register" element={<OfficeAdd />} />
+            )}
+            {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
+              <Route path="/admin/users/register" element={<RegisterUsers />} />
+            )}
+            {(checkType(user.type) === 66 || checkType(user.type) === 32) && (
+              <Route path="/admin/user/:id" element={<SingleUser />} />
+            )}
 
-        {checkType(user.type) !== 404 && (
-          <Route path="/user/history" element={<History />} />
-        )}
-       
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </div>
+            {checkType(user.type) === 32 && (
+              <Route
+                path="/superadmin/users/register"
+                element={<SARegisterUsers />}
+              />
+            )}
+
+            {checkType(user.type) !== 404 && (
+              <Route path="/user/history" element={<History />} />
+            )}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Box>
+      </ThemeProvider>
   );
 }
 

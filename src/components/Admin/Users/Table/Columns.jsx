@@ -1,6 +1,6 @@
 import { Box, IconButton } from "@mui/material";
 import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteBtn from "../../../../commons/DeleteBtn";
 import { deleteUser } from "../../../../state/allUsers";
@@ -11,15 +11,18 @@ import checkType from "../../../../utils/checkType";
 export const Columns = (type, handleOpen) => {
   let columns = [];
   const dispatch = useDispatch();
+  const userType = useSelector((state) => state.user.type);
+  const number = checkType(type);
+
   const handleClick = (user) => {
-    if (user.type === process.env.REACT_APP_ALPHA)
+    if (
+      user.type === process.env.REACT_APP_ALPHA &&
+      userType !== process.env.REACT_APP_OMEGA
+    )
       return toast.error("You can't delete another admin");
     axiosDeleteUser(user.email);
     dispatch(deleteUser(user.email));
   };
-
-  const number = checkType(type);
-
   return number === 32
     ? (columns = [
         {
@@ -55,21 +58,22 @@ export const Columns = (type, handleOpen) => {
                     }}
                   >
                     {/* <Box sx={{backgroundColor:'red', flexWrap: "wrap", display:'flex', justifyContent:'space-between', alignItems: "center", width:'100px'}}> */}
-                      <Box sx={{marginX:2}}>
-                        <p>Admin</p>
-                      </Box>
-                      <Box>
-                        <IconButton
-                          sx={{ padding: 0 }}
-                          onClick={() => {
-                            dispatch(changeTypeUser(params.row));
-                            handleOpen();
-                          }}
-                        >
-                          <EditIcon fontSize="small" />
-                        </IconButton>
-                      </Box>
+                    <Box sx={{ marginX: 2 }}>
+                      <p>Admin</p>
                     </Box>
+                    <Box>
+                      <IconButton
+                        sx={{ padding: 0 }}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          dispatch(changeTypeUser(params.row));
+                          handleOpen();
+                        }}
+                      >
+                        <EditIcon fontSize="small" />
+                      </IconButton>
+                    </Box>
+                  </Box>
                   //  </Box>
                 );
               case 14:
@@ -84,13 +88,14 @@ export const Columns = (type, handleOpen) => {
                       gap: 1,
                     }}
                   >
-                    <Box sx={{marginX:1.5}}>
+                    <Box sx={{ marginX: 1.5 }}>
                       <p>Service</p>
                     </Box>
                     <Box>
                       <IconButton
                         sx={{ padding: 0 }}
-                        onClick={() => {
+                        onClick={(event) => {
+                          event.stopPropagation();
                           dispatch(changeTypeUser(params.row));
                           handleOpen();
                         }}
@@ -112,13 +117,14 @@ export const Columns = (type, handleOpen) => {
                       gap: 1,
                     }}
                   >
-                    <Box sx={{marginX:1}}>
+                    <Box sx={{ marginX: 1 }}>
                       <p>Standard</p>
                     </Box>
                     <Box>
                       <IconButton
                         sx={{ padding: 0 }}
-                        onClick={() => {
+                        onClick={(event) => {
+                          event.stopPropagation();
                           dispatch(changeTypeUser(params.row));
                           handleOpen();
                         }}
@@ -151,14 +157,18 @@ export const Columns = (type, handleOpen) => {
           flex: 0.5,
           editable: false,
           renderCell: (params) => (
-            <IconButton onClick={() => handleClick(params.row)}>
+            <IconButton
+              onClick={(event) => {
+                event.stopPropagation();
+                handleClick(params.row);
+              }}
+            >
               <DeleteBtn />
             </IconButton>
           ),
         },
       ])
-    : // eslint-disable-next-line no-unused-vars
-      (columns = [
+    : (columns = [
         {
           field: "fullName",
           headerName: "Full name",
@@ -209,7 +219,12 @@ export const Columns = (type, handleOpen) => {
           flex: 0.5,
           editable: false,
           renderCell: (params) => (
-            <IconButton onClick={() => handleClick(params.row)}>
+            <IconButton
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClick(params.row);
+              }}
+            >
               <DeleteBtn />
             </IconButton>
           ),

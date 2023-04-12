@@ -10,8 +10,10 @@ import { Box } from "@mui/system";
 import React from "react";
 import Chat from "../../Chat";
 import ResolveRejectBtn from "./ResolveReject";
+import { useSelector } from "react-redux";
 
-export const ReportDataService = ({ singleReport }) => {
+export const ReportDataService = () => {
+  const singleReport = useSelector((state) => state.updateStatusReport)
   const imageSrc =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png";
   return (
@@ -31,7 +33,7 @@ export const ReportDataService = ({ singleReport }) => {
             component="img"
             alt="Input Image"
             src={singleReport.image ? singleReport?.image : imageSrc}
-            sx={{ maxWidth: "100%" }}
+            sx={{ maxWidth: "65%" }}
           ></Box>
         </Grid>
 
@@ -112,12 +114,40 @@ export const ReportDataService = ({ singleReport }) => {
               </Typography>
             </ListItem>
             <Divider></Divider>
-
-            <ListItem sx={{ py: 2, px: 0 }}>
+            
+            {
+              singleReport.status === "in progress" && (<>
+                <ListItem sx={{ py: 2, px: 0 }}>
               <ListItemText primary="Resolve:" />
               {singleReport && <ResolveRejectBtn singleReport={singleReport} />}
             </ListItem>
             <Divider></Divider>
+            </>
+              )
+            }
+
+            {
+              (singleReport.status === "resolved" || singleReport.status === "rejected") && (<>
+                <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText primary={singleReport.status === "resolved" ? `Resolved title:` : `Rejected title:`} />
+              <Typography variant="subtitle1">{singleReport?.reason.title}</Typography>
+            </ListItem>
+            <Divider></Divider>
+
+            <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText primary={singleReport.status === "resolved" ? `Resolved description:` : `Rejected description:`} />
+              <Typography
+                variant="subtitle1"
+                maxWidth={"50%"}
+                sx={{ wordWrap: "break-word", textAlign: "right" }}
+              >
+                {singleReport?.reason.description}
+              </Typography>
+            </ListItem>
+            <Divider></Divider>
+              </>)
+            }
+            
           </List>
           {singleReport._id && <Chat report={singleReport?._id} chatType={"assigned"}/>}
         </Grid>

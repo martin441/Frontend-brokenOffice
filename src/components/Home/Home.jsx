@@ -1,13 +1,15 @@
 import { Box, Button, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 export const Home = () => {
   const navigate = useNavigate();
+  const theme = useSelector(state => state.theme.mode)
 
   return (
-    <Box className="header-container-home home-text">
-      <Box sx={{ mt: 4 }}>
-        <Typography variant="h3">Hey Glober!</Typography>
+    <Box className={theme === 'light' ? 'header-container-home home-text' : 'header-container-home-dark home-text'} >
+      <Box sx={{ mt: 4 , color:'text.primary'}}>
+        <Typography  variant="h3">Hey Glober!</Typography>
         <Typography variant="h6">
           Looks like you are not signed in...
         </Typography>

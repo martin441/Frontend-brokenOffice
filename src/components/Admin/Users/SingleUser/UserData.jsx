@@ -11,7 +11,6 @@ import React from "react";
 import checkType from "../../../../utils/checkType";
 
 export const UserData = ({ singleUser }) => {
-
   function checkSingleUserType(type) {
     switch (checkType(type)) {
       case 66:
@@ -36,7 +35,6 @@ export const UserData = ({ singleUser }) => {
 
   return (
     <div>
-      {" "}
       <Grid
         container
         spacing={2}
@@ -44,13 +42,13 @@ export const UserData = ({ singleUser }) => {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        sx={{ maxWidth: "70%", margin: "0 auto" }}
+        sx={{ maxWidth: { xs: "85%", sm: "80%" }, margin: "0 auto" }}
       >
         <Grid item xs={12} md={3}>
           <Box
             component="img"
             alt="Input Image"
-            src={singleUser.image ? singleUser?.picure : imageSrc}
+            src={singleUser.user.image ? singleUser?.user.picure : imageSrc}
             sx={{ maxWidth: "70%" }}
           ></Box>
         </Grid>
@@ -58,44 +56,79 @@ export const UserData = ({ singleUser }) => {
         <Grid item xs={16} md={8}>
           <Divider></Divider>
           <List disablePadding>
-            <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="ID:" />
-              <Typography variant="subtitle1">{singleUser?._id}</Typography>
-            </ListItem>
-            <Divider></Divider>
-
-            <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Name:" />
-              <Typography variant="subtitle1" sx={{ maxWidth: '80%' }}>{`${singleUser?.name} ${singleUser?.lastName}`}</Typography>
-            </ListItem>
-            <Divider></Divider>
-
-            <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Email:" />
-              <Typography variant="subtitle1">{singleUser?.email}</Typography>
-            </ListItem>
-            <Divider></Divider>
-
-            <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Address:" />
-              <Typography align="right" variant="subtitle1" sx={{ maxWidth: '80%' }}>
-                {singleUser?.addressName}
+            <ListItem sx={{ py: 1, px: 0  }}>
+              <ListItemText primary="ID:" sx={{ maxWidth: '5rem'}} />
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  wordWrap: "break-word",
+                  maxWidth: { xs: "60%", sm: "80%" },
+                }}
+              >
+                {singleUser?.user._id}
               </Typography>
             </ListItem>
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Role:" />
-              <Typography align="right" variant="subtitle1" sx={{ maxWidth: '80%' }}>
-                {singleUser?.role}
+              <ListItemText primary="Name:" sx={{ maxWidth: '5rem'}} />
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  wordWrap: "break-word",
+                  maxWidth: { xs: "60%", sm: "80%" },
+                }}
+              >{`${singleUser?.user.name} ${singleUser?.user.lastName}`}</Typography>
+            </ListItem>
+            <Divider></Divider>
+
+            <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText primary="Email:" sx={{ maxWidth: '5rem'}} />
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  wordWrap: "break-word",
+                  maxWidth: { xs: "60%", sm: "80%" },
+                }}
+              >
+                {singleUser?.user.email}
               </Typography>
             </ListItem>
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Type:" />
-              <Typography align="right" variant="subtitle1">
-                {singleUser?.type && checkSingleUserType(singleUser.type)}
+              <ListItemText primary="Address:" sx={{ maxWidth: '5rem'}} />
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  wordWrap: "break-word",
+                  maxWidth: { xs: "60%", sm: "80%" },
+                }}
+              >
+                {singleUser?.user.addressName}
+              </Typography>
+            </ListItem>
+            <Divider></Divider>
+
+            <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText primary="Role:" sx={{maxWidth: '5rem'}} />
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  wordWrap: "break-word",
+                  maxWidth: { xs: "60%", sm: "80%" },
+                }}
+              >
+                {singleUser?.user.role}
+              </Typography>
+            </ListItem>
+            <Divider></Divider>
+
+            <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText primary="Type:" sx={{ maxWidth: '5rem'}} />
+              <Typography  variant="subtitle1">
+                {singleUser?.user.type &&
+                  checkSingleUserType(singleUser.user.type)}
               </Typography>
             </ListItem>
             <Divider></Divider>

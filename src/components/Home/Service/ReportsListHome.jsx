@@ -6,14 +6,16 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import CardBtn from "../../../commons/CardBtn";
 import { setAssignedReports } from "../../../state/service";
 import { axiosGetAssignedReportsService } from "../../../utils/axios";
 
 
 export const ReportListHomeService = () => {
+  const [handleClick, setHandleClick] = useState(false);
   const reports = useSelector((state) => state.service);
   const navigate = useNavigate()
   const dispatch = useDispatch();
@@ -25,9 +27,9 @@ export const ReportListHomeService = () => {
 
   return (
     <div>
-      {" "}
-      <TableContainer sx={{ maxHeight: "35vh" }}>
-        <Table stickyHeader aria-label="sticky table">
+      <CardBtn text={'All Reports'} rute={'/service/report/all'} handleClick={handleClick} setHandleClick={setHandleClick}/>
+      <TableContainer sx={handleClick ? { maxHeight: 250 } : { height: 12 }}>
+        {handleClick && (<Table>
           <TableHead>
             <TableRow>
               <TableCell style={{ minWidth: 100 }} align={"center"}>
@@ -38,7 +40,13 @@ export const ReportListHomeService = () => {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody
+          style={
+            handleClick
+              ? { overflow: "auto" }
+              : { overflow: "auto", display: "none" }
+          }
+          >
             {reports
               .filter((ticket) => ticket.status === "issued")
               .map((ticket) => {
@@ -63,7 +71,7 @@ export const ReportListHomeService = () => {
                 );
               })}
           </TableBody>
-        </Table>
+        </Table>)}
       </TableContainer>
     </div>
   );

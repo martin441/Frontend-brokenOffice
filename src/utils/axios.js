@@ -174,10 +174,45 @@ export async function axiosPutReportStatus(id, obj) {
       obj,
       { withCredentials: true }
     );
-    toast.success("Report Status changed successfully");
+    toast.success("Report status changed successfully");
     return updatedReport.data;
   } catch (error) {
     toast.error("Report status could not be changed");
+    console.error(error);
+  }
+}
+
+export async function axiosShareReport(reportId, emailTo) {
+  try {
+    const sent = await axios.post(`${ROUTE}/reports/share`, {reportId, emailTo}, {
+      withCredentials: true,
+    });
+    return sent.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function axiosPostGenerateRestoreLink(email) {
+  try {
+    const sent = await axios.post(`${ROUTE}/user/restore/password`, {email}, {
+      withCredentials: true,
+    });
+    if (!sent) return {error: true, data: "Something went wrong"}
+    return sent;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function axiosPostRestorePass(token, password) {
+  try {
+    const sent = await axios.post(`${ROUTE}/user/restore/password/${token}`, {password}, {
+      withCredentials: true,
+    });
+    if (!sent) return {error: true, data: "Something went wrong"}
+    return sent;
+  } catch (error) {
     console.error(error);
   }
 }

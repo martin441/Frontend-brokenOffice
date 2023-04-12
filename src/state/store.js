@@ -8,6 +8,8 @@ import newReportReducer from "./newReport";
 import changeTypeUserReducer from "./changeTypeUser";
 import serviceReducer from './service'
 import chatReducer from "./chat"
+import themeReducer from "./theme";
+import updateStatusReportReducer from "./updatedStatusReport";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +22,8 @@ const store = configureStore({
     changeType: changeTypeUserReducer,
     service: serviceReducer,
     chat: chatReducer,
+    theme: themeReducer,
+    updateStatusReport: updateStatusReportReducer
   },
 });
 
