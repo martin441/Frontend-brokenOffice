@@ -27,7 +27,7 @@ export const ReportListHomeService = () => {
 
   return (
     <div>
-      <CardBtn text={'All'} rute={'/service/report/all'} handleClick={handleClick} setHandleClick={setHandleClick}/>
+      <CardBtn text={'All Reports'} rute={'/service/report/all'} handleClick={handleClick} setHandleClick={setHandleClick}/>
       <TableContainer sx={handleClick ? { maxHeight: 250 } : { height: 12 }}>
         {handleClick && (<Table>
           <TableHead>

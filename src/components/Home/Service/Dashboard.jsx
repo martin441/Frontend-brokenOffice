@@ -4,24 +4,23 @@ import React from "react";
 import { muiDashboardHome } from "../../../utils/styleMUI";
 import HistoryIcon from "@mui/icons-material/History";
 import { ReportListHomeService } from "./ReportsListHome";
-import { useNavigate } from "react-router";
+
 
 export const DashboardService = () => {
-  const navigate = useNavigate();
   return (
     <Box sx={muiDashboardHome}>
-      <Card sx={{ width: 345}}>
+      <Card sx={{ width: 345, minHeight: 214}}>
         <CardActionArea>
           <CardContent>
             <HistoryIcon />
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography  variant="h5" >
               Pending Reports
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Click here to access the reports assigned to you
             </Typography>
           </CardContent>
-          <CardContent>
+          <CardContent >
             <ReportListHomeService />
           </CardContent>
         </CardActionArea>

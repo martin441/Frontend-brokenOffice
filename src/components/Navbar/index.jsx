@@ -1,6 +1,6 @@
 import { AppBar, Box, Button, Toolbar } from "@mui/material";
 import { Container } from "@mui/system";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { Logo } from "./Logo";
@@ -15,6 +15,19 @@ export const Navbar = () => {
   const theme = useSelector((state) => state.theme.mode);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      dispatch(setTheme(storedTheme))
+    }
+  }, [dispatch, theme]);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    dispatch(setTheme(newTheme))
+    localStorage.setItem('theme', newTheme);
+  };
 
   return (
     <AppBar position="sticky" sx={{ mb: 0 }} color="secondary">
@@ -38,7 +51,7 @@ export const Navbar = () => {
                 justifyContent: "center",
               }}
             >
-              <Button onClick={() => dispatch(setTheme())}>
+              <Button onClick={toggleTheme}>
                 {" "}
                 {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
               </Button>
@@ -53,7 +66,7 @@ export const Navbar = () => {
                 justifyContent: "center",
               }}
             >
-              <Button onClick={() => dispatch(setTheme())}>
+              <Button onClick={toggleTheme}>
                 {" "}
                 {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
               </Button>
