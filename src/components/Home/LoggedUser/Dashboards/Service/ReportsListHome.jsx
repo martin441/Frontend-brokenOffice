@@ -9,9 +9,9 @@ import {
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import CardBtn from "../../../commons/CardBtn";
-import { setAssignedReports } from "../../../state/service";
-import { axiosGetAssignedReportsService } from "../../../utils/axios";
+import CardBtn from "../../../../../commons/CardBtn";
+import { setAssignedReports } from "../../../../../state/service";
+import { axiosGetAssignedReportsService } from "../../../../../utils/axios";
 
 
 export const ReportListHomeService = () => {
@@ -59,7 +59,7 @@ export const ReportListHomeService = () => {
                       key={ticket._id}
                       onClick={() => navigate(`/service/ticket/${ticket._id}`)}
                     >
-                      <TableCell key={(ticket.date)} align={"center"}>
+                      <TableCell key={(ticket.date)} align={"center"} >
                         {ticket.title}
                       </TableCell>
 

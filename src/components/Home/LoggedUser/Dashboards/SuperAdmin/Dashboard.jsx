@@ -7,12 +7,12 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import { muiDashboardHome } from "../../../utils/styleMUI";
+import { muiDashboardHome } from "../../../../../utils/styleMUI";
 import BusinessIcon from "@mui/icons-material/Business";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import checkType from "../../../utils/checkType";
+import checkType from "../../../../../utils/checkType";
 
 export const DashboardSuperAdmin = () => {
   const navigate = useNavigate();
