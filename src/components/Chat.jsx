@@ -92,6 +92,23 @@ export default function Chat({ report, chatType }) {
         { withCredentials: true }
       );
 
+      if (chatType === "issued") {
+        const currentLength = await axios.post(
+          "http://localhost:3001/chats/issuerlength",
+          { chatId: chatId, chatLength: chatHistory.data.length },
+          { withCredentials: true }
+        );
+      } else {
+        const currentLength = await axios.post(
+          "http://localhost:3001/chats/solverlength",
+          { chatId: chatId, chatLength: chatHistory.data.length },
+          { withCredentials: true }
+        );
+        
+      }
+
+
+
       setMessages(chatHistory.data);
 
       socket.emit("join_room", report);
