@@ -8,7 +8,7 @@ import { changeTypeUser } from "../../../../state/changeTypeUser";
 import { axiosDeleteUser } from "../../../../utils/axios";
 import checkType from "../../../../utils/checkType";
 
-export const Columns = (type, handleOpen) => {
+export const Columns = (type, handleOpen, handleConfirm) => {
   let columns = [];
   const dispatch = useDispatch();
   const userType = useSelector((state) => state.user.type);
@@ -20,8 +20,11 @@ export const Columns = (type, handleOpen) => {
       userType !== process.env.REACT_APP_OMEGA
     )
       return toast.error("You can't delete another admin");
-    axiosDeleteUser(user.email);
-    dispatch(deleteUser(user.email));
+    if (
+      user.type === process.env.REACT_APP_OMEGA
+    )
+      return toast.error("Can't delete the owner");
+    handleConfirm(user.email)
   };
   return number === 32
     ? (columns = [
