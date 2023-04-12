@@ -89,5 +89,19 @@ export const Columns = (type, handleClick) => {
               params.row.address.street
             ),
         },
+        {
+          field: "c",
+          headerName: "Delete",
+          headerAlign: "center",
+          align: "center",
+          sortable: false,
+          flex: 0.5,
+          editable: false,
+          renderCell: (params) => (
+            <IconButton onClick={() => handleClick(params.row._id)}>
+              <DeleteBtn />
+            </IconButton>
+          ),
+        }
       ]);
 };

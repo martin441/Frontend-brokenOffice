@@ -17,7 +17,7 @@ export const DashboardService = () => {
               Pending Reports
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Click here to access the reports assigned to you
+              Access the reports assigned to you
             </Typography>
           </CardContent>
           <CardContent >
