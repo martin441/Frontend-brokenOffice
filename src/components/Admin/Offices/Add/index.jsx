@@ -5,7 +5,7 @@ import { OfficeAddForm } from "./OfficeAddForm";
 import BusinessIcon from "@mui/icons-material/Business";
 import { BackLink } from "../../../../commons/BackLink";
 
-export const OfficeAdd = () => {
+const OfficeAdd = () => {
   return (
     <Container component="main" maxWidth="lg">
       <BackLink text="Back to Offices" href="/admin/offices" />
@@ -26,3 +26,4 @@ export const OfficeAdd = () => {
     </Container>
   );
 };
+export default OfficeAdd

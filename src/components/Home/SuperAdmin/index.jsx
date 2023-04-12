@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { DashboardSuperAdmin } from "./Dashboard";
 import { DashboardUser } from "../User/Dashboard";
 
-export const SuperAdminHome = () => {
+const SuperAdminHome = () => {
   const user = useSelector((state) => state.user);
 
   return (
@@ -24,3 +24,4 @@ export const SuperAdminHome = () => {
     </Box>
   );
 };
+export default SuperAdminHome

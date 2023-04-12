@@ -1,4 +1,4 @@
-import { Button, IconButton, Modal, TextField, Typography } from "@mui/material";
+import { Button, IconButton, Modal, TextField, Typography, LinearProgress } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -12,11 +12,10 @@ import { axiosPutReportStatus } from "../../../utils/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { updateStatusReport } from "../../../state/updatedStatusReport";
 
-export const SingleTicketService = () => {
+const SingleTicketService = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const singleReport = useSelector((state) => state.updateStatusReport)
-  
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -75,7 +74,7 @@ export const SingleTicketService = () => {
           </Box>
       </Modal>
       {
-        singleReport.status === "issued" && (
+        singleReport?.status === "issued" && (
           <Box>
             <IconButton
               sx={{ padding: 0 }}
@@ -88,7 +87,9 @@ export const SingleTicketService = () => {
         </Box>
         )
       }
-      <ReportDataService singleReport={singleReport} />
+      {singleReport.image ? <ReportDataService singleReport={singleReport} />: <LinearProgress />}
     </Box>
   );
 };
+
+export default SingleTicketService

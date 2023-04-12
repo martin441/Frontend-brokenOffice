@@ -2,12 +2,13 @@ import {
   Avatar,
   Backdrop,
   Input,
+  LinearProgress,
   Modal,
   TextField,
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import EditProfile from "./EditProfile";
 import EditSensitive from "./EditSensitive";
@@ -16,13 +17,13 @@ import { styleEditProfile } from "../../utils/styleMUI";
 import { setUser } from "../../state/user";
 import axios from "axios";
 
-export const Profile = () => {
+const Profile = () => {
   const ROUTE = process.env.REACT_APP_ROUTE;
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
   const [open, setOpen] = useState(false);
-  const [imgAvatar, setImgAvatar] = useState("");
+  const [background, setBackground] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -46,6 +47,10 @@ export const Profile = () => {
     }
   };
 
+  useEffect(() => {
+    setBackground("https://statics.globant.com/production/public/2022-12/Mask%20Group%2061.jpeg")
+  },[])
+
   return (
     <>
       <Modal
@@ -62,7 +67,7 @@ export const Profile = () => {
         <div className="header-profile">
           <img
             className="header-image"
-            src="https://statics.globant.com/production/public/2022-12/Mask%20Group%2061.jpeg"
+            src={background === "" ? <LinearProgress/> : background}
             alt="header profile"
           />
         </div>
@@ -108,3 +113,5 @@ export const Profile = () => {
     </>
   );
 };
+
+export default Profile

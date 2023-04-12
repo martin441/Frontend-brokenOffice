@@ -2,8 +2,7 @@ import { Box, Card, CardActionArea, CardActions, CardContent, Grid, Typography }
 import { useSelector } from "react-redux";
 import { DashboardService } from "./Dashboard";
 import { DashboardUser } from "../User/Dashboard";
-import BuildCircleIcon from "@mui/icons-material/BuildCircle";
-export const ServiceHome = () => {
+const ServiceHome = () => {
   const user = useSelector((state) => state.user);
 
   return (
@@ -24,3 +23,4 @@ export const ServiceHome = () => {
     </Box>
   );
 };
+export default ServiceHome
