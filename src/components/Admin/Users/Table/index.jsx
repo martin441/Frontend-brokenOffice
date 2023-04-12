@@ -53,8 +53,11 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
       userType !== process.env.REACT_APP_OMEGA
     )
       return toast.error("You can't delete another admin");
-    axiosDeleteUser(user.email);
-    dispatch(deleteUser(user.email));
+    if (
+      user.type === process.env.REACT_APP_OMEGA
+    )
+      return toast.error("Can't delete the owner");
+    handleConfirm(user.email)
   };
 
   const handleConfirm = (data) => {
