@@ -32,7 +32,7 @@ export const DashboardSuperAdmin = () => {
               Globant Offices
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {num === 66 ? 'Click here to view, create and delete offices':'Click here to view, edit, create and delete offices'}
+              {num === 66 ? 'View, create and delete offices':'View, create, edit and delete offices'}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -50,7 +50,7 @@ export const DashboardSuperAdmin = () => {
               Globant Users
             </Typography>
             <Typography variant="body2" color="text.secondary">
-            {num === 66 ? 'Click here to view, create and delete users':'Click here to view, edit, create and delete users'}
+            {num === 66 ? 'View, create and delete users':'View, create, edit and delete users'}
             </Typography>
           </CardContent>
         </CardActionArea>

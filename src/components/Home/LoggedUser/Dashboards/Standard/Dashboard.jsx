@@ -54,7 +54,7 @@ export const DashboardUser = () => {
               History
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Click here to get access to your report history
+              Get access to your issued report history
             </Typography>
           </CardContent>
           <CardContent>
