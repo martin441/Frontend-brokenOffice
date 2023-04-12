@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import Chat from "../../Chat";
 import ResolveRejectBtn from "./ResolveReject";
 import { useSelector } from "react-redux";
 
@@ -46,6 +47,20 @@ export const ReportDataService = () => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText primary="Issuer:" />
+              <Typography
+                align="right"
+                variant="subtitle1"
+                sx={{ maxWidth: "80%" }}
+              >
+                {singleReport.issuer
+                  ? `${singleReport?.issuer.name} ${singleReport?.issuer.lastName}`
+                  : ""}
+              </Typography>
+            </ListItem>
+            <Divider></Divider>
+
+            <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Title:" />
               <Typography variant="subtitle1">{singleReport?.title}</Typography>
             </ListItem>
@@ -79,7 +94,7 @@ export const ReportDataService = () => {
               <ListItemText primary="Office:" />
               <Typography align="right" variant="subtitle1">
                 {singleReport.office &&
-                  `${singleReport?.office.address.street}, ${singleReport?.office.address.zip}, ${singleReport?.office.address.floor}, ${singleReport.office.name}`}
+                  `${singleReport?.office.address.street}, ${singleReport?.office.address.zip}, ${singleReport?.office.address.floor} ${singleReport.office.name}`}
               </Typography>
             </ListItem>
             <Divider></Divider>
@@ -134,6 +149,7 @@ export const ReportDataService = () => {
             }
             
           </List>
+          {singleReport._id && <Chat report={singleReport?._id} chatType={"assigned"}/>}
         </Grid>
       </Grid>
     </div>

@@ -7,11 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import Chat from "../../Chat";
 import React from "react";
 
 export const ReportData = ({ singleReport }) => {
   const imageSrc =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png";
+
   return (
     <div>
       {" "}
@@ -57,7 +59,7 @@ export const ReportData = ({ singleReport }) => {
                 sx={{
                   wordWrap: "break-word",
                   maxWidth: { xs: "60%", sm: "80%" },
-                }}
+                  }}
               >
                 {singleReport?.title}
               </Typography>
@@ -104,11 +106,13 @@ export const ReportData = ({ singleReport }) => {
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Product:" sx={{ maxWidth: "6rem" }} />
               <Typography variant="subtitle1">
+
                 {singleReport?.product}
               </Typography>
             </ListItem>
             <Divider></Divider>
           </List>
+          {singleReport._id && <Chat report={singleReport?._id} chatType={"issued"} />}
         </Grid>
       </Grid>
     </div>

@@ -6,10 +6,10 @@ import allUsersReducer from "./allUsers";
 import allReportsReducer from "./allReports";
 import newReportReducer from "./newReport";
 import changeTypeUserReducer from "./changeTypeUser";
-import serviceReducer from "./service";
+import serviceReducer from './service'
+import chatReducer from "./chat"
 import themeReducer from "./theme";
 import updateStatusReportReducer from "./updatedStatusReport";
-
 
 const store = configureStore({
   reducer: {
@@ -21,9 +21,9 @@ const store = configureStore({
     newReport: newReportReducer,
     changeType: changeTypeUserReducer,
     service: serviceReducer,
+    chat: chatReducer,
     theme: themeReducer,
     updateStatusReport: updateStatusReportReducer
-
   },
 });
 
