@@ -11,7 +11,7 @@ export const Notification = ({ notification }) => {
 
   return (
     <>
-      <Box sx={{ mr: 2 }}>
+      <Box sx={{ mr: 2 }} >
         <Avatar
           src={notification.senderPic ? notification.senderPic : img}
         ></Avatar>

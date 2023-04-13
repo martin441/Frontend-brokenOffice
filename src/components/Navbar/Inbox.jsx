@@ -21,18 +21,22 @@ export default function Inbox() {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = (id) => {
+
+  const handleClose = () => {
     setAnchorEl(null);
-    if (user?.type === process.env.REACT_APP_BETA) {
-      if (serviceOption === "issued") {
-        navigate(`/user/ticket/${id}`);
-      } else {
-        navigate(`/service/ticket/${id}`);
-      }
-    } else {
-      navigate(`/user/ticket/${id}`);
-    }
   };
+
+  const  handleNotificationClick = (id) => {
+    if (user?.type === process.env.REACT_APP_BETA) {
+        if (serviceOption === "issued") {
+          navigate(`/user/ticket/${id}`);
+        } else {
+          navigate(`/service/ticket/${id}`);
+        }
+      } else {
+        navigate(`/user/ticket/${id}`);
+      }
+  }
 
   return (
     <div>
@@ -90,12 +94,12 @@ export default function Inbox() {
             </ButtonGroup>
 
             {serviceOption === "issued" ? (
-              standardNot.notifications ? (
-                standardNot.notifications.map((notification, index) => (
+              standardNot?.notifications ? (
+                standardNot.notifications?.map((notification, index) => (
                   <>
                     <MenuItem
                       key={index}
-                      onClick={(e) => handleClose(notification.report)}
+                      onClick={(e) => handleNotificationClick(notification.report)}
                       id={notification?.report}
                     >
                       {notification && (
@@ -110,16 +114,16 @@ export default function Inbox() {
                   <Typography sx={{ ml: 1 }}>{standardNot}...</Typography>
                 </Box>
               )
-            ) : serviceNot.notifications ? (
-              serviceNot.notifications.map((notification, index) => (
+            ) : serviceNot?.notifications ? (
+              serviceNot.notifications?.map((notification, index) => (
                 <>
                   <MenuItem
                     key={index}
-                    onClick={(e) => handleClose(notification.report)}
+                    onClick={(e) => handleNotificationClick(notification.report)}
                     id={notification?.report}
                   >
                     {notification && (
-                      <Notification notification={notification} />
+                      <Notification notification={notification}  />
                     )}
                   </MenuItem>
                   <Divider></Divider>
@@ -130,14 +134,14 @@ export default function Inbox() {
             )}
           </div>
         ) : (
-          standardNot.notifications &&
+          standardNot?.notifications &&
           standardNot.notifications?.map((notification, index) => (
             <>
               <MenuItem
                 key={index}
-                onClick={(e) => handleClose(notification.report)}
+                onClick={(e) => handleNotificationClick(notification.report)}
               >
-                {notification && <Notification notification={notification} />}
+                {notification && <Notification notification={notification}  />}
               </MenuItem>
               <Divider></Divider>
             </>
