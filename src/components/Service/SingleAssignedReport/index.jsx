@@ -52,7 +52,8 @@ const SingleTicketService = () => {
       sx={{
         mt: 4,
         minHeight: '90vh',
-        color: 'text.primary'
+        color: 'text.primary',
+        paddingBottom:"30px"
       }}
     >
       <Box sx={{ ml: 2 }}>
@@ -82,15 +83,20 @@ const SingleTicketService = () => {
       </Modal>
       {
         singleReport?.status === "issued" && (
-          <Box>
+          <Box sx={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
+            <Box sx={{width:"100%"}}>
             <IconButton
-              sx={{ padding: 0 }}
+              sx={{ padding: 0, width:"50px" }}
               onClick={(event) => {
                 setOpen(true)
               }}
             >
               <AddTask sx={{ fontSize: 50 }} color="primary" />
             </IconButton>
+            </Box>
+            <Typography variant="body" gutterBottom sx={{textAlign:"center", color:"grey"}}>
+            Click to resolve issued report
+          </Typography>
         </Box>
         )
       }

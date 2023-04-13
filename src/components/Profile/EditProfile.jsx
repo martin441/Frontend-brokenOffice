@@ -23,7 +23,7 @@ export default function EditProfile() {
   const [inputRole, setInputRole] = React.useState(user?.role);
   const [inputAddress, setInputAddress] = React.useState(user?.addressName);
   const [inputOffice, setInputOffice] = React.useState(user?.office);
-  const [addressCoor, setAddressCoor] = React.useState([]);
+  const [addressCoor, setAddressCoor] = React.useState(user?.addressCoor);
 
   function handleAddressChange(value) {
     if (value) {
@@ -54,8 +54,11 @@ export default function EditProfile() {
       office: inputOffice,
     };
 
+    if (!obj.addressCoor.coordinates.length) {
+      delete obj.addressCoor
+    }
+
     try {
-     
       const { data } = await axios.put(`${ROUTE}/user/edit/profile`, obj, {
         withCredentials: true,
       });
@@ -115,7 +118,7 @@ export default function EditProfile() {
             sx={{ mb: ".5rem" }}
           />
 
-          <Typography color='text.primary'>Current Office: {user.office.address?.street}{user.office?.name}</Typography>
+          <Typography color='text.primary'>Current Office: {user.office.address ? (user.office.address.street + " " + user.office.name) : "You haven't set an office yet"}</Typography>
 
           <TextField
             sx={{ mt: 1 }}
@@ -134,6 +137,7 @@ export default function EditProfile() {
               >{`${office?.name}, ${office?.address.street}`}</MenuItem>
             ))}
           </TextField>
+          <Typography color='text.primary'>Current Address: {user.addressName ? user.addressName : "You haven't set an address yet"}</Typography>
           <AddressAutocomplete
             sx={{ mt: 2 }}
             apiKey={process.env.REACT_APP_API_KEY}

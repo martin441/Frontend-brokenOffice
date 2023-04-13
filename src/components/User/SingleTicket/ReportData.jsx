@@ -13,7 +13,7 @@ import React from "react";
 export const ReportData = ({ singleReport }) => {
   const imageSrc =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png";
-
+  
   return (
     <div>
       {" "}
@@ -26,12 +26,12 @@ export const ReportData = ({ singleReport }) => {
         alignItems="center"
         sx={{ maxWidth: { xs: "85%", sm: "80%" }, margin: "0 auto" }}
       >
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={8}>
           <Box
             component="img"
             alt="Input Image"
             src={singleReport.image ? singleReport?.image : imageSrc}
-            sx={{ maxWidth: "100%" }}
+            sx={{ maxWidth: "250px" }}
           ></Box>
         </Grid>
 
@@ -48,6 +48,20 @@ export const ReportData = ({ singleReport }) => {
                 }}
               >
                 {singleReport?._id}
+              </Typography>
+            </ListItem>
+            <Divider></Divider>
+
+            <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText primary="Solver:" sx={{ maxWidth: "6rem" }} />
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  wordWrap: "break-word",
+                  maxWidth: { xs: "60%", sm: "80%" },
+                }}
+              >
+                {singleReport?.solver.name} {singleReport?.solver.lastName}
               </Typography>
             </ListItem>
             <Divider></Divider>
@@ -111,8 +125,33 @@ export const ReportData = ({ singleReport }) => {
               </Typography>
             </ListItem>
             <Divider></Divider>
+
+                  
+            {
+              (singleReport.status === "resolved" || singleReport.status === "rejected") && (<>
+                <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText sx={{ maxWidth: "6rem" }} primary={singleReport.status === "resolved" ? `Resolved title:` : `Rejected title:`} />
+              <Typography variant="subtitle1">{singleReport?.reason.title}</Typography>
+            </ListItem>
+            <Divider></Divider>
+
+            <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText sx={{ maxWidth: "6rem" }} primary={singleReport.status === "resolved" ? `Resolved description:` : `Rejected description:`} />
+              <Typography
+                variant="subtitle1"
+                maxWidth={"50%"}
+                sx={{ wordWrap: "break-word", textAlign: "right" }}
+              >
+                {singleReport?.reason.description}
+              </Typography>
+            </ListItem>
+            <Divider></Divider>
+              </>)
+            }
+                 
+
           </List>
-          {singleReport._id && <Chat report={singleReport?._id} chatType={"issued"} />}
+          {singleReport.status === "in progress" && <Chat report={singleReport?._id} chatType={"issued"} />}
         </Grid>
       </Grid>
     </div>

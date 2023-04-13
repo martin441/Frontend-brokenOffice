@@ -28,6 +28,7 @@ const SingleTicket = () => {
         mt: 4,
         color: "text.primary",
         minHeight: "89vh",
+        paddingBottom:"30px"
       }}
     >
       <Box marginLeft={"30px"}>

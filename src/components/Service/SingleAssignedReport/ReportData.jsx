@@ -33,7 +33,7 @@ export const ReportDataService = () => {
             component="img"
             alt="Input Image"
             src={singleReport.image ? singleReport?.image : imageSrc}
-            sx={{ maxWidth: "65%" }}
+            sx={{ maxWidth: "250px" }}
           ></Box>
         </Grid>
 
@@ -41,13 +41,16 @@ export const ReportDataService = () => {
           <Divider></Divider>
           <List disablePadding>
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="ID:" />
-              <Typography variant="subtitle1">{singleReport?._id}</Typography>
+              <ListItemText primary="ID:" sx={{ maxWidth: "7rem" }} />
+              <Typography variant="subtitle1" sx={{
+                  wordWrap: "break-word",
+                  maxWidth: { xs: "60%", sm: "80%" },
+                }}>{singleReport?._id}</Typography>
             </ListItem>
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Issuer:" />
+              <ListItemText primary="Issuer:" sx={{ maxWidth: "7rem" }} />
               <Typography
                 align="right"
                 variant="subtitle1"
@@ -61,13 +64,13 @@ export const ReportDataService = () => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Title:" />
+              <ListItemText primary="Title:" sx={{ maxWidth: "7rem" }} />
               <Typography variant="subtitle1">{singleReport?.title}</Typography>
             </ListItem>
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Description:" />
+              <ListItemText primary="Description:" sx={{ maxWidth: "7rem" }} />
               <Typography
                 variant="subtitle1"
                 maxWidth={"50%"}
@@ -79,7 +82,7 @@ export const ReportDataService = () => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Date of issue:" />
+              <ListItemText primary="Date of issue:" sx={{ maxWidth: "7rem" }} />
               <Typography
                 variant="subtitle1"
                 maxWidth={"50%"}
@@ -91,8 +94,11 @@ export const ReportDataService = () => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Office:" />
-              <Typography align="right" variant="subtitle1">
+              <ListItemText primary="Office:" sx={{ maxWidth: "7rem" }} />
+              <Typography variant="subtitle1" sx={{
+                  wordWrap: "break-word",
+                  maxWidth: { xs: "60%", sm: "80%" },
+                }}>
                 {singleReport.office &&
                   `${singleReport?.office.address.street}, ${singleReport?.office.address.zip}, ${singleReport?.office.address.floor} ${singleReport.office.name}`}
               </Typography>
@@ -100,7 +106,7 @@ export const ReportDataService = () => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Product:" />
+              <ListItemText primary="Product:" sx={{ maxWidth: "7rem" }} />
               <Typography align="right" variant="subtitle1">
                 {singleReport?.product}
               </Typography>
@@ -108,7 +114,7 @@ export const ReportDataService = () => {
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary="Status:" />
+              <ListItemText primary="Status:" sx={{ maxWidth: "7rem" }} />
               <Typography align="right" variant="subtitle1">
                 {singleReport?.status}
               </Typography>
@@ -129,13 +135,13 @@ export const ReportDataService = () => {
             {
               (singleReport.status === "resolved" || singleReport.status === "rejected") && (<>
                 <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary={singleReport.status === "resolved" ? `Resolved title:` : `Rejected title:`} />
+              <ListItemText sx={{ maxWidth: "7rem" }} primary={singleReport.status === "resolved" ? `Resolved title:` : `Rejected title:`} />
               <Typography variant="subtitle1">{singleReport?.reason.title}</Typography>
             </ListItem>
             <Divider></Divider>
 
             <ListItem sx={{ py: 1, px: 0 }}>
-              <ListItemText primary={singleReport.status === "resolved" ? `Resolved description:` : `Rejected description:`} />
+              <ListItemText sx={{ maxWidth: "7rem" }} primary={singleReport.status === "resolved" ? `Resolved description:` : `Rejected description:`} />
               <Typography
                 variant="subtitle1"
                 maxWidth={"50%"}
@@ -149,7 +155,7 @@ export const ReportDataService = () => {
             }
             
           </List>
-          {singleReport._id && <Chat report={singleReport?._id} chatType={"assigned"}/>}
+          {singleReport.status === "in progress" && <Chat report={singleReport?._id} chatType={"assigned"}/>}
         </Grid>
       </Grid>
     </div>

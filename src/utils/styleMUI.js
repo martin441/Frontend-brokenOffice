@@ -22,7 +22,7 @@ export const styleEditProfile = {
   p: 4,
   backgroundColor:'secondary.main',
   color: 'text.primary',
-  maxWidth:300
+  maxWidth:400
 };
 
 export const muiStyleLoginBtn = {
