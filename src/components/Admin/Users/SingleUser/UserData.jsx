@@ -11,6 +11,7 @@ import React from "react";
 import checkType from "../../../../utils/checkType";
 
 export const UserData = ({ singleUser }) => {
+  console.log(singleUser)
   function checkSingleUserType(type) {
     switch (checkType(type)) {
       case 66:
@@ -44,11 +45,11 @@ export const UserData = ({ singleUser }) => {
         alignItems="center"
         sx={{ maxWidth: { xs: "85%", sm: "80%" }, margin: "0 auto" }}
       >
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={6}>
           <Box
             component="img"
             alt="Input Image"
-            src={singleUser.user.image ? singleUser?.user.picure : imageSrc}
+            src={singleUser.user.picture ? singleUser.user.picture : imageSrc}
             sx={{ maxWidth: "70%" }}
           ></Box>
         </Grid>

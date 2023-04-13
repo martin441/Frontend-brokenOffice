@@ -11,6 +11,7 @@ import Chat from "../../Chat";
 import React from "react";
 
 export const ReportData = ({ singleReport }) => {
+  console.log(singleReport)
   const imageSrc =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png";
   
