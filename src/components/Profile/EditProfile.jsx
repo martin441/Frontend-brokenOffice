@@ -102,7 +102,7 @@ export default function EditProfile() {
               >{`${office?.name}, ${office?.address.street}`}</MenuItem>
             ))}
           </TextField>
-          <Typography color='text.primary'>Current Address: {user.addressName ? user.addressName : "You haven't set an address yet"}</Typography>
+          <Typography color='text.primary'>Current Address: {user?.addressName ? user?.addressName : "You haven't set an address yet"}</Typography>
           <AddressAutocomplete
             sx={{ mt: 2 }}
             apiKey={process.env.REACT_APP_API_KEY}
