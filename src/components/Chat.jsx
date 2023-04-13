@@ -63,13 +63,13 @@ export default function Chat({ report, chatType }) {
     if (chatType === "issued") {
       const currentLength = await axios.post(
         "http://localhost:3001/chats/issuerlength",
-        { chatId: chatId, chatLength: currentChat.data.length },
+        { chatId: chatId, chatLength: currentChat.data.length, chatRoom: report },
         { withCredentials: true }
       );
     } else {
       const currentLength = await axios.post(
         "http://localhost:3001/chats/solverlength",
-        { chatId: chatId, chatLength: currentChat.data.length },
+        { chatId: chatId, chatLength: currentChat.data.length, chatRoom: report},
         { withCredentials: true }
       );
       console.log(currentLength);
@@ -95,13 +95,13 @@ export default function Chat({ report, chatType }) {
       if (chatType === "issued") {
         const currentLength = await axios.post(
           "http://localhost:3001/chats/issuerlength",
-          { chatId: chatId, chatLength: chatHistory.data.length },
+          { chatId: newChat.data._id, chatLength: chatHistory.data.length,chatRoom: report },
           { withCredentials: true }
         );
       } else {
         const currentLength = await axios.post(
           "http://localhost:3001/chats/solverlength",
-          { chatId: chatId, chatLength: chatHistory.data.length },
+          { chatId: newChat.data._id, chatLength: chatHistory.data.length, chatRoom: report },
           { withCredentials: true }
         );
         
