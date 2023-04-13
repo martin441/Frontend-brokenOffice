@@ -78,7 +78,13 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
   };
 
   React.useEffect(() => {
-    axiosGetAllUsers().then((users) => dispatch(setAllUsers(users)));
+    axiosGetAllUsers().then((users) => {
+      dispatch(setAllUsers(users))
+      localStorage.setItem("allUsersPWA", JSON.stringify(users))
+    }).catch(() => {
+      const userss = JSON.parse(localStorage.getItem("allUsersPWA"));
+      dispatch(setAllUsers(userss))
+    })
   }, [dispatch]);
 
   const columns = Columns(type, handleOpen, handleClick);

@@ -24,7 +24,11 @@ export default function ServerReportList() {
   React.useEffect(() => {
     axiosGetAssignedReportsService().then((reports) => {
       dispatch(setAssignedReports(reports));
-    });
+      localStorage.setItem("serviceReportsPWA", JSON.stringify(reports))
+    }).catch(() => {
+      const reportss = JSON.parse(localStorage.getItem("serviceReportsPWA"));
+      dispatch(setAssignedReports(reportss));
+    })
   }, [dispatch]);
 
   function CustomToolbar() {
