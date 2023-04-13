@@ -59,7 +59,6 @@ export default function NewTicketForm() {
         dispatch(clearReport());
         setActiveStep(activeStep + 1);
       } catch (error) {
-        console.log(error);
       }
     }
   };

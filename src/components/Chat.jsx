@@ -19,9 +19,11 @@ import {
 import ChatIcon from "@mui/icons-material/Chat";
 import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import checkType from "../utils/checkType";
+import { axiosGetInboxIssuer, axiosGetInboxSolver } from "../utils/axios";
+import { notificationsIssuer, notificationsSolver } from "../state/chat";
 const socket = io("http://localhost:3001");
 
 export default function Chat({ report, chatType }) {
@@ -32,11 +34,11 @@ export default function Chat({ report, chatType }) {
   const [isSending, setIsSending] = useState(false);
   const [chatId, setChatId] = useState("");
   const chatRef = useRef(null);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
-      console.log("gola");
     }
   }, [messages, chatRef]);
 
@@ -72,7 +74,14 @@ export default function Chat({ report, chatType }) {
         { chatId: chatId, chatLength: currentChat.data.length, chatRoom: report},
         { withCredentials: true }
       );
-      console.log(currentLength);
+      if (user) {
+        if (user?.type === process.env.REACT_APP_BETA) {
+          axiosGetInboxSolver().then((res) => dispatch(notificationsSolver(res)));
+          axiosGetInboxIssuer().then((res) => dispatch(notificationsIssuer(res)));
+        } else {
+          axiosGetInboxIssuer().then((res) => dispatch(notificationsIssuer(res)));
+        }
+      }
     }
     setOpen(false);
   };
