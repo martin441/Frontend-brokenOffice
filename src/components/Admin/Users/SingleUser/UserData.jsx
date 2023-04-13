@@ -11,7 +11,6 @@ import React from "react";
 import checkType from "../../../../utils/checkType";
 
 export const UserData = ({ singleUser }) => {
-  console.log(singleUser)
   function checkSingleUserType(type) {
     switch (checkType(type)) {
       case 66:

@@ -24,7 +24,6 @@ export default function ResolveRejectBtn() {
     e.preventDefault();
     if(!title || !description) return toast.error('Description and Title must be filled')
     const obj = {status: status, title: title, description: description}
-    console.log(obj);
     try {
       const updtReport = await axiosPutReportStatus(singleReport._id, obj)
       dispatch(updateStatusReport(updtReport))

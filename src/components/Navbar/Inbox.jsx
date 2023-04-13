@@ -14,29 +14,29 @@ import { notificationsIssuer, notificationsSolver } from "../../state/chat";
 export default function Inbox() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [serviceOption, setServiceOption] = React.useState("assigned");
-
   const open = Boolean(anchorEl);
   const user = useSelector((state) => state.user);
   const serviceNot = useSelector((state) => state.chat.notificationsSolver);
   const standardNot = useSelector((state) => state.chat.notificationsIssuer);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const getTotalNotifications = () => {
     if (user?.type === process.env.REACT_APP_BETA) {
-      if (serviceNot.total && standardNot.total) {
-        return serviceNot.total + standardNot.total;
-      } else if (!serviceNot.total || !standardNot.total) {
-        if (serviceNot.total) return serviceNot.total;
-        if (standardNot.total) return standardNot.total;
+      if (serviceNot?.total && standardNot?.total) {
+        return serviceNot?.total + standardNot?.total;
+      } else if (!serviceNot?.total || !standardNot?.total) {
+        if (serviceNot?.total) return serviceNot?.total;
+        if (standardNot?.total) return standardNot?.total;
       } else {
         return 0;
       }
     } else {
-      return standardNot.total;
+      return standardNot?.total;
     }
   };
+
+  
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -101,12 +101,13 @@ export default function Inbox() {
             <ButtonGroup
               variant="outlined"
               aria-label="outlined button group"
-              sx={{ p: 1 }}
+              sx={{ p: 1, width: "100%" }}
             >
               <Button
                 sx={{
                   background: serviceOption === "assigned" && "#39B54A",
                   color: serviceOption === "assigned" && "black",
+                  width: "12rem",
                 }}
                 onClick={() => setServiceOption("assigned")}
               >
@@ -116,10 +117,11 @@ export default function Inbox() {
                 sx={{
                   background: serviceOption === "issued" && "#39B54A",
                   color: serviceOption === "issued" && "black",
+                  width: "12rem",
                 }}
                 onClick={() => setServiceOption("issued")}
               >
-                Issued Reports
+                My Reports
               </Button>
             </ButtonGroup>
 

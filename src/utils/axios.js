@@ -219,12 +219,10 @@ export async function axiosPostRestorePass(token, password) {
 }
 
 export async function axiosGetInboxSolver() {
-  console.log('CHAU');
   try {
     const notifications = await axios.get(`${ROUTE}/chats/solverinbox`, {
       withCredentials: true,
     });
-    console.log(notifications.data);
     return notifications.data;
   } catch (error) {
     console.error(error);
@@ -232,12 +230,10 @@ export async function axiosGetInboxSolver() {
 }
 
 export async function axiosGetInboxIssuer() {
-  console.log('HOLA');
   try {
     const notifications = await axios.get(`${ROUTE}/chats/issuerinbox`, {
       withCredentials: true,
     });
-    console.log(notifications.data);
     return notifications.data;
   } catch (error) {
     console.error(error);
