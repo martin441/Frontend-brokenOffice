@@ -42,6 +42,11 @@ export default function MenuNav() {
         { withCredentials: true }
       );
       if (user) dispatch(setUser({}));
+      localStorage.removeItem("userPWA");
+      localStorage.removeItem("officesPWA");
+      localStorage.removeItem("personalReportsPWA");
+      localStorage.removeItem("serviceReportsPWA");
+      localStorage.removeItem("allUsersPWA");
       navigate("/");
     } catch (error) {
       console.error(error);
