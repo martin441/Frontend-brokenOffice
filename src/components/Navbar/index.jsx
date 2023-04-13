@@ -24,7 +24,7 @@ export const Navbar = () => {
       if (user?.type === process.env.REACT_APP_BETA) {
         axiosGetInboxSolver().then((res) => dispatch(notificationsSolver(res)));
         axiosGetInboxIssuer().then((res) => dispatch(notificationsIssuer(res)));
-      } else  {
+      } else {
         axiosGetInboxIssuer().then((res) => dispatch(notificationsIssuer(res)));
       }
     }
