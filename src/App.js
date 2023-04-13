@@ -68,7 +68,7 @@ function App() {
         .catch((err) => {
           console.error(err);
           const user = JSON.parse(localStorage.getItem("userPWA"));
-          dispatch(setUser(user))
+          if (user) dispatch(setUser(user))
         })
       axios
         .get(`${ROUTE}/offices`, { withCredentials: true })
@@ -80,7 +80,7 @@ function App() {
         .catch((err) => {
           console.error(err);
           const offices = JSON.parse(localStorage.getItem("officesPWA"));
-          dispatch(setOffices(offices))
+          if (offices) dispatch(setOffices(offices))
         })
       axios
         .get(`${ROUTE}/reports/history`, { withCredentials: true })
@@ -92,7 +92,7 @@ function App() {
         .catch((err) => {
           console.error(err)
           const reports = JSON.parse(localStorage.getItem("personalReportsPWA"));
-          dispatch(setAllReports(reports))
+          if (reports) dispatch(setAllReports(reports))
         });
     }
     if (checkType(user?.type) === 14) {
@@ -101,7 +101,7 @@ function App() {
         localStorage.setItem("serviceReportsPWA", JSON.stringify(reports))
       }).catch(() => {
         const reportss = JSON.parse(localStorage.getItem("serviceReportsPWA"));
-        dispatch(setAssignedReports(reportss));
+        if (reportss) dispatch(setAssignedReports(reportss));
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
