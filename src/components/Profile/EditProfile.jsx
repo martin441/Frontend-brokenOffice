@@ -3,15 +3,13 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { styleEditProfile } from "../../utils/styleMUI";
 import { Button, MenuItem, TextField, Typography } from "@mui/material";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import AddressAutocomplete from "mui-address-autocomplete";
 import useChange from "../../hooks/useChange";
 
-
 export default function EditProfile() {
   const offices = useSelector((state) => state.office);
-
 
   const {
     setInputName,
@@ -29,7 +27,6 @@ export default function EditProfile() {
     inputRole,
     inputOffice,
   } = useChange();
-
 
   return (
     <div>
@@ -78,12 +75,13 @@ export default function EditProfile() {
             sx={{ mb: ".5rem" }}
           />
 
-
           <Typography color="text.primary">
-            Current Office: {user?.office?.address?.street}
+            Current Office:{" "}
+            {user?.office?.address?.street
+              ? user.office.address.street
+              : "You haven't set an default office"}
             {user?.office?.name}
           </Typography>
-
 
           <TextField
             sx={{ mt: 1 }}
@@ -102,7 +100,12 @@ export default function EditProfile() {
               >{`${office?.name}, ${office?.address.street}`}</MenuItem>
             ))}
           </TextField>
-          <Typography color='text.primary'>Current Address: {user?.addressName ? user?.addressName : "You haven't set an address yet"}</Typography>
+          <Typography color="text.primary">
+            Current Address:{" "}
+            {user?.addressName
+              ? user?.addressName
+              : "You haven't set an address yet"}
+          </Typography>
           <AddressAutocomplete
             sx={{ mt: 2 }}
             apiKey={process.env.REACT_APP_API_KEY}
