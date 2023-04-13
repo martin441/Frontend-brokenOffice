@@ -110,6 +110,15 @@ export const ReportData = ({ singleReport }) => {
             </ListItem>
             <Divider></Divider>
 
+
+            <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText primary="Service:" sx={{ maxWidth: "6rem" }} />
+              <Typography variant="subtitle1">
+                {singleReport?.solver.name}
+              </Typography>
+            </ListItem>
+            <Divider></Divider>
+
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Status:" sx={{ maxWidth: "6rem" }} />
               <Typography variant="subtitle1">
