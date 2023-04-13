@@ -1,4 +1,4 @@
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Tooltip } from "@mui/material";
 import { useDispatch } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteBtn from "../../../../commons/DeleteBtn";
@@ -10,7 +10,6 @@ export const Columns = (type, handleOpen, handleClick) => {
   const dispatch = useDispatch();
 
   const number = checkType(type);
-
 
   return number === 32
     ? (columns = [
@@ -134,8 +133,18 @@ export const Columns = (type, handleOpen, handleClick) => {
           align: "center",
           flex: 0.5,
           editable: false,
-          valueGetter: (params) =>
-            !params.row.addressName ? "(No region)" : params.row.addressName,
+          // valueGetter: (params) =>
+          //   !params.row.addressName ? "(No region)" : params.row.addressName,
+          renderCell: (params) =>
+            !params.row.addressName ? (
+              "(No region)"
+            ) : params.row.addressName.length > 4 ? (
+              <Tooltip title={params.row.addressName} arrow>
+                <span>{`${params.row.addressName.slice(0, 14)}...`}</span>
+              </Tooltip>
+            ) : (
+              params.row.addressName
+            ),
         },
         {
           headerName: "Delete",
@@ -197,8 +206,16 @@ export const Columns = (type, handleOpen, handleClick) => {
           align: "center",
           flex: 0.5,
           editable: false,
-          valueGetter: (params) =>
-            !params.row.addressName ? "(No region)" : params.row.addressName,
+          renderCell: (params) =>
+            !params.row.addressName ? (
+              "(No region)"
+            ) : params.row.addressName.length > 4 ? (
+              <Tooltip title={params.row.addressName} arrow>
+                <span>{`${params.row.addressName.slice(0, 14)}...`}</span>
+              </Tooltip>
+            ) : (
+              params.row.addressName
+            ),
         },
         {
           headerName: "Delete",

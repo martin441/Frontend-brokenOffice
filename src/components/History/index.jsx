@@ -45,10 +45,10 @@ export const History = ({ reportsOtherUser }) => {
       renderCell: (params) => {
         return (<Box sx={{
           display: "flex",
-          width: "100%",
-          justifyContent: "center",
+          width: "70%",
+          justifyContent: "flex-start",
           alignItems: "center",
-          flexWrap: "wrap",
+          
           gap: 1,
         }}>
         <Box>
@@ -63,7 +63,7 @@ export const History = ({ reportsOtherUser }) => {
           <ShareIcon fontSize="small" />
         </IconButton>
       </Box>
-      <Box sx={{marginX:1}}>
+      <Box sx={{marginX:1, width:"80%"}}>
       {params.row.title}
       </Box>
     </Box>)
