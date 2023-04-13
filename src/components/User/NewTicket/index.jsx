@@ -37,7 +37,7 @@ export default function NewTicketForm() {
   const report = useSelector((state) => state.newReport);
   const dispatch = useDispatch();
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (activeStep === 0) {
       if (report.title && report.description && report.image) {
         setActiveStep(activeStep + 1);
@@ -53,9 +53,14 @@ export default function NewTicketForm() {
       }
     }
     if (activeStep === 2) {
-      axiosPostNewReport({ ...report, office: report.office._id });
-      dispatch(clearReport());
-      setActiveStep(activeStep + 1);
+      try {
+        const data = await axiosPostNewReport({ ...report, office: report.office._id });
+        if (data.name === "AxiosError") return toast.error(`Already exist a report open`);;
+        dispatch(clearReport());
+        setActiveStep(activeStep + 1);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

@@ -143,6 +143,7 @@ export async function axiosPostNewReport(obj) {
     return office.data;
   } catch (error) {
     console.error(error);
+    return error
   }
 }
 export async function axiosPutUserType(obj) {
