@@ -60,21 +60,48 @@ function App() {
       axios
         .get(`${ROUTE}/user/me`, { withCredentials: true })
         .then((res) => res.data)
-        .then((data) => dispatch(setUser(data)));
+        .then((data) => {
+          dispatch(setUser(data))
+          localStorage.setItem("userPWA", JSON.stringify(data))
+        })
+        .catch((err) => {
+          console.error(err);
+          const user = JSON.parse(localStorage.getItem("userPWA"));
+          dispatch(setUser(user))
+        })
       axios
         .get(`${ROUTE}/offices`, { withCredentials: true })
         .then((res) => res.data)
-        .then((data) => dispatch(setOffices(data)));
+        .then((data) => {
+          dispatch(setOffices(data))
+          localStorage.setItem("officesPWA", JSON.stringify(data))
+        })
+        .catch((err) => {
+          console.error(err);
+          const offices = JSON.parse(localStorage.getItem("officesPWA"));
+          dispatch(setOffices(offices))
+        })
       axios
         .get(`${ROUTE}/reports/history`, { withCredentials: true })
         .then((res) => res.data)
-        .then((data) => dispatch(setAllReports(data)))
-        .catch((err) => console.error(err));
+        .then((data) => {
+          dispatch(setAllReports(data))
+          localStorage.setItem("personalReportsPWA", JSON.stringify(data))
+        })
+        .catch((err) => {
+          console.error(err)
+          const reports = JSON.parse(localStorage.getItem("personalReportsPWA"));
+          dispatch(setAllReports(reports))
+        });
     }
     if (checkType(user?.type) === 14) {
       axiosGetAssignedReportsService().then((reports) => {
         dispatch(setAssignedReports(reports));
-      });
+        localStorage.setItem("serviceReportsPWA", JSON.stringify(reports))
+      }).catch(() => {
+        const reportss = JSON.parse(localStorage.getItem("serviceReportsPWA"));
+        dispatch(setAssignedReports(reportss));
+      })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ROUTE, dispatch]);
