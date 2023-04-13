@@ -1,72 +1,33 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import toast from "react-hot-toast";
 import Modal from "@mui/material/Modal";
 import { styleEditProfile } from "../../utils/styleMUI";
 import { Button, MenuItem, TextField, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import {useSelector } from "react-redux";
+
 import AddressAutocomplete from "mui-address-autocomplete";
-import { setUser } from "../../state/user";
+import useChange from "../../hooks/useChange";
+
 
 export default function EditProfile() {
-  const ROUTE = process.env.REACT_APP_ROUTE;
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
   const offices = useSelector((state) => state.office);
 
-  const [inputName, setInputName] = React.useState(user?.name);
-  const [inputLastName, setInputLastName] = React.useState(user?.lastName);
-  const [inputRole, setInputRole] = React.useState(user?.role);
-  const [inputAddress, setInputAddress] = React.useState(user?.addressName);
-  const [inputOffice, setInputOffice] = React.useState(user?.office);
-  const [addressCoor, setAddressCoor] = React.useState([]);
-
-  function handleAddressChange(value) {
-    if (value) {
-      setInputAddress(value?.description);
-    } else {
-      setInputAddress("");
-    }
-    const lat = value?.geometry.location.lat();
-    const lng = value?.geometry.location.lng();
-    setAddressCoor([lng, lat]);
-    if (!value) toast.error("Address not valid");
-  }
-  
-  const handleSubmit = async () => {
-    if (
-      inputName === "" ||
-      inputLastName === "" ||
-      inputRole === ""
-    )
-      return toast.error("Please enter required data");
-
-    const obj = {
-      name: inputName,
-      lastName: inputLastName,
-      role: inputRole,
-      addressName: inputAddress,
-      addressCoor: { type: "Point", coordinates: addressCoor },
-      office: inputOffice,
-    };
-
-    try {
-     
-      const { data } = await axios.put(`${ROUTE}/user/edit/profile`, obj, {
-        withCredentials: true,
-      });
-      dispatch(setUser(data));
-      toast.success("Profile changed successfully");
-      handleClose();
-    } catch (err) {
-      toast.error("Could not change Profile");
-      console.error(err);
-    }
-  };
+  const {
+    setInputName,
+    setInputLastName,
+    setInputRole,
+    setInputOffice,
+    handleAddressChange,
+    handleOpen,
+    handleClose,
+    handleEditPassSubmit,
+    open,
+    user,
+    inputName,
+    inputLastName,
+    inputRole,
+    inputOffice,
+  } = useChange();
 
   return (
     <div>
@@ -115,7 +76,10 @@ export default function EditProfile() {
             sx={{ mb: ".5rem" }}
           />
 
-          <Typography color='text.primary'>Current Office: {user.office.address?.street}{user.office?.name}</Typography>
+          <Typography color="text.primary">
+            Current Office: {user?.office?.address?.street}
+            {user?.office?.name}
+          </Typography>
 
           <TextField
             sx={{ mt: 1 }}
@@ -144,7 +108,7 @@ export default function EditProfile() {
             }}
           />
           <Button
-            onClick={handleSubmit}
+            onClick={handleEditPassSubmit}
             variant="contained"
             sx={{ mt: 2, mx: "auto" }}
           >

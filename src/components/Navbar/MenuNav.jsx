@@ -55,7 +55,6 @@ export default function MenuNav() {
           <Box
             sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
           >
-            {/* <Typography sx={{ minWidth: 100 }}>Contact</Typography> */}
             <Tooltip title="Account settings">
               <IconButton
                 onClick={handleClick}

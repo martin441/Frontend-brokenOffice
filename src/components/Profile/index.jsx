@@ -7,42 +7,20 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 import EditProfile from "./EditProfile";
 import EditSensitive from "./EditSensitive";
 import { Box } from "@mui/system";
 import { styleEditProfile } from "../../utils/styleMUI";
-import { setUser } from "../../state/user";
-import axios from "axios";
 import useImg from "../../hooks/useImg";
+import useChange from "../../hooks/useChange";
 
 const Profile = () => {
-  const ROUTE = process.env.REACT_APP_ROUTE;
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
   
-  const handleChangeInput = async (e) => {
-    try {
-      var formData = new FormData();
-      formData.append("file", e.target.files[0]);
-      handleClose();
-      const { data } = await axios.post(
-        `${ROUTE}/user/edit/picture`,
-        formData,
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-      dispatch(setUser(data));
-    } catch (err) {
-      console.error("desde PROFILE,index", err);
-    }
-  };
+  const {handleChangeInput, open, handleOpen, handleClose} = useChange()
 
   const { img } = useImg(
     "https://statics.globant.com/production/public/2022-12/Mask%20Group%2061.jpeg"
