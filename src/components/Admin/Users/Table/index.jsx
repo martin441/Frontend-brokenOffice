@@ -86,9 +86,9 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
   function CustomToolbar() {
     return (
       <GridToolbarContainer>
-        <GridToolbarColumnsButton />
-        <GridToolbarFilterButton />
-        <GridToolbarExport />
+        <GridToolbarColumnsButton sx={{color:"text.primary"}} />
+        <GridToolbarFilterButton sx={{color:"text.primary"}} />
+        <GridToolbarExport sx={{color:"text.primary"}} />
       </GridToolbarContainer>
     );
   }
