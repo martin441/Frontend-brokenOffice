@@ -83,7 +83,7 @@ export default function BasicExampleDataGrid({ type, filterForType }) {
       localStorage.setItem("allUsersPWA", JSON.stringify(users))
     }).catch(() => {
       const userss = JSON.parse(localStorage.getItem("allUsersPWA"));
-      dispatch(setAllUsers(userss))
+      if (userss) dispatch(setAllUsers(userss))
     })
   }, [dispatch]);
 
