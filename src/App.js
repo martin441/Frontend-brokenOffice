@@ -19,7 +19,9 @@ import { setOffices } from "./state/office";
 import { LoginProtectedRoute } from "./commons/LoginProtectedRoute";
 import { History } from "../src/components/History";
 import { setAllReports } from "./state/allReports";
-import { axiosGetAssignedReportsService } from "./utils/axios";
+import {
+  axiosGetAssignedReportsService,
+} from "./utils/axios";
 import { setAssignedReports } from "./state/service";
 const Home = lazy(() => import("./components/Home/Home"));
 const UserHome = lazy(() => import("./components/Home/LoggedUser/index"));
@@ -47,7 +49,6 @@ function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
   const dispatch = useDispatch();
 
-  const reports = useSelector((state) => state.allReports);
 
   // Update the theme only if the mode changes
   const theme = useMemo(

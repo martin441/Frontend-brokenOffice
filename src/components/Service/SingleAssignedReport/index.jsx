@@ -12,7 +12,7 @@ import { ReportDataService } from "./ReportData";
 import { AddTask } from "@mui/icons-material";
 import { styleEditProfile } from "../../../utils/styleMUI";
 import { toast } from "react-hot-toast";
-import { axiosPutReportStatus } from "../../../utils/axios";
+import { axiosGetInboxIssuer, axiosGetInboxSolver, axiosPutReportStatus } from "../../../utils/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { updateStatusReport } from "../../../state/updatedStatusReport";
 
