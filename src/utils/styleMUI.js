@@ -111,3 +111,14 @@ export const muiChatRecipientMsg = {
   padding: ".5rem 3rem .5rem .5rem",
   wordBreak: "break-word",
 };
+
+export const muiInboxCircle = {
+  background: "#EB1E4E",
+  borderRadius: "50%",
+  width: "1.5rem",
+  height: "1.5rem",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: 'white'
+}

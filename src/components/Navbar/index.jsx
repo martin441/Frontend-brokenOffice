@@ -9,6 +9,9 @@ import MenuNav from "./MenuNav";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { setTheme } from "../../state/theme";
+import Inbox from "./Inbox";
+import { notificationsIssuer, notificationsSolver } from "../../state/chat";
+import { axiosGetInboxIssuer, axiosGetInboxSolver } from "../../utils/axios";
 
 export const Navbar = () => {
   const user = useSelector((state) => state.user);
@@ -17,16 +20,27 @@ export const Navbar = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem('theme');
+    if (user) {
+      if (user?.type === process.env.REACT_APP_BETA) {
+        axiosGetInboxSolver().then((res) => dispatch(notificationsSolver(res)));
+        axiosGetInboxIssuer().then((res) => dispatch(notificationsIssuer(res)));
+      } else  {
+        axiosGetInboxIssuer().then((res) => dispatch(notificationsIssuer(res)));
+      }
+    }
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
     if (storedTheme) {
-      dispatch(setTheme(storedTheme))
+      dispatch(setTheme(storedTheme));
     }
   }, [dispatch, theme]);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    dispatch(setTheme(newTheme))
-    localStorage.setItem('theme', newTheme);
+    const newTheme = theme === "light" ? "dark" : "light";
+    dispatch(setTheme(newTheme));
+    localStorage.setItem("theme", newTheme);
   };
 
   return (
@@ -55,6 +69,8 @@ export const Navbar = () => {
                 {" "}
                 {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
               </Button>
+
+              <Inbox />
 
               <MenuNav />
             </Box>

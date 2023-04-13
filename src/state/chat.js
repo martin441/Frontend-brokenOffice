@@ -1,26 +1,20 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
-export const setSocket = createAction("SET_SOCKET");
-export const setRoom = createAction("SET_ROOM");
-export const setChatId = createAction("SET_CHATID");
+export const notificationsSolver = createAction("SET_NOT_SOLVER");
+export const notificationsIssuer = createAction("SET_NOT_ISSUER");
 
 const initialState = {
-  socket: {},
-  room: "",
-  chatId: "",
+  notificationsSolver: [],
+  notificationsIssuer: [],
 };
 
 const reducer = createReducer(initialState, {
-  [setSocket]: (state, action) => {
-    state.socket = action.payload;
+  [notificationsSolver]: (state, action) => {
+    state.notificationsSolver = action.payload;
   },
-  [setRoom]: (state, action) => {
-    state.room = action.payload;
+  [notificationsIssuer]: (state, action) => {
+    state.notificationsIssuer = action.payload;
   },
-  [setChatId]: (state, action) => {
-    state.chatId = action.payload;
-  },
-  
 });
 
 export default reducer;
