@@ -9,7 +9,7 @@ export default function EditSensitive() {
   const {
     handleOpen,
     handleClose,
-    handleSubmit,
+    handleEditPassSubmit,
     setOldPassword,
     setNewPassword,
     setRepeatPassword,
@@ -59,7 +59,7 @@ export default function EditSensitive() {
             sx={{ mb: ".5rem" }}
           />
           <Button
-            onClick={handleSubmit}
+            onClick={handleEditPassSubmit}
             variant="contained"
             sx={{ mt: 2, mx: "auto" }}
           >

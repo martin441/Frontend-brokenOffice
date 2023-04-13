@@ -21,7 +21,7 @@ export default function EditProfile() {
     handleAddressChange,
     handleOpen,
     handleClose,
-    handleEditPassSubmit,
+    handleSubmit,
     open,
     user,
     inputName,
@@ -113,7 +113,7 @@ export default function EditProfile() {
             }}
           />
           <Button
-            onClick={handleEditPassSubmit}
+            onClick={handleSubmit}
             variant="contained"
             sx={{ mt: 2, mx: "auto" }}
           >

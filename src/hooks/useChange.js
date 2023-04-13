@@ -23,7 +23,7 @@ const useChange = () => {
   const dispatch = useDispatch();
 
   //   EDIT PASS
-  const handleSubmit = async () => {
+  const handleEditPassSubmit = async () => {
     if (newPassword !== repeatPassword)
       return toast.error("The new password does not match");
 
@@ -73,7 +73,7 @@ const useChange = () => {
     }
   };
 
-  const handleEditPassSubmit = async () => {
+  const handleSubmit = async () => {
     if (inputName === "" || inputLastName === "" || inputRole === "")
       return toast.error("Please enter required data");
 
