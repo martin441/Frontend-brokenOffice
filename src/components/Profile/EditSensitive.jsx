@@ -1,37 +1,20 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import toast from "react-hot-toast";
 import { styleEditProfile } from "../../utils/styleMUI";
 import { Button, Link, TextField } from "@mui/material";
-import axios from "axios";
+import useChange from "../../hooks/useChange";
 
 export default function EditSensitive() {
-  const ROUTE = process.env.REACT_APP_ROUTE;
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const [oldPassword, setOldPassword] = React.useState("");
-  const [newPassword, setNewPassword] = React.useState("");
-  const [repeatPassword, setRepeatPassword] = React.useState("");
-
-  const handleSubmit = async () => {
-    if (newPassword !== repeatPassword)
-      return toast.error("The new password does not match");
-    
-    try {
-      await axios.put(
-        `${ROUTE}/user/edit/password`,
-        { oldPassword, newPassword },
-        { withCredentials: true }
-      );
-      toast.success("Password changed successfully");
-      handleClose();
-    } catch (err) {
-      toast.error("Password is incorrect");
-    }
-  };
+  const {
+    handleOpen,
+    handleClose,
+    handleSubmit,
+    setOldPassword,
+    setNewPassword,
+    setRepeatPassword,
+    open,
+  } = useChange();
 
   return (
     <div>
