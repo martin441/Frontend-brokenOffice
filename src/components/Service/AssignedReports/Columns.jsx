@@ -13,7 +13,7 @@ export const Columns = (type, handleOpen) => {
         description: "This column has a value getter and is not sortable.",
         sortable: true,
         flex: 0.5,
-        valueGetter: (params) => `${params.row.date.substring(0, 10) || ""}`,
+        valueGetter: (params) => `${params.row.date?.substring(0, 10) || ""}`,
       },
       {
         field: "Title",
@@ -23,7 +23,7 @@ export const Columns = (type, handleOpen) => {
         description: "This column has a value getter and is not sortable.",
         sortable: true,
         flex: 0.5,
-        valueGetter: (params) => `${params.row.title || ""}`,
+        valueGetter: (params) => `${params.row?.title || ""}`,
       },
       {
         field: "Sender",
@@ -33,7 +33,7 @@ export const Columns = (type, handleOpen) => {
         flex: 0.5,
         editable: false,
         valueGetter: (params) =>
-          `${params.row.issuer.name || ""} ${params.row.issuer.lastName || ""}`,
+          `${params.row?.issuer?.name || ""} ${params.row?.issuer?.lastName || ""}`,
       },
       {
         field: "Status",
@@ -43,7 +43,7 @@ export const Columns = (type, handleOpen) => {
         flex: 0.5,
         editable: false,
         valueGetter: (params) =>
-          `${params.row.status || ""}`,
+          `${params.row?.status || ""}`,
       },
     ]
   );
