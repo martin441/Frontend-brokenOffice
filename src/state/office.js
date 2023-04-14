@@ -11,7 +11,7 @@ const reducer = createReducer([], {
     return action.payload;
   },
   [deleteOffice]: (state, action) => {
-    state.filter((office) => office._id !== action.payload);
+    return state.filter((office) => office._id !== action.payload);
   },
   [setSelectedOffice]: (state, action) => {
     return action.payload;

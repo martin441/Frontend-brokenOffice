@@ -42,8 +42,8 @@ export const OfficeAddForm = () => {
       },
       location: { type: "Point", coordinates: coords },
     };
-    axiosPostOffice(newOffice);
-    dispatch(addOffice(newOffice));
+    const newOfficeBack = await axiosPostOffice(newOffice);
+    dispatch(addOffice(newOfficeBack));
     setStreet("");
     setRegion("");
     setZip("");
