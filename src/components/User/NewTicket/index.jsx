@@ -14,8 +14,9 @@ import LocationForm from "./LocationForm";
 import ReviewNewTicket from "./Review";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import { axiosPostNewReport } from "../../../utils/axios";
+import { axiosGetReportHistory, axiosPostNewReport } from "../../../utils/axios";
 import { clearReport } from "../../../state/newReport";
+import { setAllReports } from "../../../state/allReports";
 
 const steps = ["Description", "Location", "Review"];
 
@@ -55,10 +56,13 @@ export default function NewTicketForm() {
     if (activeStep === 2) {
       try {
         const data = await axiosPostNewReport({ ...report, office: report.office._id });
-        if (data.name === "AxiosError") return toast.error(`Already exist a report open`);;
+        if (data.name === "AxiosError") return toast.error(`Already exist a report open`);
         dispatch(clearReport());
+        const newData = await axiosGetReportHistory();
+        dispatch(setAllReports(newData))
         setActiveStep(activeStep + 1);
       } catch (error) {
+        console.error(error)
       }
     }
   };
