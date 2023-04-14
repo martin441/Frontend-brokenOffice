@@ -22,7 +22,7 @@ export const DashboardSuperAdmin = () => {
   return (
     <Box sx={muiDashboardHome}>
       <Card
-        sx={{ minWidth: 345, height: 214, display:'flex', flexDirection:'column', justifyContent:'center' }}
+        sx={{ minWidth: 345, height: 210, display:'flex', flexDirection:'column', justifyContent:'center' }}
         onClick={() => navigate("/admin/offices")}
       >
         <CardActionArea>
@@ -40,7 +40,7 @@ export const DashboardSuperAdmin = () => {
       </Card>
 
       <Card
-        sx={{ minWidth: 345, height: 214, mt: "1rem", display:'flex', flexDirection:'column', justifyContent:'center' }}
+        sx={{ minWidth: 345, height: 210, mt: "1rem", display:'flex', flexDirection:'column', justifyContent:'center' }}
         onClick={() => navigate(`/${num === 66 ? "admin": "superadmin"}/users`)}
       >
         <CardActionArea>

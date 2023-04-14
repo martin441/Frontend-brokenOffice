@@ -19,7 +19,7 @@ export const DashboardUser = () => {
   return (
 
     <Box sx={muiDashboardHome}>
-      <Card sx={{ width: 345, height: 214, display:'flex', flexDirection:'column', justifyContent:'center' }} onClick={() => navigate("/user/new-ticket")}>
+      <Card sx={{ width: 345, height: 210, display:'flex', flexDirection:'column', justifyContent:'center' }} onClick={() => navigate("/user/new-ticket")}>
         <CardActionArea>
           <CardContent>
             <BuildCircleIcon />
@@ -37,6 +37,7 @@ export const DashboardUser = () => {
       <Card
         sx={{
           minWidth: 345,
+          maxWidth:345,
           mt: "1rem",
         }}
       >

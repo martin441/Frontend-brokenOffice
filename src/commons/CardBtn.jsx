@@ -9,13 +9,17 @@ const CardBtn = ({ text, rute, handleClick, setHandleClick }) => {
 
   return (
     <Box
-      sx={{
-        margin: 0,
+      sx={handleClick ? {
+        marginBottom: 5,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         gap: 3,
-      }}
+      }: {marginBottom: 0,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: 3,}}
     >
       <Button
         color="secondary"
