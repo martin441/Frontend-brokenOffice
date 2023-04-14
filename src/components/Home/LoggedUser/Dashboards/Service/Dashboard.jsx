@@ -9,7 +9,7 @@ import { ReportListHomeService } from "./ReportsListHome";
 export const DashboardService = () => {
   return (
     <Box sx={muiDashboardHome}>
-      <Card sx={{ width: 345, minHeight: 214}}>
+      <Card sx={{ width: 345, minHeight: 210}}>
         <CardActionArea>
           <CardContent>
             <HistoryIcon />

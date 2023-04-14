@@ -40,21 +40,21 @@ export const ReportListHomeUser = () => {
                 <TableCell
                   style={{ minWidth: 100 }}
                   align={"center"}
-                  sx={{ background: "transparent" }}
+                  sx={{ }}
                 >
                   Title
                 </TableCell>
                 <TableCell
                   style={{ minWidth: 100 }}
                   align={"center"}
-                  sx={{ background: "transparent" }}
+                  sx={{  }}
                 >
                   State
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody
-              style={
+              sx={
                 handleClick
                   ? { overflow: "auto" }
                   : { overflow: "auto", display: "none" }
