@@ -37,7 +37,7 @@ export default function MenuNav() {
     handleClose();
     try {
       const user = await axios.post(
-        `${ROUTE}/user/logout`,
+        `${ROUTE}/api/user/logout`,
         {},
         { withCredentials: true }
       );

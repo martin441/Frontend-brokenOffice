@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://backend-broken-office.vercel.app/api/:path*"
+    }
+  ]
+}

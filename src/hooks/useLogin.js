@@ -16,7 +16,7 @@ const useLogin = () => {
         email: data.get("email"),
         password: data.get("password"),
       };
-      const loggedUser = await axios.post(`${ROUTE}/user/login`, userData, {
+      const loggedUser = await axios.post(`${ROUTE}/api/user/login`, userData, {
         withCredentials: true,
       });
       dispatch(setUser(loggedUser.data));

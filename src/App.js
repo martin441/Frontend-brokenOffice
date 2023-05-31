@@ -19,9 +19,7 @@ import { setOffices } from "./state/office";
 import { LoginProtectedRoute } from "./commons/LoginProtectedRoute";
 import { History } from "../src/components/History";
 import { setAllReports } from "./state/allReports";
-import {
-  axiosGetAssignedReportsService,
-} from "./utils/axios";
+import { axiosGetAssignedReportsService } from "./utils/axios";
 import { setAssignedReports } from "./state/service";
 const Home = lazy(() => import("./components/Home/Home"));
 const UserHome = lazy(() => import("./components/Home/LoggedUser/index"));
@@ -49,7 +47,6 @@ function App() {
   const ROUTE = process.env.REACT_APP_ROUTE;
   const dispatch = useDispatch();
 
-
   // Update the theme only if the mode changes
   const theme = useMemo(
     () => createTheme(getDesignTokens(modeTheme)),
@@ -59,50 +56,56 @@ function App() {
   useEffect(() => {
     if (user) {
       axios
-        .get(`${ROUTE}/user/me`, { withCredentials: true })
+        .get(`${ROUTE}/api/user/me`, { withCredentials: true })
         .then((res) => res.data)
         .then((data) => {
-          dispatch(setUser(data))
-          localStorage.setItem("userPWA", JSON.stringify(data))
+          dispatch(setUser(data));
+          localStorage.setItem("userPWA", JSON.stringify(data));
         })
         .catch((err) => {
           console.error(err);
           const user = JSON.parse(localStorage.getItem("userPWA"));
-          if (user) dispatch(setUser(user))
-        })
+          if (user) dispatch(setUser(user));
+        });
       axios
-        .get(`${ROUTE}/offices`, { withCredentials: true })
+        .get(`${ROUTE}/api/offices`, { withCredentials: true })
         .then((res) => res.data)
         .then((data) => {
-          dispatch(setOffices(data))
-          localStorage.setItem("officesPWA", JSON.stringify(data))
+          dispatch(setOffices(data));
+          localStorage.setItem("officesPWA", JSON.stringify(data));
         })
         .catch((err) => {
           console.error(err);
           const offices = JSON.parse(localStorage.getItem("officesPWA"));
-          if (offices) dispatch(setOffices(offices))
-        })
+          if (offices) dispatch(setOffices(offices));
+        });
       axios
-        .get(`${ROUTE}/reports/history`, { withCredentials: true })
+        .get(`${ROUTE}/api/reports/history`, { withCredentials: true })
         .then((res) => res.data)
         .then((data) => {
-          dispatch(setAllReports(data))
-          localStorage.setItem("personalReportsPWA", JSON.stringify(data))
+          dispatch(setAllReports(data));
+          localStorage.setItem("personalReportsPWA", JSON.stringify(data));
         })
         .catch((err) => {
-          console.error(err)
-          const reports = JSON.parse(localStorage.getItem("personalReportsPWA"));
-          if (reports) dispatch(setAllReports(reports))
+          console.error(err);
+          const reports = JSON.parse(
+            localStorage.getItem("personalReportsPWA")
+          );
+          if (reports) dispatch(setAllReports(reports));
         });
     }
     if (checkType(user?.type) === 14) {
-      axiosGetAssignedReportsService().then((reports) => {
-        dispatch(setAssignedReports(reports));
-        localStorage.setItem("serviceReportsPWA", JSON.stringify(reports))
-      }).catch(() => {
-        const reportss = JSON.parse(localStorage.getItem("serviceReportsPWA"));
-        if (reportss) dispatch(setAssignedReports(reportss));
-      })
+      axiosGetAssignedReportsService()
+        .then((reports) => {
+          dispatch(setAssignedReports(reports));
+          localStorage.setItem("serviceReportsPWA", JSON.stringify(reports));
+        })
+        .catch(() => {
+          const reportss = JSON.parse(
+            localStorage.getItem("serviceReportsPWA")
+          );
+          if (reportss) dispatch(setAssignedReports(reportss));
+        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ROUTE, dispatch]);

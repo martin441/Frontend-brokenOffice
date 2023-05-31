@@ -4,9 +4,12 @@ const ROUTE = process.env.REACT_APP_ROUTE;
 
 export async function axiosDeleteOffice(id) {
   try {
-    const deletedOffice = await axios.delete(`${ROUTE}/offices/delete/${id}`, {
-      withCredentials: true,
-    });
+    const deletedOffice = await axios.delete(
+      `${ROUTE}/api/offices/delete/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
     toast.success("Office deleted successfully");
     return deletedOffice;
   } catch (error) {
@@ -17,7 +20,7 @@ export async function axiosDeleteOffice(id) {
 
 export async function axiosGetAllOffices() {
   try {
-    const offices = await axios.get(`${ROUTE}/offices`, {
+    const offices = await axios.get(`${ROUTE}/api/offices`, {
       withCredentials: true,
     });
     return offices.data;
@@ -28,7 +31,7 @@ export async function axiosGetAllOffices() {
 
 export async function axiosPutOffice(id, obj) {
   try {
-    const offices = await axios.put(`${ROUTE}/offices/edit/${id}`, obj, {
+    const offices = await axios.put(`${ROUTE}/api/offices/edit/${id}`, obj, {
       withCredentials: true,
     });
     toast.success("Office edited successfully");
@@ -41,7 +44,7 @@ export async function axiosPutOffice(id, obj) {
 
 export async function axiosPostOffice(obj) {
   try {
-    const offices = await axios.post(`${ROUTE}/offices/add`, obj, {
+    const offices = await axios.post(`${ROUTE}/api/offices/add`, obj, {
       withCredentials: true,
     });
     toast.success("Office added successfully");
@@ -54,7 +57,7 @@ export async function axiosPostOffice(obj) {
 
 export async function axiosGetMe() {
   try {
-    const loggedUser = await axios.get(`${ROUTE}/user/me`, {
+    const loggedUser = await axios.get(`${ROUTE}/api/user/me`, {
       withCredentials: true,
     });
     return loggedUser.data;
@@ -65,7 +68,7 @@ export async function axiosGetMe() {
 
 export async function axiosGetAllUsers() {
   try {
-    const users = await axios.get(`${ROUTE}/collaborators/users`, {
+    const users = await axios.get(`${ROUTE}/api/collaborators/users`, {
       withCredentials: true,
     });
     return users.data;
@@ -76,9 +79,13 @@ export async function axiosGetAllUsers() {
 
 export async function axiosRegisterUser(obj) {
   try {
-    const user = await axios.post(`${ROUTE}/collaborators/create/user`, obj, {
-      withCredentials: true,
-    });
+    const user = await axios.post(
+      `${ROUTE}/api/collaborators/create/user`,
+      obj,
+      {
+        withCredentials: true,
+      }
+    );
     toast.success("Registered succesfully");
     return user;
   } catch (error) {
@@ -89,9 +96,12 @@ export async function axiosRegisterUser(obj) {
 
 export async function axiosDeleteUser(email) {
   try {
-    const user = await axios.delete(`${ROUTE}/collaborators/delete/${email}`, {
-      withCredentials: true,
-    });
+    const user = await axios.delete(
+      `${ROUTE}/api/collaborators/delete/${email}`,
+      {
+        withCredentials: true,
+      }
+    );
     toast.success("Deleted succesfully");
     return user;
   } catch (error) {
@@ -114,7 +124,7 @@ export async function axiosGetAddressFromCoord(lat, lng) {
 
 export async function axiosGetReportHistory() {
   try {
-    const reports = await axios.get(`${ROUTE}/reports/history`, {
+    const reports = await axios.get(`${ROUTE}/api/reports/history`, {
       withCredentials: true,
     });
     return reports.data;
@@ -126,7 +136,7 @@ export async function axiosGetReportHistory() {
 export async function axiosGetClosestOffices(lat, lng) {
   try {
     const closestOffices = await axios.get(
-      `${ROUTE}/reports/geoffice?lat=${lat}&long=${lng}`,
+      `${ROUTE}/api/reports/geoffice?lat=${lat}&long=${lng}`,
       { withCredentials: true }
     );
     return closestOffices.data;
@@ -137,20 +147,24 @@ export async function axiosGetClosestOffices(lat, lng) {
 
 export async function axiosPostNewReport(obj) {
   try {
-    const office = await axios.post(`${ROUTE}/reports/create`, obj, {
+    const office = await axios.post(`${ROUTE}/api/reports/create`, obj, {
       withCredentials: true,
     });
     return office.data;
   } catch (error) {
     console.error(error);
-    return error
+    return error;
   }
 }
 export async function axiosPutUserType(obj) {
   try {
-    const { data } = await axios.put(`${ROUTE}/collaborators/edit/type`, obj, {
-      withCredentials: true,
-    });
+    const { data } = await axios.put(
+      `${ROUTE}/api/collaborators/edit/type`,
+      obj,
+      {
+        withCredentials: true,
+      }
+    );
     return data;
   } catch (error) {
     console.error(error);
@@ -159,7 +173,7 @@ export async function axiosPutUserType(obj) {
 
 export async function axiosGetAssignedReportsService() {
   try {
-    const reports = await axios.get(`${ROUTE}/reports/service`, {
+    const reports = await axios.get(`${ROUTE}/api/reports/service`, {
       withCredentials: true,
     });
     return reports.data;
@@ -171,7 +185,7 @@ export async function axiosGetAssignedReportsService() {
 export async function axiosPutReportStatus(id, obj) {
   try {
     const updatedReport = await axios.put(
-      `${ROUTE}/reports/edit/state/${id}`,
+      `${ROUTE}/api/reports/edit/state/${id}`,
       obj,
       { withCredentials: true }
     );
@@ -185,9 +199,13 @@ export async function axiosPutReportStatus(id, obj) {
 
 export async function axiosShareReport(reportId, emailTo) {
   try {
-    const sent = await axios.post(`${ROUTE}/reports/share`, {reportId, emailTo}, {
-      withCredentials: true,
-    });
+    const sent = await axios.post(
+      `${ROUTE}/api/reports/share`,
+      { reportId, emailTo },
+      {
+        withCredentials: true,
+      }
+    );
     return sent.data;
   } catch (error) {
     console.error(error);
@@ -196,10 +214,14 @@ export async function axiosShareReport(reportId, emailTo) {
 
 export async function axiosPostGenerateRestoreLink(email) {
   try {
-    const sent = await axios.post(`${ROUTE}/user/restore/password`, {email}, {
-      withCredentials: true,
-    });
-    if (!sent) return {error: true, data: "Something went wrong"}
+    const sent = await axios.post(
+      `${ROUTE}/api/user/restore/password`,
+      { email },
+      {
+        withCredentials: true,
+      }
+    );
+    if (!sent) return { error: true, data: "Something went wrong" };
     return sent;
   } catch (error) {
     console.error(error);
@@ -208,10 +230,14 @@ export async function axiosPostGenerateRestoreLink(email) {
 
 export async function axiosPostRestorePass(token, password) {
   try {
-    const sent = await axios.post(`${ROUTE}/user/restore/password/${token}`, {password}, {
-      withCredentials: true,
-    });
-    if (!sent) return {error: true, data: "Something went wrong"}
+    const sent = await axios.post(
+      `${ROUTE}/api/user/restore/password/${token}`,
+      { password },
+      {
+        withCredentials: true,
+      }
+    );
+    if (!sent) return { error: true, data: "Something went wrong" };
     return sent;
   } catch (error) {
     console.error(error);
@@ -220,7 +246,7 @@ export async function axiosPostRestorePass(token, password) {
 
 export async function axiosGetInboxSolver() {
   try {
-    const notifications = await axios.get(`${ROUTE}/chats/solverinbox`, {
+    const notifications = await axios.get(`${ROUTE}/api/chats/solverinbox`, {
       withCredentials: true,
     });
     return notifications.data;
@@ -231,7 +257,7 @@ export async function axiosGetInboxSolver() {
 
 export async function axiosGetInboxIssuer() {
   try {
-    const notifications = await axios.get(`${ROUTE}/chats/issuerinbox`, {
+    const notifications = await axios.get(`${ROUTE}/api/chats/issuerinbox`, {
       withCredentials: true,
     });
     return notifications.data;

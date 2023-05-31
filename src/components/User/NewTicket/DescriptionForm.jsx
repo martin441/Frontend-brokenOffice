@@ -44,10 +44,14 @@ export default function DescriptionForm() {
       formData.append("file", e.target.files[0]);
 
       axios
-        .post(`${process.env.REACT_APP_ROUTE}/reports/create/img`, formData, {
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
-        })
+        .post(
+          `${process.env.REACT_APP_ROUTE}/api/reports/create/img`,
+          formData,
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        )
         .then((res) => dispatch(setImage(res.data)))
         .catch((err) => console.error(err));
     }

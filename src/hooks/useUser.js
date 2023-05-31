@@ -6,7 +6,7 @@ const useUser = (id) => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_ROUTE}/collaborators/${id}`, {
+      .get(`${process.env.REACT_APP_ROUTE}/api/collaborators/${id}`, {
         withCredentials: true,
       })
       .then((res) => {

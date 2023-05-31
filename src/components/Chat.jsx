@@ -34,7 +34,8 @@ export default function Chat({ report, chatType }) {
   const [isSending, setIsSending] = useState(false);
   const [chatId, setChatId] = useState("");
   const chatRef = useRef(null);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const ROUTE = process.env.REACT_APP_ROUTE;
 
   useEffect(() => {
     if (chatRef.current) {
@@ -58,28 +59,42 @@ export default function Chat({ report, chatType }) {
 
   const handleClose = async () => {
     const currentChat = await axios.get(
-      `http://localhost:3001/chats/history/${chatId}`,
+      `${ROUTE}/api/chats/history/${chatId}`,
       { withCredentials: true }
     );
 
     if (chatType === "issued") {
       const currentLength = await axios.post(
-        "http://localhost:3001/chats/issuerlength",
-        { chatId: chatId, chatLength: currentChat.data.length, chatRoom: report },
+        `${ROUTE}/api/chats/issuerlength`,
+        {
+          chatId: chatId,
+          chatLength: currentChat.data.length,
+          chatRoom: report,
+        },
         { withCredentials: true }
       );
     } else {
       const currentLength = await axios.post(
-        "http://localhost:3001/chats/solverlength",
-        { chatId: chatId, chatLength: currentChat.data.length, chatRoom: report},
+        `${ROUTE}/api/chats/solverlength`,
+        {
+          chatId: chatId,
+          chatLength: currentChat.data.length,
+          chatRoom: report,
+        },
         { withCredentials: true }
       );
       if (user) {
         if (user?.type === process.env.REACT_APP_BETA) {
-          axiosGetInboxSolver().then((res) => dispatch(notificationsSolver(res)));
-          axiosGetInboxIssuer().then((res) => dispatch(notificationsIssuer(res)));
+          axiosGetInboxSolver().then((res) =>
+            dispatch(notificationsSolver(res))
+          );
+          axiosGetInboxIssuer().then((res) =>
+            dispatch(notificationsIssuer(res))
+          );
         } else {
-          axiosGetInboxIssuer().then((res) => dispatch(notificationsIssuer(res)));
+          axiosGetInboxIssuer().then((res) =>
+            dispatch(notificationsIssuer(res))
+          );
         }
       }
     }
@@ -89,7 +104,7 @@ export default function Chat({ report, chatType }) {
   const handleChatConnection = async () => {
     try {
       const newChat = await axios.post(
-        "http://localhost:3001/chats/create",
+        `${ROUTE}/api/chats/create`,
         { room: report },
         { withCredentials: true }
       );
@@ -97,26 +112,31 @@ export default function Chat({ report, chatType }) {
       setChatId(newChat.data._id);
 
       const chatHistory = await axios.get(
-        `http://localhost:3001/chats/history/${newChat.data._id}`,
+        `${ROUTE}/api/chats/history/${newChat.data._id}`,
         { withCredentials: true }
       );
 
       if (chatType === "issued") {
         const currentLength = await axios.post(
-          "http://localhost:3001/chats/issuerlength",
-          { chatId: newChat.data._id, chatLength: chatHistory.data.length,chatRoom: report },
+          `${ROUTE}/api/chats/issuerlength`,
+          {
+            chatId: newChat.data._id,
+            chatLength: chatHistory.data.length,
+            chatRoom: report,
+          },
           { withCredentials: true }
         );
       } else {
         const currentLength = await axios.post(
-          "http://localhost:3001/chats/solverlength",
-          { chatId: newChat.data._id, chatLength: chatHistory.data.length, chatRoom: report },
+          `${ROUTE}/api/chats/solverlength`,
+          {
+            chatId: newChat.data._id,
+            chatLength: chatHistory.data.length,
+            chatRoom: report,
+          },
           { withCredentials: true }
         );
-        
       }
-
-
 
       setMessages(chatHistory.data);
 
@@ -142,7 +162,7 @@ export default function Chat({ report, chatType }) {
       }
 
       const newMessage = await axios.post(
-        "http://localhost:3001/chats/messages",
+        `${ROUTE}/api/chats/messages`,
         { msg: inputValue, room: report },
         { withCredentials: true }
       );

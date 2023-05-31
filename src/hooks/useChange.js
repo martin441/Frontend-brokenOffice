@@ -29,7 +29,7 @@ const useChange = () => {
 
     try {
       await axios.put(
-        `${ROUTE}/user/edit/password`,
+        `${ROUTE}/api/user/edit/password`,
         { oldPassword, newPassword },
         { withCredentials: true }
       );
@@ -60,13 +60,13 @@ const useChange = () => {
       formData.append("file", e.target.files[0]);
       handleClose();
       const { data } = await axios.post(
-        `${ROUTE}/user/edit/picture`,
+        `${ROUTE}/api/user/edit/picture`,
         formData,
         {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         }
-      )
+      );
       dispatch(setUser(data));
     } catch (err) {
       console.error("desde PROFILE,index", err);
@@ -87,7 +87,7 @@ const useChange = () => {
     };
 
     try {
-      const { data } = await axios.put(`${ROUTE}/user/edit/profile`, obj, {
+      const { data } = await axios.put(`${ROUTE}/api/user/edit/profile`, obj, {
         withCredentials: true,
       });
       dispatch(setUser(data));

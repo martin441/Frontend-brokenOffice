@@ -13,7 +13,7 @@ const SingleTicket = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_ROUTE}/reports/single/${id}`, {
+      .get(`${process.env.REACT_APP_ROUTE}/api/reports/single/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -28,7 +28,7 @@ const SingleTicket = () => {
         mt: 4,
         color: "text.primary",
         minHeight: "89vh",
-        paddingBottom:"30px"
+        paddingBottom: "30px",
       }}
     >
       <Box marginLeft={"30px"}>
@@ -45,4 +45,4 @@ const SingleTicket = () => {
     </Box>
   );
 };
- export default SingleTicket
+export default SingleTicket;
