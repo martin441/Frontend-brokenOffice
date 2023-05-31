@@ -25,7 +25,7 @@ import checkType from "../utils/checkType";
 import { axiosGetInboxIssuer, axiosGetInboxSolver } from "../utils/axios";
 import { notificationsIssuer, notificationsSolver } from "../state/chat";
 const ROUTE = process.env.REACT_APP_ROUTE;
-const socket = io(ROUTE);
+const socket = io(`https://frontend-broken-office.vercel.app`);
 
 export default function Chat({ report, chatType }) {
   const user = useSelector((state) => state.user);
