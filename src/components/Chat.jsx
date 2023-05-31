@@ -24,7 +24,8 @@ import { io } from "socket.io-client";
 import checkType from "../utils/checkType";
 import { axiosGetInboxIssuer, axiosGetInboxSolver } from "../utils/axios";
 import { notificationsIssuer, notificationsSolver } from "../state/chat";
-const socket = io("http://localhost:3001");
+const ROUTE = process.env.REACT_APP_ROUTE;
+const socket = io(ROUTE);
 
 export default function Chat({ report, chatType }) {
   const user = useSelector((state) => state.user);
